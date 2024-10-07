@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
-// import MenuDrop from "./MenuDrop";
+import MenuDrop from "./MenuDrop";
 import {
   Sheet,
   SheetContent,
@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/sheet";
 import { Menuitems } from "./menuItems";
 // import Shoping from "./Shoping";
-// import { ModeToggle } from "./ModeToggle";
+import { ModeToggle } from "./ModeToggle";
 
 export function MenuDashboard() {
   return (
@@ -51,9 +51,9 @@ export function MenuDashboard() {
         </SheetContent>
       </Sheet>
       <div className="flex justify-between items-center gap-4 lg:gap-8">
-        {/* <Shoping />
+        {/* <Shoping /> */}
         <ModeToggle/>
-        <MenuDrop /> */}
+        <MenuDrop />
       </div>
     </div>
   );

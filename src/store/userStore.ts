@@ -1,13 +1,12 @@
 "use strict";
 import { create } from "zustand";
 import Cookies from "js-cookie";
-
 const useUserStore = create((set) => ({
   user: Cookies.get("user")
-    ? JSON.parse(Cookies.get("user"))
-    : [],
+    ? JSON.parse(Cookies.get("user") as string)
+    : null,
 
-  addToUser: (newUser) => {
+  addToUser: (newUser:User) => {
     Cookies.set("user", JSON.stringify(newUser), { sameSite: 'Strict', secure: true });
     set({ user: newUser });
   },
