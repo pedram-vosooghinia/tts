@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { MenuDashboard } from "@/components/menu/MenuDashboard";
-import { ThemeProvider } from "@/provider/ThemeProvider";
 import ToastProvider from "@/provider/ToastProvider";
 import SwrProvider from "@/provider/SwrProvider";
 const vazirFont = localFont({
@@ -23,21 +22,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`rtl ${vazirFont.className} flex flex-col min-h-screen  `}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {/* <SwrProvider> */}
-            {/* <ToastProvider> */}
-              {/* <MenuDashboard /> */}
+          <SwrProvider>
+            <ToastProvider>
+              <MenuDashboard />
               <div className="body flex-grow pt-20 md:pt-28  ">
                 {children}
               </div>
-            {/* </ToastProvider> */}
-          {/* </SwrProvider> */}
-        </ThemeProvider>
+            </ToastProvider>
+          </SwrProvider>
       </body>
     </html>
   );

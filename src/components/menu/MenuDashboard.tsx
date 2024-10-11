@@ -12,7 +12,6 @@ import {
 } from "@/components/ui/sheet";
 import { Menuitems } from "./menuItems";
 // import Shoping from "./Shoping";
-import { ModeToggle } from "./ModeToggle";
 
 export function MenuDashboard() {
   return (
@@ -52,7 +51,6 @@ export function MenuDashboard() {
       </Sheet>
       <div className="flex justify-between items-center gap-4 lg:gap-8">
         {/* <Shoping /> */}
-        <ModeToggle/>
         <MenuDrop />
       </div>
     </div>
