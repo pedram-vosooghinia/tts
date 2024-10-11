@@ -10,13 +10,10 @@ const AnalyzeOrders = () => {
   const { data: analyzeOrders, isLoading } = useSWR(
     `/analyze/orders?status=${status}&month=${month}`
   );
-
   const data = analyzeOrders?.data || [];
   if (isLoading) {
     return <LoadingModal />;
   }
-  console.log("month", month);
-  console.log("data", data);
   return (
     <>
       <MountOrders data={data} month={month} />

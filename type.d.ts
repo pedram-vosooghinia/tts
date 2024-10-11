@@ -1,3 +1,4 @@
+
 // stores
 interface User {
   name: string;
@@ -40,4 +41,20 @@ interface JalaliDate {
 interface LoginFormInputs {
   mobile: string;
   password: string;
+}
+
+
+//Analyze
+interface ProductData {
+  jalali_date_chanell: string;
+  price: string;
+  barcode: number;
+  category: string;
+}
+interface MonthlyStats {
+  yearMonth: string;
+  totalItems: number;
+  avgPrice: string;
+  maxPrice: number;
+  minPrice: number;
 }
