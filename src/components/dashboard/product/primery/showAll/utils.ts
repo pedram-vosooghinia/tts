@@ -1,8 +1,11 @@
-"use client"
+"use client";
 
 import { v4 as uuidv4 } from "uuid";
 
-export const cleanTextAddPrimery = (text) => {
+export const cleanTextAddPrimery = (text: string) => {
+  if (!text) {
+    text = "";
+  }
   const specificStringsToRemove = [":", "#"];
   const newLineKeywords = ["روسری", "شال", "قواره"];
   let cleanedText = text;
@@ -28,9 +31,11 @@ export const cleanTextAddPrimery = (text) => {
   return cleanedText;
 };
 
-export const prepareFormData = (files) => {
+export const prepareFormData = (
+  files: FileList
+): { formData: FormData; images: Record<string, string> } => {
   const formData = new FormData();
-  const images = {};
+  const images: Record<string, string> = {};
   for (let i = 0; i < files.length; i++) {
     const fileExtension = files[i].name.split(".").pop();
     const uniqueName = `${uuidv4()}.${fileExtension}`;

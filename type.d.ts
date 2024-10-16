@@ -58,3 +58,35 @@ interface MonthlyStats {
   maxPrice: number;
   minPrice: number;
 }
+
+
+//pForm
+
+interface FormItem {
+  id: number;
+  label: string;
+  type: "file" | "textarea";
+  name: string;
+  placeholder?: string;
+  error?: string;
+  maxLength?: number;
+  required?: boolean;
+  // defaultValue?: any;
+}
+
+interface ButtonItem {
+  label: string;
+}
+
+interface PFormProps<T extends FormItem> {
+  Items: T[][];
+  button: ButtonItem;
+  onSubmit: SubmitHandler<T>;
+}
+
+
+//primery product
+
+type PrimeryCardProps<T> = {
+  products: T[];
+};
