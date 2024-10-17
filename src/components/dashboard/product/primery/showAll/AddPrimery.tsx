@@ -8,7 +8,7 @@ import LoadingModal from "@/components/Main/LoadingModal";
 import { cleanTextAddPrimery, prepareFormData } from "./utils";
 import { useModalStore } from "@/store/modalStore";
 import { SubmitHandler } from "react-hook-form";
-
+import { primeryItems , primeybutton } from "./inputItem";
 interface FormValues {
   product_need_text: string;
   files: FileList;
@@ -47,33 +47,6 @@ export default function AddPrimery() {
   if (loading) {
     return <LoadingModal />;
   }
-
-  const primeryItems: FormItem[][] = [
-    [
-      {
-        id: 2,
-        label: "متن در صورت نیاز",
-        type: "textarea",
-        name: "product_need_text",
-        placeholder: "متن محصول",
-        error: "لفطا فیلد مورد نظر را پر نمایید",
-        maxLength: 255,
-      },
-      {
-        id: 3,
-        label: "افزودن عکس",
-        type: "file",
-        name: "files",
-        required: true,
-        error: "لفطا عکس مورد نظر را وارد نمایید",
-      },
-    ],
-   
-  ];
-
-  const primeybutton = {
-    label: "افزودن محصول",
-  };
 
   return (
     <>

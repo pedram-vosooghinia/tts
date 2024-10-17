@@ -1,4 +1,3 @@
-
 // stores
 interface User {
   name: string;
@@ -43,7 +42,6 @@ interface LoginFormInputs {
   password: string;
 }
 
-
 //Analyze
 interface ProductData {
   jalali_date_chanell: string;
@@ -59,19 +57,21 @@ interface MonthlyStats {
   minPrice: number;
 }
 
-
 //pForm
 
 interface FormItem {
   id: number;
   label: string;
-  type: "file" | "textarea";
+  type: "file" | "textarea" | "select" | "text" | "number";
   name: string;
   placeholder?: string;
   error?: string;
   maxLength?: number;
   required?: boolean;
-  // defaultValue?: any;
+  option?: Array<{
+    value: string;
+    label: string;
+  }>;
 }
 
 interface ButtonItem {
@@ -83,7 +83,6 @@ interface PFormProps<T extends FormItem> {
   button: ButtonItem;
   onSubmit: SubmitHandler<T>;
 }
-
 
 //primery product
 

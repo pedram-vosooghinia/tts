@@ -15,7 +15,7 @@ export const handleCopy = (text) => {
       .then(() => {
         toast.success("متن کپی شد");
       })
-      .catch((error) => {
+      .catch(() => {
         toast.error("خطا در کپی کردن متن");
       });
   } else {

@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-const editPrimeryItems = [
+const editPrimeryItems: FormItem[][] = [
   [
     {
       id: 1,
@@ -95,9 +95,8 @@ const editPrimeryItems = [
       type: "text",
       name: "size",
       required: true,
-      mobileSize: true,
     },
-       {
+    {
       id: 8,
       label: "تیتر",
       type: "select",
@@ -153,10 +152,8 @@ const editPrimeryItems = [
       type: "text",
       name: "person",
       required: false,
-      mobileSize: true,
     },
   ],
-  
 ];
 
 const editPrimerybutton = {

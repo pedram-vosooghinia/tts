@@ -1,6 +1,6 @@
 "use client"
 
-const primeryItems = [
+const primeryItems: FormItem[][] = [
 
   [
     {
@@ -19,7 +19,6 @@ const primeryItems = [
         label: "افزودن عکس",
         type: "file",
         name: "files",
-        defaultValue: "",
         required: true,
         error: "لفطا عکس مورد نظر را وارد نمایید",
       },
