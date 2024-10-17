@@ -1,6 +1,8 @@
 "use client";
-import { useForm } from "react-hook-form";
+import { useFormContext } from "react-hook-form";  // Use useFormContext to get the form methods
 import { Label } from "../ui/label";
+import { Input } from "../ui/input";
+
 interface NumberInputProps {
   numberItems: {
     label: string;
@@ -9,18 +11,20 @@ interface NumberInputProps {
   };
 }
 const NumberInput: React.FC<NumberInputProps> = ({ numberItems }) => {
-  console.log("first", numberItems);
-  const { register } = useForm();
+  console.log("numberItems", numberItems);
+  const { register } = useFormContext();  // Get the form context here
   const { label, name, required } = numberItems;
 
   return (
-    <div className="m-2 flex flex-col ">
-      <Label className="m-2">{label}</Label>
-      <input
+    <div className="m-2 ">
+      <Label className={` rtl block  text-sm  mb-2`}>
+        {label} {required && <span className="text-red-500">*</span>}
+      </Label>
+      <Input
         type="number"
         // placeholder={placeholder}
         // min={min}
-        className="rtl sm:w-80 w-40 px-3 py-2 border rounded-md shadow-lg focus:outline-none focus:ring focus:border-blue-300"
+        className="w-[180px] rounded-md shadow-lg focus:outline-none focus:ring focus:border-blue-300"
         {...register(name, { required: required || false })}
       />
     </div>

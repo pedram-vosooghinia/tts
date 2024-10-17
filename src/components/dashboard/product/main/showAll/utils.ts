@@ -1,5 +1,5 @@
-"use client"
-export const seasonTranslate = (product) => {
+"use client";
+export const seasonTranslate = (product: MainProduct) => {
   if (product?.season === "spring") {
     return "بهار 1403";
   } else if (product?.season === "summer") {
@@ -12,7 +12,7 @@ export const seasonTranslate = (product) => {
     return "فصل نامشخص";
   }
 };
-export const topEmoje = (product) => {
+export const topEmoje = (product: MainProduct) => {
   if (product?.season === "spring") {
     return "🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀";
   } else if (product?.season === "summer") {
@@ -26,7 +26,7 @@ export const topEmoje = (product) => {
   }
 };
 
-export const categoryTranslate = (product) => {
+export const categoryTranslate = (product: MainProduct) => {
   if (product?.category === "scarf") {
     return "روسری";
   } else if (product?.category === "shawl") {
@@ -36,7 +36,7 @@ export const categoryTranslate = (product) => {
   }
 };
 
-export const titleTranslate = (product) => {
+export const titleTranslate = (product: MainProduct) => {
   if (product?.title === "moharam") {
     return "⚫️ #محرم ⚫️";
   } else if (product?.title === "yalda") {
@@ -48,8 +48,8 @@ export const titleTranslate = (product) => {
   }
 };
 
-const shawlHashtag = ["#روسری","#شال_نخی", "#شالوروسری"];
-const scarfHashtag = ["#شال","#روسری_نخی", "#روسری_مجلسی"];
+const shawlHashtag = ["#روسری", "#شال_نخی", "#شالوروسری"];
+const scarfHashtag = ["#شال", "#روسری_نخی", "#روسری_مجلسی"];
 const randomHashtagMainMil = [
   "#ترند",
   "#explore",
@@ -66,12 +66,12 @@ const randomHashtagMainMil = [
   "#عمده",
   "#شال_روسری",
 ];
-const getRandomHashtags = (hashtags, count) => {
+const getRandomHashtags = (hashtags: string[], count: number): string[] => {
   const shuffled = hashtags.sort(() => 0.5 - Math.random());
   return shuffled.slice(0, count);
 };
 
-export const generateDetails = (product) => {
+export const generateDetails = (product: MainProduct) => {
   const categoryShow = categoryTranslate(product);
   const season = seasonTranslate(product);
   const title = titleTranslate(product);
@@ -108,8 +108,6 @@ ${product?.person || ""}
 
 ${hashtagTextString}`;
 
-
-
   const detailsTelegram = `
 ${Emoje}
 
@@ -130,15 +128,18 @@ ${product?.person || ""}
   return { detailsTelegram, detailsInstagram };
 };
 
-export const copyDetailsToClipboard = (product, type) => {
+export const copyDetailsToClipboard = (
+  product: MainProduct,
+  type: "telegram" | "instagram"
+) => {
   const { detailsTelegram, detailsInstagram } = generateDetails(product);
   const details = type === "telegram" ? detailsTelegram : detailsInstagram;
   const textarea = document.createElement("textarea");
   textarea.value = details;
   textarea.style.position = "fixed";
-  textarea.style.top = 0;
-  textarea.style.left = 0;
-  textarea.style.opacity = 0;
+  textarea.style.top = "0";
+  textarea.style.left = "0";
+  textarea.style.opacity = "0";
   document.body.appendChild(textarea);
   textarea.select();
   try {
@@ -148,7 +149,7 @@ export const copyDetailsToClipboard = (product, type) => {
     } else {
       toast.error("خطا در کپی کردن جزئیات محصول");
     }
-  } catch (error) {
+  } catch {
     toast.error("خطا در کپی کردن جزئیات محصول");
   } finally {
     document.body.removeChild(textarea);
@@ -159,13 +160,12 @@ import { saveAs } from "file-saver";
 import toast from "react-hot-toast";
 const BASE_URL = process.env.NEXT_PUBLIC_IMAGE_APP_BASE_URL;
 
-export const saveAllImages = async (product) => {
+export const saveAllImages = async (product: MainProduct) => {
   try {
     const imageUrls = Object.values(product.images).map((img) => ({
       url: `${BASE_URL}${img}`,
       name: img.split("/").pop(),
     }));
-
 
     for (const { url, name } of imageUrls) {
       const response = await fetch(url);
@@ -174,7 +174,7 @@ export const saveAllImages = async (product) => {
     }
 
     toast.success("تمام تصاویر با نام‌های مختلف ذخیره شدند");
-  } catch (error) {
+  } catch {
     toast.error("خطا در ذخیره تصاویر");
   }
 };

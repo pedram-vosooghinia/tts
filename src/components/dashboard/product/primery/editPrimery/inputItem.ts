@@ -10,10 +10,7 @@ const editPrimeryItems: FormItem[][] = [
       required: true,
 
       option: [
-        {
-          value: "",
-          label: "",
-        },
+   
         {
           value: "scarf",
           label: "روسری",
@@ -31,10 +28,7 @@ const editPrimeryItems: FormItem[][] = [
       name: "season",
       required: true,
       option: [
-        {
-          value: "",
-          label: "",
-        },
+
         {
           value: "spring",
           label: "بهار",
@@ -103,10 +97,7 @@ const editPrimeryItems: FormItem[][] = [
       name: "title",
       required: false,
       option: [
-        {
-          value: "",
-          label: "",
-        },
+     
         {
           value: "moharam",
           label: "⚫️ #محرم ⚫️",

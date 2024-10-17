@@ -1,13 +1,23 @@
-"use client"
+"use client";
 import toast from "react-hot-toast";
 import { useModalStore } from "@/store/modalStore";
 import Modal from "@/components/Main/Modal";
 import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
 import {
   deletePrimeryService,
   deleteImageService,
 } from "@/services/product/primeryProduct";
-export const DeletePrimery = ({ product }) => {
+interface IDeletePrimery<T> {
+  product: T;
+}
+interface Product {
+  id: number;
+  images: string[];
+}
+export const DeletePrimery = <T extends Product>({
+  product,
+}: IDeletePrimery<T>) => {
   const { closeModal } = useModalStore();
   const router = useRouter();
 
@@ -31,7 +41,7 @@ export const DeletePrimery = ({ product }) => {
       } else {
         toast.error(`خطا: ${resPrimery?.data?.message}`);
       }
-    } catch (error) {
+    } catch {
       toast.error("خطایی در پاک کردن محصول دارد. لطفا دوباره تلاش نمایید");
     } finally {
       closeModal();
@@ -46,14 +56,11 @@ export const DeletePrimery = ({ product }) => {
   return (
     <>
       <Modal buttonConfig={buttonConfig}>
-        <div className="flex flex-col justify-center items-center m-8">
+        <div className="flex flex-col justify-center items-center m-8 gap-4">
           <div>آیا از حذف محصول اطمینان دارید؟</div>
-          <button
-            onClick={handelDeleteItem}
-            className="rounded-xl bg-pedram-2 text-gray-100 px-4 py-2 mt-8"
-          >
+          <Button variant="destructive" onClick={handelDeleteItem}>
             بله
-          </button>
+          </Button>
         </div>
       </Modal>
     </>

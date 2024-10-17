@@ -2,17 +2,22 @@
 
 import React from "react";
 import { useState } from "react";
-import { items } from "./items";
+import { items ,optionitems} from "./items";
 import useUserStore from "@/store/userStore";
 import { generateDetails } from "./utils";
-const ProductDescription = ({ product }) => {
+
+interface IProductDescription {
+  product: MainProduct;
+}
+const ProductDescription: React.FC<IProductDescription> = ({ product }) => {
   const { user } = useUserStore();
   const [showDescription, setShowDescription] = useState(false);
   const handleShow = () => {
     setShowDescription(!showDescription);
   };
   const details = generateDetails(product);
-  const detailsTelegram = details.detailsTelegram.split("\n"); // Split by line breaks
+  const detailsTelegram = details.detailsTelegram.split("\n");
+
   return (
     <div className="px-2 flex-col flex-wrap justify-between w-full shadow-lg my-4 rtl">
       <button
@@ -41,16 +46,18 @@ const ProductDescription = ({ product }) => {
                   {item.content}
                 </div>
                 {item.title === "category" || item.title === "season" ? (
-                  <div>
-                    {item.options.map((option) => {
-                      if (product[item.title] === option.value) {
-                        return option.label;
-                      }
-                      return null;
-                    })}
-                  </div>
+                  item.options && (
+                    <div>
+                      {item.options.map((option) => {
+                        if (product[item.title] === option.value) {
+                          return option.label; // اینجا مشکلی نیست
+                        }
+                        return null;
+                      })}
+                    </div>
+                  )
                 ) : (
-                  <div>{product?.[item.title]}</div>
+                  <div></div>
                 )}
               </div>
             );

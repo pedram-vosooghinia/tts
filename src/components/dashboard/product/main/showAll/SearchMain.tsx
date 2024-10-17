@@ -5,11 +5,18 @@ import { searchMainProductService } from "@/services/product/mainProduct";
 import LoadingModal from "@/components/Main/LoadingModal";
 import { PForm } from "@/components/PForm/PForm";
 import { searchItems, searchbutton } from "./searchItemForm";
+interface SearchValues {
+  barcode: number;
+}
 
-export default function SearchMain({ onSearch }) {
+interface ISearchMain {
+  onSearch: (product: MainProduct | null) => void;
+}
+export default function SearchMain({ onSearch }: ISearchMain) {
   const [loading, setLoading] = useState(false);
 
-  const handleFormSubmit = async (values, event) => {
+  const handleFormSubmit = async (values: SearchValues) => {
+    console.log("values",values)
     try {
       setLoading(true);
       const response = await searchMainProductService({
@@ -21,8 +28,8 @@ export default function SearchMain({ onSearch }) {
         toast.error("هیج محصولی با این کد یافت نشد");
         onSearch(null);
       }
-    } catch (e) {
-      toast.error(e.response?.data?.message || "An error occurred");
+    } catch {
+      toast.error("لطفا دوباره تلاش نمایید");
       onSearch(null);
     } finally {
       setLoading(false);
@@ -40,6 +47,7 @@ export default function SearchMain({ onSearch }) {
           button={searchbutton}
           onSubmit={handleFormSubmit}
         />
+        
       </div>
     </>
   );

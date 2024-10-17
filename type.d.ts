@@ -89,3 +89,22 @@ interface PFormProps<T extends FormItem> {
 type PrimeryCardProps<T> = {
   products: T[];
 };
+
+//
+interface MainProduct {
+  id: number;
+  barcode: number;
+  category: string;
+  season: string;
+  product_name: string;
+  detail_color: string;
+  number_in_pack: number;
+  price: number;
+  size: string;
+  title: string;
+  inventory: number;
+  validation_value: number;
+  sell_code: number;
+  person: string;
+  images: { image1: string; [key: string]: string };
+}
