@@ -6,7 +6,6 @@ import { query } from "@/db";
 export async function GET() {
   try {
     const token = cookies().get("token");
-
     if (!token || !token.value) {
       return NextResponse.json({
         success: false,
@@ -38,8 +37,6 @@ export async function GET() {
       );
     }
 
-    console.log("dec", decodedToken);
-    console.log("token", token);
     const userResult = await query(
       'SELECT first_name, last_name, mobile, role, "is_active" FROM users WHERE id = $1',
       [(decodedToken as JwtPayload).tokenData.id]

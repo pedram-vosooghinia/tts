@@ -25,7 +25,7 @@ export default function RootLayout({
           <SwrProvider>
             <ToastProvider>
               <MenuDashboard />
-              <div className="body flex-grow pt-28   ">
+              <div className="body flex-grow pt-20   ">
                 {children}
               </div>
             </ToastProvider>

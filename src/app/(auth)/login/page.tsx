@@ -31,21 +31,23 @@ export default function Login() {
     setIsSubmitting(true);
     try {
       const res = await loginServices(values);
-      const status = res?.data?.success;
-
-      if (status === true) {
+      const status = res.data.success;
+      const message = res.data.message;
+    toast(message)
+      if (status == true) {
         try {
           const res = await getUserInfo();
+          console.log("res", res)
           if (res.data && res.data.success) {
             const userData = res.data.data;
             addToUser(userData);
             Cookies.set("user", JSON.stringify(userData), {
               expires: 1,
-              sameSite: "Strict",
+              sameSite: "strict",
             });
             router.push("/dashboard");
           } else {
-            toast.error("کاربری با این مشخصات و.جود ندارد");
+            toast.error("کاربری با این مشخصات وجود ندارد");
           }
         } catch {
           toast.error("خطا:");
@@ -53,11 +55,12 @@ export default function Login() {
         toast.success(res.data.message);
       } else {
         toast.error(res.data.message);
-        setIsSubmitting(false);
         reset();
       }
     } catch {
       toast.error("لطفا دوباره تلاش نمایید");
+    } finally {
+      setIsSubmitting(false);
     }
   }
 
@@ -101,7 +104,7 @@ export default function Login() {
                 autoFocus
               />
             </div>
-            <Button onClick={togglePasswordVisibility}>
+            <Button type="button" onClick={togglePasswordVisibility}>
               {showPassword ? <EyeOff /> : <Eye />}
             </Button>
           </div>

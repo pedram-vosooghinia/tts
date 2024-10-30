@@ -1,4 +1,3 @@
-
 import { compare } from "bcryptjs";
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
@@ -48,16 +47,16 @@ export async function POST(req: Request) {
 
     cookies().set("token", token, {
       httpOnly: true,
-      path: "/dashboard",
+      path: "/",
       sameSite: "strict",
     });
+
     return NextResponse.json({
       success: true,
       message: "شما با موفقیت وارد شدید",
       status: 200,
     });
-  } catch (error) {
-    console.error("Error in login:", error);
+  } catch {
     return NextResponse.json({
       success: false,
       message: "خطای شبکه لطفا دوباره تلاش نمایید",
