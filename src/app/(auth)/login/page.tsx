@@ -11,7 +11,7 @@ import { getUserInfo } from "@/services/user";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import Link from "next/link";
+// import Link from "next/link";
 export default function Login() {
   const { addToUser } = useUserStore();
   const [showPassword, setShowPassword] = useState(false);
@@ -121,9 +121,9 @@ export default function Login() {
       </form>
       <div className="mt-4 text-center text-sm gap-2 flex justify-center ">
         <div>آیا هنوز ثبت نام نکرده اید؟</div>
-        <Link href="/signin" className="underline">
+        {/* <Link href="/signin" className="underline">
           ثبت نام
-        </Link>
+        </Link> */}
       </div>
     </div>
   );

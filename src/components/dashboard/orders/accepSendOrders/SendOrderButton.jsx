@@ -20,7 +20,7 @@ const SendOrderButton = ({ orderId }) => {
       if (res.data.data) {
         router.push("/dashboard/orders");
       }
-    } catch (error) {
+    } catch  {
       toast.error("Failed to confirm payment");
     } finally {
       setIsLoading(false);

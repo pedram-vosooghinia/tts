@@ -1,15 +1,16 @@
 "use client";
-import { UseFormRegister } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 interface TelInputProps {
   name: string;
   value?: string;
   placeholder?: string;
-  register: UseFormRegister<any>; // می‌توانید نوع مناسب‌تری را تعیین کنید
   required?: boolean;
 }
 
-const TelInput: React.FC<TelInputProps> = ({ name, value, placeholder, register, required }) => {
+const TelInput: React.FC<TelInputProps> = ({ name, value, placeholder,  required }) => {
+  const { register } = useForm();
+
   return (
     <input
       type="tel"

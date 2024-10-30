@@ -45,7 +45,7 @@ const AcountingOrderButton = ({
       } else {
         toast.error("حسابداری ناموفق بود");
       }
-    } catch (error) {
+    } catch  {
       toast.error("Failed to confirm payment");
     } finally {
       setIsLoading(false);

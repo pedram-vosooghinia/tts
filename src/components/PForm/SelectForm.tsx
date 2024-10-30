@@ -26,7 +26,6 @@ interface SelectFormProps {
 }
 
 const SelectForm: React.FC<SelectFormProps> = ({ selectItems }) => {
-  console.log("first", selectItems);
   const { register } = useForm();
   const { name, value, option, required, label } = selectItems;
 

@@ -26,7 +26,7 @@ export const DeleteMain = ({ product }) => {
       } else {
         toast.error(`خطا: ${resPrimery?.data?.message}`);
       }
-    } catch (error) {
+    } catch  {
       toast.error("خطایی در پاک کردن محصول دارد. لطفا دوباره تلاش نمایید");
     } finally {
       closeModal();

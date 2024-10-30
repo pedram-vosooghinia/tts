@@ -4,7 +4,7 @@ import { checkProductExistService } from "@/services/product/mainProduct";
 import { postPreFormaService } from "@/services/preForma";
 import useShoppingStore from "@/store/shoppingStore";
 import toast from "react-hot-toast";
-import LoadingModal from "@/components/Main/LoadingModal";
+// import LoadingModal from "@/components/Main/LoadingModal";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 const MoveToShipping = ({
@@ -77,7 +77,7 @@ const MoveToShipping = ({
               router.push("/dashboard/preForma/completed");
               deleteAllCart();
             }
-          } catch (e) {
+          } catch  {
             toast.error("لطفا دوباره تلاش نمایید");
           }
         } else {

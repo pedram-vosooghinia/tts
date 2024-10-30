@@ -22,7 +22,7 @@ const UpdateProduct = ({ product }) => {
       await updateMainProductService(product.id, formData);
       toast.success("محصول با موفقیت آپدیت شد");
       router.push("/dashboard/product/showMain");
-    } catch (error) {
+    } catch  {
       toast.error("آپدیت  محصول ناموفق بود");
     } finally {
       setLoading(false);

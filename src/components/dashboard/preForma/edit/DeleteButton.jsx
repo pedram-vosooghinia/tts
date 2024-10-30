@@ -15,7 +15,7 @@ const DeleteButton = ({ orderId }) => {
       if (res.data.success) {
         router.push("/dashboard/preForma");
       }
-    } catch (error) {
+    } catch  {
       toast.error("حذف پیش فاکتور ناموفق بود");
     } finally {
       setIsLoading(false);

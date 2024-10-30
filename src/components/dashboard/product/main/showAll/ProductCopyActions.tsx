@@ -3,7 +3,11 @@ import { copyDetailsToClipboard, saveAllImages } from "./utils";
 import { useRouter } from "next/navigation";
 import useUserStore from "@/store/userStore";
 import { Button } from "@/components/ui/button";
-const ProductCopyActions = ({ product }) => {
+
+interface IProductCopyActions{
+  product: MainProduct
+}
+const ProductCopyActions = ({ product }:IProductCopyActions) => {
   const { user } = useUserStore();
   const router = useRouter();
   const handleEdit = () => {

@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useState } from "react";
-import { items ,optionitems} from "./items";
+import { items } from "./items";
 import useUserStore from "@/store/userStore";
 import { generateDetails } from "./utils";
 

@@ -4,7 +4,7 @@ import Modal from "@/components/Main/Modal";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { postOrderService } from "@/services/orders";
-import { deletePreFormaService } from "@/services/preForma";
+// import { deletePreFormaService } from "@/services/preForma";
 import { calculateTotalValue } from "./utils";
 
 import { Button } from "@/components/ui/button";
@@ -41,7 +41,7 @@ const PaymentMarketerButton = ({ order, orderId }) => {
       } else {
         toast.error("تبدیل به پیش فاکتور ناموفق بود");
       }
-    } catch (error) {
+    } catch  {
       toast.error("Failed to confirm payment");
     } finally {
       setIsLoading(false);

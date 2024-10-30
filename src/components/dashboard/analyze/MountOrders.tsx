@@ -2,10 +2,8 @@
 import { Card, CardTitle, CardContent } from "@/components/ui/card";
 import lodash from "lodash"
 
-import { Bar, BarChart, LabelList, XAxis, YAxis } from "recharts";
 
 import { CardDescription,  CardHeader } from "@/components/ui/card";
-import { ChartContainer } from "@/components/ui/chart";
 
 const MountOrders :React.FC<MountOrdersProps>= ({ data, month }) => {
   const totalClearProfit = lodash.sumBy(data, (order) =>
@@ -25,9 +23,6 @@ const MountOrders :React.FC<MountOrdersProps>= ({ data, month }) => {
     parseFloat(order.marketer_discount)
   );
 
-  const profitToMarketerRatio = totalClearProfit / totalMarketerDiscount || 0;
-  const profitToRealPriceRatio = (totalClearProfit / realPrice) * 100 || 0;
-  const profitToFirdtPriceRatio = (totalClearProfit / firstPay) * 100 || 0;
 
   return (
     <div className="flex justify-center items-center  px-4 w-full">
@@ -70,75 +65,7 @@ const MountOrders :React.FC<MountOrdersProps>= ({ data, month }) => {
                 برج {`${month}`}
               </CardTitle>
             </CardHeader>
-            <CardContent className="ltr ">
-              <ChartContainer
-                className="w-full h-64"
-                config={{
-                  profitToMarketer: {
-                    color: "hsl(var(--chart-1))",
-                  },
-                  profitToTotalPrice: {
-                    color: "hsl(var(--chart-2))",
-                  },
-                  profitToFirdtPriceRatio: {
-                    color: "hsl(var(--chart-3))",
-                  },
-                }}
-              >
-                <BarChart
-                  margin={{
-                    top: 10,
-                    bottom: 20,
-                  }}
-                  data={[
-                    {
-                      activity: "سود ما به بازاریاب",
-                      value: profitToMarketerRatio * 100,
-                      label: `${profitToMarketerRatio.toFixed(2)}برابر`,
-                      fill: "var(--color-profitToMarketer)",
-                    },
-                    {
-                      activity: "درصد سود واقعی",
-                      value: profitToRealPriceRatio * 100,
-                      label: `${profitToRealPriceRatio.toFixed(2)}%`,
-                      fill: "var(--color-profitToTotalPrice)",
-                    },
-                    {
-                      activity: "درصد سوداولیه",
-                      value: profitToFirdtPriceRatio * 100,
-                      label: `${profitToFirdtPriceRatio.toFixed(2)}%`,
-                      fill: "var(--color-profitToFirdtPriceRatio)",
-                    },
-                  ]}
-                  layout="vertical"
-                  barSize={40}
-                  barGap={5}
-                >
-                  <XAxis type="number" dataKey="value" hide />
-                  <YAxis
-                    dataKey="activity"
-                    type="category"
-                    tickLine={false}
-                    axisLine={false}
-                    tickMargin={10}
-                    className=""
-                    padding={{
-                      top: 10,
-                      bottom: 20,
-                    }}
-                  />
-                  <Bar dataKey="value" radius={8} fillOpacity={0.9}>
-                    <LabelList
-                      position="insideLeft"
-                      dataKey="label"
-                      fill="white"
-                      fontSize={14}
-                      className="font-semibold"
-                    />
-                  </Bar>
-                </BarChart>
-              </ChartContainer>
-            </CardContent>
+       
           </Card>
         </CardContent>
       </Card>
