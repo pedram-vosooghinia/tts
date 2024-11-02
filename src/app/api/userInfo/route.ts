@@ -57,11 +57,13 @@ export async function GET() {
       success: true,
       data: user,
       status: 200,
+      message: "شما با موفقیت وارد شدید",
+
     });
   } catch {
     return NextResponse.json({
       success: false,
-      message: "userInfo خطای شبکه لطفا دوباره تلاش نمایید",
+      message: "خطای شبکه لطفا دوباره تلاش نمایید",
       status: 500,
     });
   }

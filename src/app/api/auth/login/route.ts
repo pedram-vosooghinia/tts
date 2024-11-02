@@ -21,7 +21,7 @@ export async function POST(req: Request) {
       return NextResponse.json({
         success: false,
         message: "کاربر یافت نشد",
-        status: 404,
+        status: 401,
       });
     }
     if (!user.is_active) {
@@ -37,7 +37,7 @@ export async function POST(req: Request) {
       return NextResponse.json({
         success: false,
         message: "پسورد صحیح نمی باشد",
-        status: 404,
+        status: 401,
       });
     }
 

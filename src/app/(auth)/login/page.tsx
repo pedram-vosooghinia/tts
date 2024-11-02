@@ -24,39 +24,29 @@ export default function Login() {
     reset,
   } = useForm<LoginFormInputs>();
   const togglePasswordVisibility = () => {
-    setShowPassword((prevShowPassword) => !prevShowPassword);
+    setShowPassword((prev) => !prev);
   };
-  async function submitHandler({ mobile, password }: LoginFormInputs) {
-    const values = { mobile, password };
-    console.log("mobile",mobile)
-    console.log("password",password)
+
+  const handleLogin = async (values: LoginFormInputs) => {
     setIsSubmitting(true);
     try {
-      const res = await loginServices(values);
-      const status = res.data.success;
-      const message = res.data.message;
-    toast(message)
-      if (status == true) {
-        try {
-          const res = await getUserInfo();
-          console.log("res", res)
-          if (res.data && res.data.success) {
-            const userData = res.data.data;
-            addToUser(userData);
-            Cookies.set("user", JSON.stringify(userData), {
-              expires: 1,
-              sameSite: "strict",
-            });
-            router.push("/dashboard");
-          } else {
-            toast.error("کاربری با این مشخصات وجود ندارد");
-          }
-        } catch {
-          toast.error("خطا:");
+      const loginRes = await loginServices(values);
+      if (loginRes.data.success) {
+        const userRes = await getUserInfo();
+        if (userRes.data.success) {
+          const userData = userRes.data.data;
+          addToUser(userData);
+          Cookies.set("user", JSON.stringify(userData), {
+            expires: 1,
+            sameSite: "strict",
+          });
+          toast.success(userRes.data.message);
+          router.push("/dashboard");
+        } else {
+          toast.error(userRes.data.message);
         }
-        toast.success(res.data.message);
       } else {
-        toast.error(res.data.message);
+        toast.error(loginRes.data.message);
         reset();
       }
     } catch {
@@ -64,12 +54,11 @@ export default function Login() {
     } finally {
       setIsSubmitting(false);
     }
-  }
-
+  };
   return (
     <div className=" mx-auto grid w-[350px] gap-6 py-12">
       <h1 className="text-3xl font-bold text-center">Login</h1>
-      <form onSubmit={handleSubmit(submitHandler)}>
+      <form onSubmit={handleSubmit(handleLogin)}>
         <div className="grid gap-4">
           <div className="grid gap-2">
             <Label htmlFor="mobile">شماره موبایل</Label>
@@ -87,9 +76,7 @@ export default function Login() {
             />
 
             {errors.mobile && (
-              <div className="text-red-500">
-                لطفاً شماره تماس را بدون صفر وارد کنید
-              </div>
+              <div className="text-red-500">{errors.mobile.message}</div>
             )}
           </div>
           <div className="flex justify-between items-end gap-2 ">

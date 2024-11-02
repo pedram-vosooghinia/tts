@@ -1,5 +1,3 @@
-"use client";
-import { PForm } from "@/components/PForm/PForm";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import usePost from "@/hooks/usePost";
@@ -7,8 +5,12 @@ import { uploadImageService } from "@/services/product/primeryProduct";
 import LoadingModal from "@/components/Main/LoadingModal";
 import { cleanTextAddPrimery, prepareFormData } from "./utils";
 import { useModalStore } from "@/store/modalStore";
-import { SubmitHandler } from "react-hook-form";
-import { primeryItems , primeybutton } from "./inputItem";
+import { useForm, FormProvider } from "react-hook-form";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
+import ImageInput from "@/components/PForm/ImageInput";
+
 interface FormValues {
   product_need_text: string;
   files: FileList;
@@ -16,21 +18,27 @@ interface FormValues {
 
 export default function AddPrimery() {
   const [loading, setLoading] = useState(false);
-
   const { postData } = usePost({
     postUrl: "/product/primeryProduct/add",
     getUrl: "/product/primeryProduct/get",
   });
   const { closeModal } = useModalStore();
+  const methods = useForm<FormValues>();
+  const { setError } = methods;
 
-  const handleFormSubmit: SubmitHandler<FormValues> = async (values) => {
-    console.log("first", values);
-    const { formData, images } = prepareFormData(values.files);
-    values.product_need_text = cleanTextAddPrimery(values.product_need_text);
+  const onSubmit = async (data: FormValues) => {
+    if (!data.files || data.files.length === 0) {
+      setError("files", { type: "manual", message: "فایل مورد نیاز است" });
+      return;
+    }
+
+    data.product_need_text = cleanTextAddPrimery(data.product_need_text);
+    const { formData, images } = prepareFormData(data.files);
     const formValue = {
-      product_need_text: values.product_need_text,
+      product_need_text: data.product_need_text,
       images: images,
     };
+
     try {
       setLoading(true);
       await postData(formValue);
@@ -44,17 +52,28 @@ export default function AddPrimery() {
     }
   };
 
-  if (loading) {
-    return <LoadingModal />;
-  }
+  if (loading) return <LoadingModal />;
 
   return (
-    <>
-      <PForm
-        Items={primeryItems}
-        button={primeybutton}
-        onSubmit={handleFormSubmit as SubmitHandler<FormValues>}
-        />
-    </>
+    <FormProvider {...methods}>
+      <form onSubmit={methods.handleSubmit(onSubmit)} className="flex flex-col gap-4">
+        <div className="flex flex-col gap-2">
+          <Label htmlFor="product_need_text">متن در صورت نیاز</Label>
+          <Textarea
+            id="product_need_text"
+            {...methods.register("product_need_text", { maxLength: 255 })}
+            placeholder="متن محصول"
+          />
+          {methods.formState.errors.product_need_text && (
+            <p className="text-red-500 text-sm">
+              {methods.formState.errors.product_need_text.message}
+            </p>
+          )}
+        </div>
+        <ImageInput imageItems={{  required: true }} />
+        
+        <Button type="submit">افزودن محصول</Button>
+      </form>
+    </FormProvider>
   );
 }
