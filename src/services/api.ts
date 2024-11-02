@@ -1,8 +1,8 @@
 import axios, { AxiosError } from "axios";
-// const API_BASE_URL = process.env.NODE_ENV === "production"
-//   ? "https://tts.liara.run/api/"
-//   : "http://localhost:3000/api/";
-const API_BASE_URL =  "https://tts-five-xi.vercel.app/api/"
+const API_BASE_URL =
+  process.env.NODE_ENV === "production"
+    ? "https://tts-five-xi.vercel.app/api/"
+    : "http://localhost:3000/api/";
 export const api = axios.create({
   baseURL: API_BASE_URL,
   headers: {
@@ -23,7 +23,7 @@ export const apiFile = axios.create({
   },
 });
 
-const errorInterceptor = async (axiosError:AxiosError) => {
+const errorInterceptor = async (axiosError: AxiosError) => {
   return Promise.reject(axiosError);
 };
 

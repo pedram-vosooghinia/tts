@@ -28,6 +28,8 @@ export default function Login() {
   };
   async function submitHandler({ mobile, password }: LoginFormInputs) {
     const values = { mobile, password };
+    console.log("mobile",mobile)
+    console.log("password",password)
     setIsSubmitting(true);
     try {
       const res = await loginServices(values);
