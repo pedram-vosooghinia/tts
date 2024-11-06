@@ -13,6 +13,7 @@ export default function ShowPrimery() {
     return <LoadingModal />;
   }
   const products = primryProdctData?.data || [];
+  console.log("products",products)
   const buttonConfig = {
     modalName: "AddPrimery",
     buttonName: "افزودن محصول",

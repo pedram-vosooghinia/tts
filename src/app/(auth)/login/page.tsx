@@ -11,6 +11,7 @@ import { getUserInfo } from "@/services/user";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
+
 // import Link from "next/link";
 export default function Login() {
   const { addToUser } = useUserStore();
@@ -26,7 +27,6 @@ export default function Login() {
   const togglePasswordVisibility = () => {
     setShowPassword((prev) => !prev);
   };
-
   const handleLogin = async (values: LoginFormInputs) => {
     setIsSubmitting(true);
     try {
@@ -58,55 +58,51 @@ export default function Login() {
   return (
     <div className=" mx-auto grid w-[350px] gap-6 py-12">
       <h1 className="text-3xl font-bold text-center">Login</h1>
-      <form onSubmit={handleSubmit(handleLogin)}>
-        <div className="grid gap-4">
-          <div className="grid gap-2">
-            <Label htmlFor="mobile">شماره موبایل</Label>
+      <form onSubmit={handleSubmit(handleLogin)} className="grid gap-4">
+        <div className="grid gap-2">
+          <Label htmlFor="mobile">شماره موبایل</Label>
+          <Input
+            placeholder="9001002030"
+            {...register("mobile", {
+              required: "شماره موبایل الزامی است",
+              pattern: /^[0-9]{10}$/i,
+            })}
+            type="tel"
+            className=" rtl"
+            id="mobile"
+          />
+
+          {errors.mobile && (
+            <div className="text-red-500">{errors.mobile.message}</div>
+          )}
+        </div>
+        <div className="flex justify-between items-end gap-2 ">
+          <div className=" w-full ">
+            <Label htmlFor="password">رمز عبور</Label>
             <Input
-              placeholder="9001002030"
-              required
-              {...register("mobile", {
-                required: true,
-                pattern: /^[0-9]{10}$/i,
+              id="password"
+              {...register("password", {
+                required: "رمز عبور الزامی است",
               })}
-              type="tel"
-              className=" rtl"
-              id="mobile"
+              type={showPassword ? "text" : "password"}
+              placeholder="رمز ورود"
               autoFocus
             />
-
-            {errors.mobile && (
-              <div className="text-red-500">{errors.mobile.message}</div>
-            )}
           </div>
-          <div className="flex justify-between items-end gap-2 ">
-            <div className=" w-full ">
-              <Label htmlFor="password">رمز عبور</Label>
-              <Input
-                id="password"
-                required
-                {...register("password", {
-                  required: true,
-                })}
-                type={showPassword ? "text" : "password"}
-                placeholder="رمز ورود"
-                autoFocus
-              />
-            </div>
-            <Button type="button" onClick={togglePasswordVisibility}>
-              {showPassword ? <EyeOff /> : <Eye />}
-            </Button>
-          </div>
-          <Button
-            type="submit"
-            className={`  ${
-              isSubmitting ? "opacity-50 cursor-not-allowed" : ""
-            }`}
-            disabled={isSubmitting}
-          >
-            {isSubmitting ? "در حال ورود..." : "ورود"}
+          <Button type="button" onClick={togglePasswordVisibility}>
+            {showPassword ? <EyeOff /> : <Eye />}
           </Button>
         </div>
+          {errors.password && (
+            <div className="text-red-500">{errors.password.message}</div>
+          )}
+        <Button
+          type="submit"
+          className={`  ${isSubmitting ? "opacity-50 cursor-not-allowed" : ""}`}
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? "در حال ورود..." : "ورود"}
+        </Button>
       </form>
       <div className="mt-4 text-center text-sm gap-2 flex justify-center ">
         <div>آیا هنوز ثبت نام نکرده اید؟</div>

@@ -18,15 +18,12 @@ export async function POST(req: NextRequest) {
       s3Images[key] = newS3ImageUrl;
     }
     const jsonString = JSON.stringify(s3Images);
-
     const sqlQuery = `
       INSERT INTO primery ( images, product_need_text )
       VALUES ($1, $2)
     `;
     const values: (string | null)[] = [jsonString, product_need_text];
-
     await query(sqlQuery, values);
-
     return NextResponse.json({
       success: true,
       message: "محصول با موفقیت ثبت اولیه شد",
