@@ -12,7 +12,6 @@ import toast from "react-hot-toast";
 import usePost from "@/hooks/usePost";
 import { uploadImageService } from "@/services/product/primeryProduct";
 import { useModalStore } from "@/store/modalStore";
-import { deleteImageService } from "@/services/product/primeryProduct";
 interface FormValues {
   product_need_text: string;
   files: File[];
@@ -83,25 +82,11 @@ export default function AddPrimery() {
       closeModal();
     }
   };
-  const handelDeleteAllImage = async () => {
-    try {
-      setLoading(true); // نمایش حالت بارگذاری
-      const res= await deleteImageService();
-      console.log("res",res)
-      toast.success("تمامی تصاویر با موفقیت حذف شدند");
-    } catch (error) {
-      toast.error("خطایی در حذف تصاویر رخ داد");
-      console.error("Error deleting images:", error);
-    } finally {
-      setLoading(false); // حذف حالت بارگذاری
-    }
-  };
-  
+
   if (loading) return <LoadingModal />;
 
   return (
     <>
-    <Button onClick={handelDeleteAllImage}>حذف تمامی عکس ها</Button>
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2">
         <Label htmlFor="product_need_text">متن در صورت نیاز</Label>
         <Textarea
