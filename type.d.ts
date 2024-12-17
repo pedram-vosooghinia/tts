@@ -1,10 +1,9 @@
 // stores
 interface User {
-  name: string;
-  mobile: string;
-  first_name: string;
-  last_name: string;
-  role: string;
+  username: string;
+  email: string;
+  family: string;
+  user_role: string;
 }
 interface Customer {
   name: string;
@@ -38,7 +37,12 @@ interface JalaliDate {
 
 //login
 interface LoginFormInputs {
-  mobile: string;
+  identifier: string;
+  password: string;
+}
+interface SignInFormInputs {
+  username: string
+  email: string;
   password: string;
 }
 

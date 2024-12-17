@@ -90,28 +90,7 @@ const editPrimeryItems: FormItem[][] = [
       name: "size",
       required: true,
     },
-    {
-      id: 8,
-      label: "تیتر",
-      type: "select",
-      name: "title",
-      required: false,
-      option: [
-     
-        {
-          value: "moharam",
-          label: "⚫️ #محرم ⚫️",
-        },
-        {
-          value: "yalda",
-          label: "🍉 #یلدا 🍉",
-        },
-        {
-          value: "eyd",
-          label: "🌺 #عیدانه 🌺",
-        },
-      ],
-    },
+  
   ],
   [
     {

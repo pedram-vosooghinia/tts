@@ -36,8 +36,7 @@ export async function DELETE(req: NextRequest) {
       message: "تصاویر با موفقیت حذف شدند",
       status: 200,
     });
-  } catch (error) {
-    console.error("Error during image deletion:", error);
+  } catch  {
     return NextResponse.json({
       message: "اشتباهی رخ داده است، لطفا دوباره تلاش نمایید",
       status: 500,

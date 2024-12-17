@@ -5,7 +5,7 @@ import { query } from "@/db";
 export async function GET() {
   try {
     const sqlQuery = `
-    SELECT id, images, product_need_text FROM primery;
+    SELECT id, images, product_need_text FROM primeries;
   `;
     const result = await query(sqlQuery, []);
     if (result.rows.length > 0) {

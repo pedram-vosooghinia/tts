@@ -18,7 +18,6 @@ export default function ShowMain() {
     try {
       const productsData = await getMainProductService({ offset, limit });
       const data = productsData?.data?.data || [];
-      console.log("data", data);
       return data;
     } catch {
       toast.error("لطفا دوباره رفرش کنید");

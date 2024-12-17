@@ -9,6 +9,7 @@ interface ButtonConfig {
   className?: string;
   disabled?: boolean;
   buttonName?: string;
+  color?: "link" | "default" | "destructive" | "outline" | "secondary" | "ghost" | null;
 }
 
 // Define the props for the Modal component
@@ -18,18 +19,18 @@ interface ModalProps {
 }
 
 
-
 const Modal = ({ children, buttonConfig }:ModalProps) => {
+  const variantButton =buttonConfig.color
   const { isOpen, closeModal, activeModal, openModal } = useModalStore();
   const handleOpenModal = () => {
     openModal(buttonConfig.modalName);
   };
-
   return (
     <>
       <Button
         onClick={handleOpenModal}
         className={` ${buttonConfig?.className}`}
+        variant={variantButton}
         disabled={buttonConfig?.disabled}
       >
         {buttonConfig?.buttonName || "modal"}

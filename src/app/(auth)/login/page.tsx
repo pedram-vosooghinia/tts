@@ -3,11 +3,10 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Eye, EyeOff } from "lucide-react";
-import { loginServices } from "@/services/auth";
+import { loginServices, tokenServices } from "@/services/auth";
 import toast from "react-hot-toast";
 import useUserStore from "@/store/userStore";
 import Cookies from "js-cookie";
-import { getUserInfo } from "@/services/user";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -22,7 +21,6 @@ export default function Login() {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm<LoginFormInputs>();
   const togglePasswordVisibility = () => {
     setShowPassword((prev) => !prev);
@@ -31,24 +29,17 @@ export default function Login() {
     setIsSubmitting(true);
     try {
       const loginRes = await loginServices(values);
-      if (loginRes.data.success) {
-        const userRes = await getUserInfo();
-        if (userRes.data.success) {
-          const userData = userRes.data.data;
-          addToUser(userData);
-          Cookies.set("user", JSON.stringify(userData), {
-            expires: 1,
-            sameSite: "strict",
-          });
-          toast.success(userRes.data.message);
-          router.push("/dashboard");
-        } else {
-          toast.error(userRes.data.message);
-        }
-      } else {
-        toast.error(loginRes.data.message);
-        reset();
-      }
+      const userData = loginRes.data.user;
+      addToUser(userData);
+      Cookies.set("user", JSON.stringify(userData), {
+        expires: 1,
+        sameSite: "strict",
+      });
+      const jwtToken = loginRes.data.jwt;
+      await tokenServices(jwtToken);
+
+      router.push("/dashboard");
+      toast.success("شما با موفقیت وارد شدید");
     } catch {
       toast.error("لطفا دوباره تلاش نمایید");
     } finally {
@@ -60,20 +51,19 @@ export default function Login() {
       <h1 className="text-3xl font-bold text-center">Login</h1>
       <form onSubmit={handleSubmit(handleLogin)} className="grid gap-4">
         <div className="grid gap-2">
-          <Label htmlFor="mobile">شماره موبایل</Label>
+          <Label htmlFor="identifier">ایمیل</Label>
           <Input
-            placeholder="9001002030"
-            {...register("mobile", {
-              required: "شماره موبایل الزامی است",
-              pattern: /^[0-9]{10}$/i,
+            placeholder="login@gmail.com"
+            {...register("identifier", {
+              required: "ایمیل الزامی است",
             })}
-            type="tel"
+            type="text"
             className=" rtl"
-            id="mobile"
+            id="identifier"
           />
 
-          {errors.mobile && (
-            <div className="text-red-500">{errors.mobile.message}</div>
+          {errors.identifier && (
+            <div className="text-red-500">{errors.identifier.message}</div>
           )}
         </div>
         <div className="flex justify-between items-end gap-2 ">
@@ -85,7 +75,7 @@ export default function Login() {
                 required: "رمز عبور الزامی است",
               })}
               type={showPassword ? "text" : "password"}
-              placeholder="رمز ورود"
+              placeholder="!@#$%^&*"
               autoFocus
             />
           </div>
@@ -93,9 +83,9 @@ export default function Login() {
             {showPassword ? <EyeOff /> : <Eye />}
           </Button>
         </div>
-          {errors.password && (
-            <div className="text-red-500">{errors.password.message}</div>
-          )}
+        {errors.password && (
+          <div className="text-red-500">{errors.password.message}</div>
+        )}
         <Button
           type="submit"
           className={`  ${isSubmitting ? "opacity-50 cursor-not-allowed" : ""}`}

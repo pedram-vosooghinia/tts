@@ -16,11 +16,12 @@ const CopyNeedText = ({ productNeedText }: ICopyNeedText) => {
             <div
               key={index}
               className={`flex justify-between items-center mb-6 mx-4 ${
-                index % 2 === 0 ? "bg-purple-300" : "bg-gray-200"
+                index % 2 === 0 ? "bg-red-300" : "bg-gray-200"
               }`}
             >
               <span>{line}</span>
               <Button
+              variant="outline"
                 onClick={() => handleCopy(line)}
                 className={` ${
                   index % 2 === 0 ? "bg-gray-800" : "bg-slate-500"

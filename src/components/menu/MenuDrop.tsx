@@ -20,7 +20,6 @@ const MenuDrop = () => {
   const { user } = useUserStore() as { user: User | null };
   const handleLogout = useLogout();
   const router = useRouter();
-
   return (
     <div className="flex  gap-4 mr-auto md:gap-2 lg:gap-4">
       <DropdownMenu>
@@ -39,17 +38,17 @@ const MenuDrop = () => {
               <DropdownMenuPortal>
                 <DropdownMenuSubContent>
                   <DropdownMenuItem>
-                    <div>نام: {user?.first_name}</div>
+                    <div>نام: {user?.username}</div>
                   </DropdownMenuItem>
                   <DropdownMenuItem>
-                    <div>نام خانوادگی: {user?.last_name}</div>
+                    <div>نام خانوادگی: {user?.family}</div>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem>
-                    <div>موبایل: {user?.mobile}</div>
+                    <div>ایمیل: {user?.email}</div>
                   </DropdownMenuItem>
                   <DropdownMenuItem>
-                    <div className="rtl"> نقش: {user?.role}</div>
+                    <div className="rtl"> نقش: {user?.user_role}</div>
                   </DropdownMenuItem>
                 </DropdownMenuSubContent>
               </DropdownMenuPortal>

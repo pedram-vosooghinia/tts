@@ -49,8 +49,9 @@ export const DeletePrimery = <T extends Product>({
   };
   const buttonConfig = {
     modalName: "DeletePrimery",
-    buttonName: "حذف محصول",
+    buttonName: "حذف محصول اولیه ",
     className: "mt-8 mb-4",
+    color: "destructive" as "link" | "default" | "destructive" | "outline" | "secondary" | "ghost" | null,
   };
 
   return (

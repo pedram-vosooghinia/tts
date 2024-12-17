@@ -33,8 +33,7 @@ export async function GET(request: NextRequest) {
         message: "No products found.",
       });
     }
-  } catch (error) {
-    console.error("Error in fetching products (server) => ", error);
+  } catch  {
     return NextResponse.json({
       status: 500,
       success: false,

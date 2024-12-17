@@ -3,6 +3,10 @@ const API_BASE_URL =
   process.env.NODE_ENV === "production"
     ? "https://tts-five-xi.vercel.app/api/"
     : "http://localhost:3000/api/";
+const API_BASE_URL_STRAPI =
+  process.env.NODE_ENV === "production"
+    ? "https://tts-five-xi.vercel.app/api/"
+    : "http://localhost:1337/api/";
 export const api = axios.create({
   baseURL: API_BASE_URL,
   headers: {
@@ -10,6 +14,12 @@ export const api = axios.create({
     "Cache-Control": "no-cache",
     Pragma: "no-cache",
     Expires: "0",
+  },
+});
+export const apiStrapi = axios.create({
+  baseURL: API_BASE_URL_STRAPI,
+  headers: {
+    "Content-Type": "application/json",
   },
 });
 

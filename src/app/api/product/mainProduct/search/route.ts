@@ -3,7 +3,6 @@ import { query } from "@/db";
 export async function POST(request: NextRequest) {
   try {
     const { barcode } = await request.json();
-    console.log("barcode",barcode)
     if (!barcode) {
       return NextResponse.json({
         status: 400,
@@ -26,8 +25,7 @@ export async function POST(request: NextRequest) {
         message: "No products found.",
       });
     }
-  } catch (error) {
-    console.error("Error in fetching products (server) => ", error);
+  } catch  {
     return NextResponse.json({
       status: 500,
       success: false,

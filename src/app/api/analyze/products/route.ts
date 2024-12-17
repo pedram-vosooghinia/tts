@@ -26,8 +26,7 @@ export async function GET() {
         message: "No products found.",
       });
     }
-  } catch (error) {
-    console.error("Error in fetching products (server) => ", error);
+  } catch  {
     return NextResponse.json({
       status: 500,
       success: false,
