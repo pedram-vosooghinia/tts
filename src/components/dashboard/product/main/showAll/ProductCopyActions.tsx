@@ -30,7 +30,7 @@ const ProductCopyActions = ({ product }:IProductCopyActions) => {
       <Button onClick={() => saveAllImages(product)} className="  bg-pedram-1 ">
         ذخیره تصاویر
       </Button>
-      {(user?.role === "cto" || user?.role === "manager") && (
+      {(user?.user_role === "cto" || user?.user_role === "manager") && (
         <Button onClick={handleEdit} className="  bg-pedram-12 text-gray-900 ">
           ویرایش محصولات
         </Button>

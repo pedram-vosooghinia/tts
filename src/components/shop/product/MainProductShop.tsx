@@ -4,7 +4,7 @@ import MainCardShop from "./MainCardShop";
 import toast from "react-hot-toast";
 import { getMainProductService } from "@/services/product/mainProduct";
 import LoadingModal from "@/components/Main/LoadingModal";
-import SearchMain from "@/components/dashboard/product/main/showAll/SearchMain";
+// import SearchMain from "@/components/dashboard/product/main/showAll/SearchMain";
 import { Button } from "@/components/ui/button";
 export default function MainProductShop() {
   const [loading, setLoading] = useState(true);
@@ -43,9 +43,9 @@ export default function MainProductShop() {
     setLoading(false);
   };
 
-  const handleSearch = (product: MainProduct | null) => {
-    setSearchedProduct(product);
-  };
+  // const handleSearch = (product: MainProduct | null) => {
+  //   setSearchedProduct(product);
+  // };
   const handleClearSearch = () => {
     setSearchedProduct(null);
   };
@@ -56,7 +56,7 @@ export default function MainProductShop() {
   }
   return (
     <>
-      <SearchMain onSearch={handleSearch} />
+      {/* <SearchMain onSearch={handleSearch} /> */}
       {searchedProduct && (
         <div className="flex justify-center items-center m-4">
           <Button

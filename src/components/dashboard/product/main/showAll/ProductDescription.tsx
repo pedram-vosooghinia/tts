@@ -31,7 +31,7 @@ const ProductDescription: React.FC<IProductDescription> = ({ product }) => {
         توضیحات
       </button>
 
-      {user?.role === "cto" && showDescription && (
+      {user?.user_role === "cto" && showDescription && (
         <div className="w-full">
           {items.map((item, index) => {
             if (item.title === "detail_color" && !product.detail_color) {
@@ -65,7 +65,7 @@ const ProductDescription: React.FC<IProductDescription> = ({ product }) => {
         </div>
       )}
 
-      {user?.role === "manager" && showDescription && (
+      {user?.user_role === "manager" && showDescription && (
         <div className="w-full">
           {detailsTelegram.map((line, index) => (
             <div
