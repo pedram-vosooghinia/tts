@@ -27,8 +27,7 @@ export async function DELETE(req: NextRequest) {
         message: "هشتگ مورد نظر یافت نشد",
       });
     }
-  } catch (error) {
-    console.error("Error deleting hashtag:", error);
+  } catch  {
     return NextResponse.json({
       status: 500,
       success: false,

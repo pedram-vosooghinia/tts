@@ -35,8 +35,7 @@ export async function GET(req: Request) {
       },
       { status: 200 }
     );
-  } catch (error) {
-    console.error("Error fetching hashtags:", error);
+  } catch {
 
     return NextResponse.json(
       {

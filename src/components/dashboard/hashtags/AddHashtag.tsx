@@ -29,11 +29,11 @@ export default function AddHashtag() {
   } = useForm<FormValues>();
 
   const onSubmit = async (data: FormValues) => {
-    console.log("data", data);
+    // console.log("data", data);
 
     try {
       setLoading(true);
-      const result =await addHahstagsService(data);
+      await addHahstagsService(data);
       mutate(`/hashtags/getAll?type=${selectedType}`);
 
       toast.success("هشتگ با موفقیت ثبت شد");
