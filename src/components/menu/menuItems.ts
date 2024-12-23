@@ -23,24 +23,29 @@ export const Menuitems = [
       },
    
       {
-        id: 6,
+        id: 5,
         label: "پیش فاکتورهای من",
         link: "/dashboard/preForma",
       },
   
       {
-        id: 7,
+        id: 6,
         label: "فاکتورهای نهایی",
         link: "/dashboard/orders",
       },
       {
-        id: 8,
+        id: 7,
         label: "محاسبه خرید",
         link: "/dashboard/calculate",
       },
       {
-        id: 5,
+        id: 8,
         label: "تحلیل",
         link: "/dashboard/analyze",
+      },
+      {
+        id: 9,
+        label: "هشتگ ها",
+        link: "/dashboard/hashtags",
       },
 ];

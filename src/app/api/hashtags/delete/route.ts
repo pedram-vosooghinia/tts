@@ -1,12 +1,13 @@
 import { NextResponse, NextRequest } from "next/server";
 import { query } from "@/db";
+
 export async function DELETE(req: NextRequest) {
   try {
     const { document_id } = await req.json();
-    console.log("document_id",document_id)
+
     const sqlQuery = `
-      DELETE FROM primery
-      WHERE document_id	hashtags = $1
+      DELETE FROM hashtags
+      WHERE document_id = $1
       RETURNING *;
     `;
 
@@ -26,11 +27,12 @@ export async function DELETE(req: NextRequest) {
         message: "هشتگ مورد نظر یافت نشد",
       });
     }
-  } catch {
+  } catch (error) {
+    console.error("Error deleting hashtag:", error);
     return NextResponse.json({
       status: 500,
       success: false,
-      message: "Something went wrong. Please try again!",
+      message: "خطایی رخ داده است لطفا دوباره تلاش نمایید",
     });
   }
 }
