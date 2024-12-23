@@ -15,7 +15,7 @@ import { Menuitems } from "./menuItems";
 
 export function MenuDashboard() {
   return (
-    <div className=" z-50 flex dark:bg-black   bg-white  justify-between items-center  fixed  w-full h-20  gap-4  border-b  px-4 lg:px-6">
+    <div className=" z-50 flex dark:bg-black     justify-between items-center  fixed  w-full h-20  gap-4 bg-red-300  px-4 lg:px-6">
       <div className="   hidden  gap-6 text-lg font-medium  lg:justify-cnter  lg:flex lg:flex-row lg:flex-wrap lg:items-between   lg:text-sm lg:gap-4">
         {Menuitems.map((item) => (
           <div

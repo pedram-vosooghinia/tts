@@ -47,7 +47,9 @@
   }
 }
 
-
+.border-b {
+  border-bottom: 2px solid #f36d6d; 
+}
 
 
 

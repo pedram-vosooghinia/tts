@@ -5,7 +5,7 @@ import AllImage from "@/components/Main/AllImage";
 import CopyNeedText from "@/components/dashboard/product/primery/editPrimery/CopyNeedText";
 import useSWR from "swr";
 import { DeletePrimery } from "@/components/dashboard/product/primery/editPrimery/DeletePrimery";
-import PrimeryForm from "@/components/dashboard/product/primery/editPrimery/primeryForm";
+// import PrimeryForm from "@/components/dashboard/product/primery/editPrimery/primeryForm";
 
 interface Params {
   id: string;
@@ -23,7 +23,7 @@ export default function EditPrimery({ params }: { params: Params }) {
     <main>
       <div className="flex flex-col justify-center items-center">
         <AllImage product={product} sameSize={true} />
-        <PrimeryForm product={product} />
+        {/* <PrimeryForm product={product} /> */}
         <CopyNeedText productNeedText={product?.product_need_text} />
         <DeletePrimery product={product} />
       </div>

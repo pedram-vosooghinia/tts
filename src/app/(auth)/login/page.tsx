@@ -26,9 +26,11 @@ export default function Login() {
     setShowPassword((prev) => !prev);
   };
   const handleLogin = async (values: LoginFormInputs) => {
+    console.log("values",values)
     setIsSubmitting(true);
     try {
       const loginRes = await loginServices(values);
+      console.log("loginRes",loginRes)
       const userData = loginRes.data.user;
       addToUser(userData);
       Cookies.set("user", JSON.stringify(userData), {
