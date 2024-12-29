@@ -148,6 +148,24 @@ const PTable2 = <T,>({ data, columns }: PTableProps<T>) => {
           </TableBody>
         </Table>
       </div>
+      <div className="flex items-center justify-between  py-4">
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => table.previousPage()}
+          disabled={!table.getCanPreviousPage()}
+        >
+          قبل
+        </Button>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => table.nextPage()}
+          disabled={!table.getCanNextPage()}
+        >
+          بعد
+        </Button>
+      </div>
     </div>
   );
 };

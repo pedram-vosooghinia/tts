@@ -4,6 +4,7 @@ interface User {
   email: string;
   family: string;
   user_role: string;
+  password?: string,
 }
 interface Customer {
   name: string;

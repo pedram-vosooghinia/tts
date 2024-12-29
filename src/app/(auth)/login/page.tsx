@@ -3,7 +3,8 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Eye, EyeOff } from "lucide-react";
-import { loginServices, tokenServices } from "@/services/auth";
+// import { loginServices, tokenServices } from "@/services/auth";
+import {  tokenServices } from "@/services/auth";
 import toast from "react-hot-toast";
 import useUserStore from "@/store/userStore";
 import Cookies from "js-cookie";
@@ -16,6 +17,30 @@ export default function Login() {
   const { addToUser } = useUserStore();
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const user_const =[
+
+    {
+      username: "pedram",
+      email: "pedram",
+      password: "123",
+      family: "vosooghinia",
+      user_role: "manager",
+    },
+    {
+      username: "rasol",
+      email: "rasol",
+      password: "123",
+      family: "rezai",
+      user_role: "admin",
+    },
+    {
+      username: "milad",
+      email: "milad",
+      password: "123",
+      family: "kiani",
+      user_role: "admin",
+    },
+  ] 
   const router = useRouter();
   const {
     register,
@@ -28,15 +53,23 @@ export default function Login() {
   const handleLogin = async (values: LoginFormInputs) => {
     setIsSubmitting(true);
     try {
-      const loginRes = await loginServices(values);
+      // const loginRes = await loginServices(values);
       // console.log("loginRes",loginRes)
-      const userData = loginRes.data.user;
+      // const userData = loginRes.data.user;
+      const userData = user_const.find(user => 
+        user.email === values.identifier && user.password === values.password
+      );
+      if (!userData) {
+        throw new Error("کاربر یافت نشد");
+      }
       addToUser(userData);
       Cookies.set("user", JSON.stringify(userData), {
         expires: 1,
         sameSite: "strict",
       });
-      const jwtToken = loginRes.data.jwt;
+      // const jwtToken = loginRes.data.jwt;
+      const jwtToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMjM0NTY3ODkwIiwibmFtZSI6Ik1pbGFkIEtpYW5pIiwiaWF0IjoxNjE2MjY3MjAwLCJleHBpcmF0aW9uIjoxNjE2MjY3ODAwfQ.8cV5Xq3wzTg3YgM3z7H0n1J7D_5Z1F5j7XgD9qA3e3c"; // توکن فرضی
+
       await tokenServices(jwtToken);
 
       router.push("/dashboard");
