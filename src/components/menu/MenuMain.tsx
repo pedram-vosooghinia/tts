@@ -10,14 +10,14 @@ import {
   SheetTitle,
   SheetClose,
 } from "@/components/ui/sheet";
-import { DashboardMenuitems } from "./menuItems";
+import { MainMenuitems } from "./menuItems";
 // import Shoping from "./Shoping";
 
-export function MenuDashboard() {
+export function MainMenu() {
   return (
     <div className=" z-50 flex dark:bg-black     justify-between items-center  fixed  w-full h-20  gap-4 bg-red-300  px-4 lg:px-6">
       <div className="   hidden  gap-6 text-lg font-medium  lg:justify-cnter  lg:flex lg:flex-row lg:flex-wrap lg:items-between   lg:text-sm lg:gap-4">
-        {DashboardMenuitems.map((item) => (
+        {MainMenuitems.map((item) => (
           <div
             key={item.id}
             className="text-muted-foreground transition-colors hover:text-foreground"
@@ -37,7 +37,7 @@ export function MenuDashboard() {
           <SheetTitle className="pt-4">Menu</SheetTitle>
 
           <div className=" flex flex-col py-4 text-lg font-medium">
-            {DashboardMenuitems.map((item) => (
+            {MainMenuitems.map((item) => (
               <SheetClose
                 asChild
                 key={item.id}

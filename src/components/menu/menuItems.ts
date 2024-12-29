@@ -1,51 +1,68 @@
-export const Menuitems = [
- 
-      {
-        id: 1,
-        label: "داشبورد",
-        link: "/dashboard",
-      },
-      {
-        id: 2,
-        label: "تایید نهایی محصول",
-        link: "/dashboard/product/primery",
-      },
-      {
-        id: 3,
-        label: "محصولات",
-        link: "/dashboard/product/main",
-      },
-  
-      {
-        id: 4,
-        label: "مشتری ها من",
-        link: "/dashboard/customers",
-      },
-   
-      {
-        id: 5,
-        label: "پیش فاکتورهای من",
-        link: "/dashboard/preForma",
-      },
-  
-      {
-        id: 6,
-        label: "فاکتورهای نهایی",
-        link: "/dashboard/orders",
-      },
-      {
-        id: 7,
-        label: "محاسبه خرید",
-        link: "/dashboard/calculate",
-      },
-      {
-        id: 8,
-        label: "تحلیل",
-        link: "/dashboard/analyze",
-      },
-      {
-        id: 9,
-        label: "هشتگ ها",
-        link: "/dashboard/hashtags",
-      },
+export const DashboardMenuitems = [
+  {
+    id: 1,
+    label: "صفحه اصلی",
+    link: "/",
+  },
+  {
+    id: 2,
+    label: "داشبرد",
+    link: "/dashboard",
+  },
+  {
+    id: 3,
+    label: "تایید نهایی محصول",
+    link: "/dashboard/product/primery",
+  },
+  {
+    id: 4,
+    label: "محصولات",
+    link: "/dashboard/product/main",
+  },
+
+  {
+    id: 5,
+    label: "مشتری ها من",
+    link: "/dashboard/customers",
+  },
+
+  {
+    id: 6,
+    label: "پیش فاکتورهای من",
+    link: "/dashboard/preForma",
+  },
+
+  {
+    id: 7,
+    label: "فاکتورهای نهایی",
+    link: "/dashboard/orders",
+  },
+  {
+    id: 8,
+    label: "محاسبه خرید",
+    link: "/dashboard/calculate",
+  },
+  {
+    id: 9,
+    label: "تحلیل",
+    link: "/dashboard/analyze",
+  },
+  {
+    id: 10,
+    label: "هشتگ ها",
+    link: "/dashboard/hashtags",
+  },
+];
+
+export const MainMenuitems = [
+  {
+    id: 1,
+    label: "داشبرد",
+    link: "/dashboard",
+  },
+  {
+    id: 2,
+    label: "درباره ما",
+    link: "/about_us",
+  },
 ];
