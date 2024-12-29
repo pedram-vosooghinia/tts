@@ -7,5 +7,6 @@ export type Hashtag = {
     published_at: string;
     updated_at: string;
     updated_by_id: number;
+    name:string
   };
   

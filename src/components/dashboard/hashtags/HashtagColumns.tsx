@@ -7,8 +7,13 @@ import { Button } from "@/components/ui/button";
 import { deleteHashtagsService } from "@/services/hashtags";
 import { ColumnDef } from "@tanstack/react-table";
 import { hashtagTypeStore } from "@/store/hashtagTypeStore";
-import Modal from "@/components/MainComponents/Modal";
-
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { MoreHorizontal } from "lucide-react";
 export const Hashtagcolumns: ColumnDef<Hashtag>[] = [
   {
     id: "ردیف",
@@ -45,24 +50,36 @@ export const Hashtagcolumns: ColumnDef<Hashtag>[] = [
       const { selectedType } = hashtagTypeStore();
       const handleDelete = async () => {
         try {
-          const response = await deleteHashtagsService({ document_id: hashtag.document_id });
-      
+          const response = await deleteHashtagsService({
+            document_id: hashtag.document_id,
+          });
+
           if (response.status === 204) {
             toast.error("هشتگ مورد نظر یافت نشد");
           } else {
             toast.success("هشتگ با موفقیت حذف شد!");
             mutate(`/hashtags/getAll?type=${selectedType}`);
-
           }
-        } catch  {
+        } catch {
           toast.error("مشکلی پیش آمد، لطفاً دوباره تلاش کنید.");
         }
       };
-      
+
       return (
-        <Button onClick={handleDelete} variant="destructive">
-          حذف
-        </Button>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" className="h-8 w-8 p-0">
+              <MoreHorizontal />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="center">
+            <DropdownMenuItem>
+              <Button onClick={handleDelete} variant="destructive">
+                حذف
+              </Button>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       );
     },
   },
