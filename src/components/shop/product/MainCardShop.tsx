@@ -1,10 +1,10 @@
 "use client";
-import AllImage from "@/components/Main/AllImage";
+import AllImage from "@/components/MainComponents/AllImage";
 import { Card, CardContent } from "@/components/ui/card";
 interface IMainCard {
   product: MainProduct;
 }
-export default function  MainCardShop  ({ product }: IMainCard)  {
+export default function MainCardShop({ product }: IMainCard) {
   return (
     <div className=" flex s rounded  bg-gray-100 w-80 flex-col justify-center items-center my-2">
       <Card>
@@ -17,5 +17,4 @@ export default function  MainCardShop  ({ product }: IMainCard)  {
       </Card>
     </div>
   );
-};
-
+}

@@ -3,7 +3,7 @@ import { useState, useEffect, useCallback } from "react";
 import MainCardShop from "./MainCardShop";
 import toast from "react-hot-toast";
 import { getMainProductService } from "@/services/product/mainProduct";
-import LoadingModal from "@/components/Main/LoadingModal";
+import LoadingModal from "@/components/MainComponents/LoadingModal";
 // import SearchMain from "@/components/dashboard/product/main/showAll/SearchMain";
 import { Button } from "@/components/ui/button";
 export default function MainProductShop() {

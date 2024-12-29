@@ -1,7 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import React from "react";
-import OneImage from "@/components/Main/OneImage";
+import OneImage from "@/components/MainComponents/OneImage";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 const PrimeryCard = <T extends { id: number; images: { image1: string } }>({

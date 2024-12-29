@@ -1,8 +1,8 @@
 "use client";
 import * as React from "react";
 import useSWR, { mutate } from "swr";
-import LoadingModal from "@/components/Main/LoadingModal";
-import Modal from "@/components/Main/Modal";
+import LoadingModal from "@/components/MainComponents/LoadingModal";
+import Modal from "@/components/MainComponents/Modal";
 import PTable2 from "@/components/PTable/Ptable2";
 import { Hashtag } from "@/types/Hashtags";
 import { Hashtagcolumns } from "./HashtagColumns";
@@ -24,7 +24,6 @@ export default function GetHashtags() {
     `/hashtags/getAll?type=${selectedType}`
   );
   const hashtags = hashtagGetData?.data || [];
-  console.log("hashtags", hashtags);
   const handleTypeChange = (type: string) => {
     setSelectedType(type);
     mutate(`/hashtags/getAll?type=${type}`);
@@ -41,30 +40,29 @@ export default function GetHashtags() {
   return (
     <div className="flex flex-col mx-4">
       <div className="flex justify-center items-center">
-
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button variant="outline" className="ml-auto">
-            {selectedType ? `نوع: ${selectedType}` : "تغییر نوع هشتگ"}
-            <ChevronDown />
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent>
-          <DropdownMenuItem onClick={() => handleTypeChange("tts")}>
-            tts
-          </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => handleTypeChange("rain.g")}>
-            rain.g
-          </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => handleTypeChange("hebe")}>
-            hebe
-          </DropdownMenuItem>
-          <DropdownMenuSeparator />
-        </DropdownMenuContent>
-      </DropdownMenu>
-      <Modal buttonConfig={buttonConfig}>
-        <AddHashtag />
-      </Modal>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="outline" className="ml-auto">
+              {selectedType ? `نوع: ${selectedType}` : "تغییر نوع هشتگ"}
+              <ChevronDown />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuItem onClick={() => handleTypeChange("tts")}>
+              tts
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => handleTypeChange("rain.g")}>
+              rain.g
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => handleTypeChange("hebe")}>
+              hebe
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+          </DropdownMenuContent>
+        </DropdownMenu>
+        <Modal buttonConfig={buttonConfig}>
+          <AddHashtag />
+        </Modal>
       </div>
 
       <PTable2<Hashtag> data={hashtags} columns={Hashtagcolumns} />

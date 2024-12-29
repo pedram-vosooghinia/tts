@@ -1,7 +1,7 @@
 "use client";
 // import ProductCopyActions from "./ProductCopyActions";
 import ProductDescription from "./ProductDescription";
-import AllImage from "@/components/Main/AllImage";
+import AllImage from "@/components/MainComponents/AllImage";
 import { Card, CardContent } from "@/components/ui/card";
 interface IMainCard {
   product: MainProduct;

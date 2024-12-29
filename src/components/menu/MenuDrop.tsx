@@ -54,7 +54,6 @@ const MenuDrop = () => {
               </DropdownMenuPortal>
             </DropdownMenuSub>
           )}
-          {/* <DropdownMenuSeparator /> */}
           {user === null ? (
             <DropdownMenuItem
               className="pt-12"

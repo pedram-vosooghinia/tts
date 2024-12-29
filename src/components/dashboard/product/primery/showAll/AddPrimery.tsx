@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { cleanTextAddPrimery, prepareFormData } from "./utils";
-import LoadingModal from "@/components/Main/LoadingModal";
+import LoadingModal from "@/components/MainComponents/LoadingModal";
 import toast from "react-hot-toast";
 import usePost from "@/hooks/usePost";
 import { uploadImageService } from "@/services/product/primeryProduct";

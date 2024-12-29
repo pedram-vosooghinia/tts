@@ -7,6 +7,8 @@ import { Button } from "@/components/ui/button";
 import { deleteHashtagsService } from "@/services/hashtags";
 import { ColumnDef } from "@tanstack/react-table";
 import { hashtagTypeStore } from "@/store/hashtagTypeStore";
+import Modal from "@/components/MainComponents/Modal";
+
 export const Hashtagcolumns: ColumnDef<Hashtag>[] = [
   {
     id: "ردیف",

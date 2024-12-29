@@ -1,7 +1,7 @@
 "use client";
 import toast from "react-hot-toast";
 import { useModalStore } from "@/store/modalStore";
-import Modal from "@/components/Main/Modal";
+import Modal from "@/components/MainComponents/Modal";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import {
@@ -51,7 +51,14 @@ export const DeletePrimery = <T extends Product>({
     modalName: "DeletePrimery",
     buttonName: "حذف محصول اولیه ",
     className: "mt-8 mb-4",
-    color: "destructive" as "link" | "default" | "destructive" | "outline" | "secondary" | "ghost" | null,
+    color: "destructive" as
+      | "link"
+      | "default"
+      | "destructive"
+      | "outline"
+      | "secondary"
+      | "ghost"
+      | null,
   };
 
   return (

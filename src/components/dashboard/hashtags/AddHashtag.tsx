@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { addHahstagsService } from "@/services/hashtags";
-import LoadingModal from "@/components/Main/LoadingModal";
+import LoadingModal from "@/components/MainComponents/LoadingModal";
 import toast from "react-hot-toast";
 import { useModalStore } from "@/store/modalStore";
 import { hashtagTypeStore } from "@/store/hashtagTypeStore";
@@ -29,7 +29,6 @@ export default function AddHashtag() {
   } = useForm<FormValues>();
 
   const onSubmit = async (data: FormValues) => {
-    // console.log("data", data);
 
     try {
       setLoading(true);
@@ -37,7 +36,7 @@ export default function AddHashtag() {
       mutate(`/hashtags/getAll?type=${selectedType}`);
 
       toast.success("هشتگ با موفقیت ثبت شد");
-    } catch  {
+    } catch {
       toast.error("خطایی رخ داد");
     } finally {
       setLoading(false);
@@ -50,7 +49,6 @@ export default function AddHashtag() {
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
-        {/* فیلد نام */}
         <div>
           <Label htmlFor="hashatg_name">نام</Label>
           <Input
@@ -68,7 +66,6 @@ export default function AddHashtag() {
           )}
         </div>
 
-        {/* فیلد نوع */}
         <div>
           <Label htmlFor="hashatg_type">نوع</Label>
           <select
@@ -110,7 +107,6 @@ export default function AddHashtag() {
           )}
         </div>
 
-        {/* دکمه ارسال */}
         <Button type="submit">افزودن هشتگ</Button>
       </form>
     </>

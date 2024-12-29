@@ -1,8 +1,8 @@
 "use client";
 import PrimeryCard from "@/components/dashboard/product/primery/showAll/PrimeryCard";
-import LoadingModal from "@/components/Main/LoadingModal";
+import LoadingModal from "@/components/MainComponents/LoadingModal";
 import useSWR from "swr";
-import Modal from "@/components/Main/Modal";
+import Modal from "@/components/MainComponents/Modal";
 import AddPrimery from "@/components/dashboard/product/primery/showAll/AddPrimery";
 export default function ShowPrimery() {
   const { data: primryProdctData, isLoading } = useSWR(

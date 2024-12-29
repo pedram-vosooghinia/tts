@@ -1,9 +1,5 @@
 export const DashboardMenuitems = [
-  {
-    id: 1,
-    label: "صفحه اصلی",
-    link: "/",
-  },
+
   {
     id: 2,
     label: "داشبرد",
@@ -54,15 +50,4 @@ export const DashboardMenuitems = [
   },
 ];
 
-export const MainMenuitems = [
-  {
-    id: 1,
-    label: "داشبرد",
-    link: "/dashboard",
-  },
-  {
-    id: 2,
-    label: "درباره ما",
-    link: "/about_us",
-  },
-];
+

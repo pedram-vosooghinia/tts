@@ -41,11 +41,7 @@ interface LoginFormInputs {
   identifier: string;
   password: string;
 }
-interface SignInFormInputs {
-  username: string
-  email: string;
-  password: string;
-}
+
 
 //Analyze
 interface ProductData {

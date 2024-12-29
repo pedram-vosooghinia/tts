@@ -1,7 +1,7 @@
 "use client";
 
-import LoadingModal from "@/components/Main/LoadingModal";
-import AllImage from "@/components/Main/AllImage";
+import LoadingModal from "@/components/MainComponents/LoadingModal";
+import AllImage from "@/components/MainComponents/AllImage";
 import CopyNeedText from "@/components/dashboard/product/primery/editPrimery/CopyNeedText";
 import useSWR from "swr";
 import { DeletePrimery } from "@/components/dashboard/product/primery/editPrimery/DeletePrimery";
