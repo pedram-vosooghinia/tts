@@ -1,31 +1,36 @@
 import { NextResponse, NextRequest } from "next/server";
 import { query } from "@/db";
 import { UUID24C } from "@/utils/api/uuid16c";
-interface Images {
-  [key: string]: string;
-}
-
-interface RequestBody {
-  images: Images;
-  product_need_text: string;
-}
+import { ProductAddProp } from "@/components/dashboard/product/type";
 
 export async function POST(req: NextRequest) {
-const document_id= UUID24C()
+  const document_id = UUID24C();
+  const created_at = new Date().toISOString();
+
   try {
-    const value: RequestBody = await req.json();
-    const { images, product_need_text } = value;
-    const s3Images: Images = {};
-    for (const [key, filename] of Object.entries(images)) {
-      const newS3ImageUrl = `${filename}`;
-      s3Images[key] = newS3ImageUrl;
+    const body: ProductAddProp = await req.json();
+
+    const { product_name, brand, sale_type, price } = body;
+    if (!product_name || !brand || !sale_type || !price) {
+      return NextResponse.json({
+        success: false,
+        message: "تمامی فیلدها الزامی هستند",
+        status: 400,
+      });
     }
-    const jsonString = JSON.stringify(s3Images);
     const sqlQuery = `
-      INSERT INTO primeries (document_id, images, product_need_text )
-      VALUES ($1, $2, $3)
-    `;
-    const values: (string | null)[] = [document_id,jsonString, product_need_text];
+    INSERT INTO products (document_id, product_name, brand, sale_type, price, created_at)
+    VALUES ($1, $2, $3, $4, $5, $6)
+  `;
+    const values: (string | number | null)[] = [
+      document_id,
+      product_name,
+      brand,
+      sale_type,
+      price,
+      created_at,
+    ];
+
     await query(sqlQuery, values);
     return NextResponse.json({
       success: true,
@@ -41,11 +46,17 @@ const document_id= UUID24C()
   }
 }
 
+// const { images, product_need_text } = value;
+// const s3Images: Images = {};
+// for (const [key, filename] of Object.entries(images)) {
+//   const newS3ImageUrl = `${filename}`;
+//   s3Images[key] = newS3ImageUrl;
+// }
+// const jsonString = JSON.stringify(s3Images);
 
 // "use client";
 
 // import { v4 as uuidv4 } from "uuid";
-
 
 // export const prepareFormData = (
 //   files: File[]
@@ -60,4 +71,3 @@ const document_id= UUID24C()
 //   }
 //   return { formData, images };
 // };
-

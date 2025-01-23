@@ -1,6 +1,5 @@
 "use client";
 import { useForm } from "react-hook-form";
-import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -8,6 +7,7 @@ import LoadingModal from "@/components/MainComponents/LoadingModal";
 import toast from "react-hot-toast";
 import ImageUploader from "@/components/PComponent/form/ImageUploader";
 import { postProductService } from "@/services/product";
+import { ProductAddProp } from "@/components/dashboard/product/type";
 import {
   Select,
   SelectContent,
@@ -24,18 +24,14 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
-import { ProductAddProp } from "@/components/dashboard/product/type";
 export default function AddPrimery() {
   const [loading, setLoading] = useState(false);
- 
 
   const form = useForm<ProductAddProp>({
     defaultValues: {
       product_name: "",
       brand: "",
-      category: "",
       sale_type: "",
-      description: "",
       price: 0,
       files: [],
     },
@@ -49,10 +45,13 @@ export default function AddPrimery() {
 
     try {
       setLoading(true);
-        await postProductService(data);
-      toast.success("محصول با موفقیت ثبت شد");
+      const res = await postProductService(data);
+      if (res.data.success) {
+        toast.success(res.data.message);
+      } else {
+        toast.error(res.data.message);
+      }
     } catch (error) {
-      toast.error("خطایی رخ داد");
       console.error(error);
     } finally {
       setLoading(false);
@@ -101,28 +100,6 @@ export default function AddPrimery() {
 
           <FormField
             control={form.control}
-            name="category"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>دسته بندی</FormLabel>
-                <Select onValueChange={field.onChange}>
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="انتخاب دسته بندی" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent className="rtl">
-                    <SelectItem value="clear_product">لوازم شوینده</SelectItem>
-                    <SelectItem value="cit_cluch">دیسک و صفحه</SelectItem>
-                  </SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
             name="sale_type"
             render={({ field }) => (
               <FormItem>
@@ -151,23 +128,6 @@ export default function AddPrimery() {
                 <FormLabel>قیمت</FormLabel>
                 <FormControl>
                   <Input type="number" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="description"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>توضیحات</FormLabel>
-                <FormControl>
-                  <Textarea
-                    className=" h-36"
-                    {...field}
-                    placeholder="توضیحات محصول را وارد کنید"
-                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
