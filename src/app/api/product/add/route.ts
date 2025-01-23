@@ -40,3 +40,24 @@ const document_id= UUID24C()
     });
   }
 }
+
+
+// "use client";
+
+// import { v4 as uuidv4 } from "uuid";
+
+
+// export const prepareFormData = (
+//   files: File[]
+// ): { formData: FormData; images: Record<string, string> } => {
+//   const formData = new FormData();
+//   const images: Record<string, string> = {};
+//   for (let i = 0; i < files?.length; i++) {
+//     const fileExtension = files[i].name.split(".").pop();
+//     const uniqueName = `${uuidv4()}.${fileExtension}`;
+//     images[`image${i + 1}`] = uniqueName;
+//     formData.append(`files`, files[i], uniqueName);
+//   }
+//   return { formData, images };
+// };
+

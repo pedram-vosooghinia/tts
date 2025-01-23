@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import {
   deletePrimeryService,
   deleteImageService,
-} from "@/services/product/primeryProduct";
+} from "@/services/product";
 interface IDeletePrimery<T> {
   product: T;
 }

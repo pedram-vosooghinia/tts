@@ -1,6 +1,6 @@
 "use client";
 import LoadingModal from "@/components/MainComponents/LoadingModal";
-import { PTable } from "@/components/PTable/PTable";
+import { PTable } from "@/components/PComponent/table/PTable";
 import analyzeProductTable from "@/components/dashboard/analyze/analyzeProductTable";
 import useSWR from "swr";
 

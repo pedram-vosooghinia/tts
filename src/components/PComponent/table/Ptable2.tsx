@@ -1,7 +1,7 @@
 "use client";
 import * as React from "react";
 import { ChevronDown } from "lucide-react";
-import { Button } from "../ui/button";
+import { Button } from "../../ui/button";
 import {
   ColumnFiltersState,
   SortingState,

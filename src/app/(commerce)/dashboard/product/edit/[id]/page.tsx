@@ -2,9 +2,9 @@
 
 import LoadingModal from "@/components/MainComponents/LoadingModal";
 import AllImage from "@/components/MainComponents/AllImage";
-import CopyNeedText from "@/components/dashboard/product/primery/editPrimery/CopyNeedText";
+import CopyNeedText from "@/components/dashboard/product/editPrimery/CopyNeedText";
 import useSWR from "swr";
-import { DeletePrimery } from "@/components/dashboard/product/primery/editPrimery/DeletePrimery";
+import { DeletePrimery } from "@/components/dashboard/product/editPrimery/DeletePrimery";
 // import PrimeryForm from "@/components/dashboard/product/primery/editPrimery/primeryForm";
 
 interface Params {

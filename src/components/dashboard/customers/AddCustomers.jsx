@@ -1,13 +1,12 @@
 "use client";
 import { PForm } from "@/components/PForm/PForm";
 import { customerItem, customerbutton } from "./customersInput";
-import usePost from "@/hooks/usePost";
 import toast from "react-hot-toast";
 import Modal from "@/components/Main/Modal";
 import { useModalStore } from "@/store/modalStore";
 export const AddCustomers = () => {
   const { closeModal } = useModalStore();
-  const { postData } = usePost("/customers/add", "/customers/getAll");
+  // const { postData } = usePost("/customers/add", "/customers/getAll");
   const handleFormSubmit = async (values) => {
     try {
       await postData(values);

@@ -1,4 +1,6 @@
 import { api,apiStrapi, apiFile } from "@/services/api";
+const postProductService = <T>(data: T) =>
+  apiStrapi.post("/product/add", { data });
 const uploadImageService = (fileData: FormData) =>
   apiFile.post("/image/upload", fileData);
 const deleteImageService = <T>(data: T) =>
@@ -9,4 +11,4 @@ const deletePrimeryService = <T>(data: T) =>
   api.delete("/product/primeryProduct/delete", { data });
 const getPrimeryService = () =>
   api.get(`/api/primeries`);
-export {getPrimeryService,uploadPrimeryService, deletePrimeryService, deleteImageService, uploadImageService };
+export {postProductService,getPrimeryService,uploadPrimeryService, deletePrimeryService, deleteImageService, uploadImageService };
