@@ -21,12 +21,12 @@ export default function GetHashtags() {
   const { selectedType, setSelectedType } = hashtagTypeStore();
 
   const { data: hashtagGetData, isLoading } = useSWR(
-    `/hashtags/getAll?type=${selectedType}`
+    `/hashtags/get?type=${selectedType}`
   );
   const hashtags = hashtagGetData?.data || [];
   const handleTypeChange = (type: string) => {
     setSelectedType(type);
-    mutate(`/hashtags/getAll?type=${type}`);
+    mutate(`/hashtags/get?type=${type}`);
   };
 
   if (isLoading) {

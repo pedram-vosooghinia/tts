@@ -1,22 +1,20 @@
 "use client";
-import PrimeryCard from "@/components/dashboard/product/showAll/PrimeryCard";
+import PrimeryCard from "@/components/dashboard/product/PrimeryCard";
 import LoadingModal from "@/components/MainComponents/LoadingModal";
 import useSWR from "swr";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 export default function ShowPrimery() {
   const router = useRouter();
-  const { data: prodctData, isLoading } = useSWR(
-    "/products/get"
-  );
+  const { data: prodctData, isLoading } = useSWR("/products/get");
 
-  if (isLoading) {
-    return <LoadingModal />;
-  }
   const products = prodctData?.data || [];
   const handelAddProduct = () => {
     router.push("/dashboard/product/add");
   };
+  if (isLoading) {
+    return <LoadingModal />;
+  }
   return (
     <div className="rtl flex flex-col justify-center items-center">
       <Button onClick={handelAddProduct}>افزودن محصول</Button>

@@ -66,7 +66,7 @@ const PTable2 = <T,>({ data, columns }: PTableProps<T>) => {
     <div className="flex flex-col justify-center ">
       <div className=" flex justify-between items-center py-4  ">
         <Input
-          placeholder="جستجو هشتگ ها"
+          placeholder="جستجو"
           value={(table.getColumn("نام")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
             table.getColumn("نام")?.setFilterValue(event.target.value)

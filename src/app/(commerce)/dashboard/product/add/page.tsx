@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import LoadingModal from "@/components/MainComponents/LoadingModal";
 import toast from "react-hot-toast";
 // import ImageUploader from "@/components/PComponent/form/ImageUploader";
-import { postProductService } from "@/services/product";
+import { addProductService } from "@/services/product";
 import { Product } from "@/components/dashboard/product/type";
 import {
   Select,
@@ -24,7 +24,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
-export default function AddPrimery() {
+export default function AddProduct() {
   const [loading, setLoading] = useState(false);
 
   const form = useForm<Product>({
@@ -44,7 +44,7 @@ export default function AddPrimery() {
 
     try {
       setLoading(true);
-      const res = await postProductService(data);
+      const res = await addProductService(data);
       if (res.data.success) {
         toast.success(res.data.message);
       } else {
