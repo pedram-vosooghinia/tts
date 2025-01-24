@@ -6,14 +6,14 @@ import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 export default function ShowPrimery() {
   const router = useRouter();
-  const { data: primryProdctData, isLoading } = useSWR(
-    "/product/primeryProduct/get"
+  const { data: prodctData, isLoading } = useSWR(
+    "/products/get"
   );
 
   if (isLoading) {
     return <LoadingModal />;
   }
-  const products = primryProdctData?.data || [];
+  const products = prodctData?.data || [];
   const handelAddProduct = () => {
     router.push("/dashboard/product/add");
   };

@@ -5,9 +5,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import LoadingModal from "@/components/MainComponents/LoadingModal";
 import toast from "react-hot-toast";
-import ImageUploader from "@/components/PComponent/form/ImageUploader";
+// import ImageUploader from "@/components/PComponent/form/ImageUploader";
 import { postProductService } from "@/services/product";
-import { ProductAddProp } from "@/components/dashboard/product/type";
+import { Product } from "@/components/dashboard/product/type";
 import {
   Select,
   SelectContent,
@@ -27,7 +27,7 @@ import {
 export default function AddPrimery() {
   const [loading, setLoading] = useState(false);
 
-  const form = useForm<ProductAddProp>({
+  const form = useForm<Product>({
     defaultValues: {
       product_name: "",
       brand: "",
@@ -37,11 +37,10 @@ export default function AddPrimery() {
     },
   });
 
-  const handleFilesChange = (files: File[]) => {
-    form.setValue("files", [...form.getValues("files"), ...files]);
-  };
-  const onSubmit = async (data: ProductAddProp) => {
-    console.log(data);
+  // const handleFilesChange = (files: File[]) => {
+  //   form.setValue("files", [...form.getValues("files"), ...files]);
+  // };
+  const onSubmit = async (data: Product) => {
 
     try {
       setLoading(true);
@@ -133,7 +132,7 @@ export default function AddPrimery() {
               </FormItem>
             )}
           />
-
+{/* 
           <FormField
             control={form.control}
             name="files"
@@ -143,7 +142,7 @@ export default function AddPrimery() {
                 <FormMessage />
               </FormItem>
             )}
-          />
+          /> */}
           <Button type="submit">ارسال</Button>
         </form>
       </Form>

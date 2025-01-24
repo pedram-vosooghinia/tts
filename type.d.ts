@@ -85,12 +85,6 @@ interface PFormProps<T extends FormItem> {
   onSubmit: SubmitHandler<T>;
 }
 
-//primery product
-
-type PrimeryCardProps<T> = {
-  products: T[];
-};
-
 //
 interface MainProduct {
   id: number;

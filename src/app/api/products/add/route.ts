@@ -1,14 +1,14 @@
 import { NextResponse, NextRequest } from "next/server";
 import { query } from "@/db";
 import { UUID24C } from "@/utils/api/uuid16c";
-import { ProductAddProp } from "@/components/dashboard/product/type";
+import { Product } from "@/components/dashboard/product/type";
 
 export async function POST(req: NextRequest) {
   const document_id = UUID24C();
   const created_at = new Date().toISOString();
 
   try {
-    const body: ProductAddProp = await req.json();
+    const body: Product = await req.json();
 
     const { product_name, brand, sale_type, price } = body;
     if (!product_name || !brand || !sale_type || !price) {

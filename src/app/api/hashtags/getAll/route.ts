@@ -1,6 +1,5 @@
 export const dynamic = "force-dynamic";
 import { NextResponse } from "next/server";
-import { sortData } from "@/utils/api/sortData";
 import { query } from "@/db";
 
 export async function GET(req: Request) {
@@ -26,12 +25,11 @@ export async function GET(req: Request) {
       );
     }
 
-    const sortedData = sortData(result.rows, "id", "desc");
 
     return NextResponse.json(
       {
         success: true,
-        data: sortedData,
+        data: result.rows,
       },
       { status: 200 }
     );

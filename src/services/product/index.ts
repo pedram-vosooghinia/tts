@@ -1,6 +1,6 @@
 import { api,apiStrapi, apiFile } from "@/services/api";
 const postProductService = <T>(data: T) =>
-  api.post("/product/add",  data );
+  api.post("/products/add",  data );
 const uploadImageService = (fileData: FormData) =>
   apiFile.post("/image/upload", fileData);
 const deleteImageService = <T>(data: T) =>

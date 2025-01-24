@@ -1,7 +1,12 @@
-export interface ProductAddProp {
+export interface Product  {
+  document_id: string
   product_name: string;
   brand: string;
   sale_type: string;
   price: number;
   files: File[];
+}
+
+export interface ProductAddProp {
+  products: Product[];
 }

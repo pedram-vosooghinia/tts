@@ -1,18 +1,17 @@
 export const dynamic = "force-dynamic";
 import { NextResponse } from "next/server";
-import { sortData } from "@/utils/api/sortData";
 import { query } from "@/db";
 export async function GET() {
   try {
     const sqlQuery = `
-    SELECT id, images, product_need_text FROM primeries;
-  `;
+      SELECT document_id, product_name, brand, sale_type, price 
+      FROM products;
+    `;
     const result = await query(sqlQuery, []);
     if (result.rows.length > 0) {
-      const sortedData = sortData(result.rows, "id", "desc");
       return NextResponse.json({
         success: true,
-        data: sortedData,
+        data: result.rows,
         status: 200,
       });
     } else {
