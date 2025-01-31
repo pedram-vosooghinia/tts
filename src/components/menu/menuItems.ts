@@ -34,11 +34,7 @@ export const DashboardMenuitems = [
     label: "محاسبه خرید",
     link: "/dashboard/calculate",
   },
-  {
-    id: 8,
-    label: "تحلیل",
-    link: "/dashboard/analyze",
-  },
+
   {
     id: 9,
     label: "هشتگ ها",

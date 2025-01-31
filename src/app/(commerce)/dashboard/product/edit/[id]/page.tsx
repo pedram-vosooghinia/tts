@@ -2,7 +2,7 @@
 
 import LoadingModal from "@/components/MainComponents/LoadingModal";
 import AllImage from "@/components/MainComponents/AllImage";
-import CopyNeedText from "@/components/dashboard/product/editPrimery/CopyNeedText";
+// import CopyNeedText from "@/components/dashboard/product/editPrimery/CopyNeedText";
 import useSWR from "swr";
 import { DeletePrimery } from "@/components/dashboard/product/editPrimery/DeletePrimery";
 // import PrimeryForm from "@/components/dashboard/product/primery/editPrimery/primeryForm";
@@ -24,7 +24,7 @@ export default function EditPrimery({ params }: { params: Params }) {
       <div className="flex flex-col justify-center items-center">
         <AllImage product={product} sameSize={true} />
         {/* <PrimeryForm product={product} /> */}
-        <CopyNeedText productNeedText={product?.product_need_text} />
+        {/* <CopyNeedText productNeedText={product?.product_need_text} /> */}
         <DeletePrimery product={product} />
       </div>
     </main>
