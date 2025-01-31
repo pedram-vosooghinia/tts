@@ -9,17 +9,13 @@ function BuyCheck() {
   const [percent, setPercent] = useState<number>(0);
   const [values, setValues] = useState<{
     sell: number;
-    marketer: number;
     justVN: number;
-    pureWithoutMarketer: number;
   } | null>(null);
   const [buy2, setBuy2] = useState<number>(0);
   const [sell2, setSell2] = useState<number>(0);
   const [values2, setValues2] = useState<{
     percent2: number;
-    marketer2: number;
     justVN2: number;
-    pureWithoutMarketer2: number;
   } | null>(null);
 
   const calculateValues = (inputBuy: number, inputPercent: number) => {
@@ -27,10 +23,8 @@ function BuyCheck() {
     const percentNumber = inputPercent;
     if (!isNaN(inputNumber) && !isNaN(percentNumber)) {
       const sell = inputNumber * (1 + percentNumber / 100);
-      const marketer = sell * 0.07;
       const justVN = sell - inputNumber;
-      const pureWithoutMarketer = justVN - marketer;
-      setValues({ sell, marketer, justVN, pureWithoutMarketer });
+      setValues({ sell, justVN });
     } else {
       setValues(null);
     }
@@ -41,10 +35,8 @@ function BuyCheck() {
     const inputSellNum = inputSell;
     if (!isNaN(inputBuyNum) && !isNaN(inputSellNum)) {
       const percent2 = (inputSellNum / inputBuyNum - 1) * 100;
-      const marketer2 = inputSellNum * 0.07;
       const justVN2 = inputSellNum - inputBuyNum;
-      const pureWithoutMarketer2 = justVN2 - marketer2;
-      setValues2({ percent2, marketer2, justVN2, pureWithoutMarketer2 });
+      setValues2({ percent2, justVN2 });
     } else {
       setValues2(null);
     }
@@ -89,12 +81,6 @@ function BuyCheck() {
                 <div className="m-2">
                   سود ناخالص1: {values.justVN.toFixed(2)}
                 </div>
-                <div className="m-2">
-                  سود مشتری: {values.marketer.toFixed(2)}
-                </div>
-                <div className="m-2">
-                  سود ناخالص2: {values.pureWithoutMarketer.toFixed(2)}
-                </div>
               </>
             </>
           )}
@@ -113,12 +99,6 @@ function BuyCheck() {
               <div className="m-2">درصد سود: {values2.percent2.toFixed(2)}</div>
               <div className="m-2">
                 سود ناخالص: {values2.justVN2.toFixed(2)}
-              </div>
-              <div className="m-2">
-                سود مشتری: {values2.marketer2.toFixed(2)}
-              </div>
-              <div className="m-2">
-                سود ناخالص2: {values2.pureWithoutMarketer2.toFixed(2)}
               </div>
             </>
           )}
