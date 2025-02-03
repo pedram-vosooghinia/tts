@@ -11,6 +11,20 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        pedram: {
+  				'1': '#002642',
+  				'2': '#840032',
+  				'3': '#e59500',
+  				'4': '#efdada',
+  				'5': '#02040f',
+  				'6': '#CE4760',
+  				'7': '#F6D0B1',
+  				'8': '#5D4A66',
+  				'9': '#6A5D78',
+  				'10': '#749C75',
+  				'11': '#B2BD7E',
+  				'12': '#E9D985'
+  			},
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {

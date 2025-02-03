@@ -1,16 +1,9 @@
 "use client";
 import { Card, CardContent } from "@/components/ui/card";
 import useShoppingStore from "@/store/shoppingStore";
-const CartSummary = ({
-  totalInvoice,
-  discountAmount,
-  marketerDiscount,
-  finalPay,
-}) => {
+const CartSummary = ({ totalPrice, finalPay }) => {
   const summaryItems = [
-    { label: "جمع فاکتور", value: totalInvoice },
-    { label: "مبلغ تخفیف", value: discountAmount },
-    { label: "کسر بازاریاب", value: marketerDiscount },
+    { label: "جمع فاکتور", value: totalPrice },
     { label: "مبلغ واریزی", value: finalPay },
   ];
   const { cart } = useShoppingStore();
@@ -27,7 +20,7 @@ const CartSummary = ({
                   className="flex justify-center items-center m-2"
                 >
                   <div className="px-2">{item.label}:</div>
-                  <div>{item.value.toLocaleString()}</div>
+                  <div>{(item.value * 1000).toLocaleString()}</div>
                   <div className="px-2"> تومان </div>
                 </div>
               ))}

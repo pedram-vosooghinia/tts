@@ -4,7 +4,7 @@ import { query } from "@/db";
 export async function GET() {
   try {
     const sqlQuery = `
-      SELECT document_id, product_name, brand, sale_type, price 
+      SELECT document_id, product_name, brand, sale_type, price ,  barcode
       FROM products;
     `;
     const result = await query(sqlQuery, []);

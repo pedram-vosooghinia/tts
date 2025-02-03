@@ -2,13 +2,13 @@
 import toast from "react-hot-toast";
 import { useState } from "react";
 import useShoppingStore from "@/store/shoppingStore";
-const AddShoppingValues = ({ product }) => {
+import { ProductCartProps } from "@/types/preForma"; 
+
+const AddShoppingValues = ({ product}: ProductCartProps ) => {
   const [quantity, setQuantity] = useState(1);
   const { firstAddToCart, cart } = useShoppingStore();
   const increaseQuantity = () => {
-    if (quantity < product?.validation_value && quantity < product?.inventory) {
       setQuantity(quantity + 1);
-    }
   };
 
   const decreaseQuantity = () => {
@@ -21,21 +21,23 @@ const AddShoppingValues = ({ product }) => {
     firstAddToCart(newItem);
     toast.success("محصول اضافه شد");
   };
-  const isInCart = cart.cartItems.some((item) => item.id === product.id); 
+  const isInCart = cart.cartItems.some(
+    (item) => item.document_id === product.document_id
+  );
   return (
     <>
       {!isInCart ? (
         <div className=" flex flex-col">
           <div className=" flex items-center justify-between mx-8 ">
             <button
-              className="bg-pedram-1 text-white px-4 py-2 rounded-md hover:bg-pedram-2 focus:outline-none"
+              className="bg-pedram-1 text-white px-4 py-2 rounded-md  focus:outline-none"
               onClick={increaseQuantity}
             >
               +
             </button>
             <span className="text-gray-700 text-xl">{quantity}</span>
             <button
-              className="bg-pedram-1 text-white px-4 py-2 rounded-md hover:bg-pedram-2 focus:outline-none"
+              className="bg-pedram-1 text-white px-4 py-2 rounded-md  focus:outline-none"
               onClick={decreaseQuantity}
             >
               -

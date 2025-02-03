@@ -7,7 +7,7 @@ import LoadingModal from "@/components/MainComponents/LoadingModal";
 import toast from "react-hot-toast";
 // import ImageUploader from "@/components/PComponent/form/ImageUploader";
 import { addProductService } from "@/services/product";
-import { Product } from "@/components/dashboard/product/type";
+import { Product } from "@/types/product";
 import {
   Select,
   SelectContent,
@@ -41,7 +41,6 @@ export default function AddProduct() {
   //   form.setValue("files", [...form.getValues("files"), ...files]);
   // };
   const onSubmit = async (data: Product) => {
-
     try {
       setLoading(true);
       const res = await addProductService(data);
@@ -132,7 +131,7 @@ export default function AddProduct() {
               </FormItem>
             )}
           />
-{/* 
+          {/* 
           <FormField
             control={form.control}
             name="files"

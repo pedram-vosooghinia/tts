@@ -1,7 +1,7 @@
 import { NextResponse, NextRequest } from "next/server";
 import { query } from "@/db";
 import { UUID24C } from "@/utils/api/uuid16c";
-import { Customer } from "@/components/dashboard/customers/type";
+import { Customer } from "@/types/customer";
 export async function POST(req: NextRequest) {
   const document_id = UUID24C();
   const created_at = new Date().toISOString();

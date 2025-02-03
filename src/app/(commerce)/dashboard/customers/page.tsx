@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import useSWR from "swr";
 import { ChevronDown } from "lucide-react";
 import PTable2 from "@/components/PComponent/table/Ptable2";
-import { Customer } from "@/components/dashboard/customers/type";
+import { Customer } from "@/types/customer";
 import { CustomerColumns } from "@/components/dashboard/customers/CustomerColumns";
 import { customerSellerStore } from "@/store/customerSellerStore";
 import {

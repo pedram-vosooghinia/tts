@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import LoadingModal from "@/components/MainComponents/LoadingModal";
 import toast from "react-hot-toast";
 import { addCustomersService } from "@/services/customers";
-import { Customer } from "@/components/dashboard/customers/type";
+import { Customer } from "@/types/customer";
 import {
   Select,
   SelectContent,

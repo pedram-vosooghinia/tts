@@ -1,6 +1,6 @@
 "use client";
 import * as React from "react";
-import { Customer } from "./type";
+import { Customer } from "../../../types/customer";
 // import { mutate } from "swr";
 // import toast from "react-hot-toast";
 // import { Button } from "@/components/ui/button";

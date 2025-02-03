@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 import { useModalStore } from "@/store/modalStore";
 import { hashtagTypeStore } from "@/store/hashtagTypeStore";
 import Modal from "@/components/MainComponents/Modal";
-import { Hashtag } from "@/types/Hashtags";
+import { Hashtag } from "@/types/hashtags";
 
 interface FormValues {
   hashatg_count: number;
@@ -35,7 +35,7 @@ export default function ExportHashatg({ hashtags }: ExportHashatgProps) {
       const { hashatg_count } = data;
       const randomTags = getRandomHashtags(hashatg_count);
       const hashtagTextString = randomTags.join(" ");
-      
+
       // کپی کردن متن هشتگ به کلیپ بورد
       await navigator.clipboard.writeText(hashtagTextString);
       toast.success("هشتگ‌ها با موفقیت کپی شدند");

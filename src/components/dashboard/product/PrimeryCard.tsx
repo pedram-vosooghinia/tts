@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 import React from "react";
 // import OneImage from "@/components/MainComponents/OneImage";
 import { Button } from "@/components/ui/button";
-import { ProductAddProp } from "./type"; 
+import { ProductAddProp } from "../../../types/product";
 import {
   Card,
   CardContent,
