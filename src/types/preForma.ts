@@ -1,6 +1,7 @@
 import { Product } from "@/types/product";
 export interface CartItem {
   document_id: string;
+  barcode:number
   product_name: string;
   quantity: number;
   price: number

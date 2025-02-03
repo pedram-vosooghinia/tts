@@ -22,7 +22,7 @@ const AddShoppingValues = ({ product}: ProductCartProps ) => {
     toast.success("محصول اضافه شد");
   };
   const isInCart = cart.cartItems.some(
-    (item) => item.document_id === product.document_id
+    (item) => item.barcode === product.barcode
   );
   return (
     <>
