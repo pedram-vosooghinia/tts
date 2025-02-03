@@ -1,6 +1,6 @@
 import { NextResponse, NextRequest } from "next/server";
 import { query } from "@/db";
-import { v4 as uuidv4 } from "uuid"; // Import UUID generator
+import { v4 as uuidv4 } from "uuid"; 
 interface RequestBody {
   data: {
     hashatg_name: string;

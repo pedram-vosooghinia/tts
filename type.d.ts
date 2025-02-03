@@ -6,13 +6,6 @@ interface User {
   user_role: string;
   password?: string,
 }
-interface Customer {
-  name: string;
-  mobile: string;
-  first_name: string;
-  last_name: string;
-  role: string;
-}
 
 //pages
 interface MountOrdersProps {

@@ -1,4 +1,5 @@
-import { Product } from "@/types/product";
+import { Product } from "@/types/product"; 
+import { Customer } from "./customer";
 export interface CartItem {
   document_id: string;
   barcode:number
@@ -26,4 +27,12 @@ export interface CartState {
 
 export interface ProductCartProps {
   product: Product;
+}
+
+
+export interface MoveToShippingProps {
+  exceptionsPrice: Record<string, number>; 
+  totalInvoice: number;
+  discountAmount: number | undefined;
+  finalPay: number;
 }

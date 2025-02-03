@@ -15,7 +15,6 @@ export default function New() {
   if (isLoading) {
     return <LoadingModal />;
   }
-  console.log("products", products);
 
   const handleClearSearch = () => {
     setSearchedProduct(null);

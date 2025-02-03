@@ -4,8 +4,8 @@ import EditShoppingValues from "@/components/dashboard/preForma/carts/EditShoppi
 import MoveToShipping from "@/components/dashboard/preForma/carts/MoveToShipping";
 import useShoppingStore from "@/store/shoppingStore";
 // import OneImage from "@/components/Main/OneImage";
-// import CustomerManagement from "@/components/dashboard/preForma/carts/CustomerManagement";
-import DetailPreForma from "@/components/dashboard/preForma/carts/DetailPreForma";
+import CustomerManagement from "@/components/dashboard/preForma/carts/CustomerManagement";
+import DetailPreForma from "@/components/dashboard/preForma/carts/Discount";
 import CartSummary from "@/components/dashboard/preForma/carts/CartSummary";
 export default function Carts() {
   const [show, setShow] = useState(false);
@@ -14,7 +14,7 @@ export default function Carts() {
     Record<string, number>
   >({});
   console.log("exceptionsValue", exceptionsPrice);
-  const { cartItems } = cart;
+  const { cartItems ,discount} = cart;
   useEffect(() => {
     if (cartItems.length !== 0) {
       setShow(true);
@@ -42,7 +42,6 @@ export default function Carts() {
   );
 
   const finalPay = totalPrice - (cart.discount ?? 0);
-console.log("finalPay",finalPay)
   return (
     <>
       <div className="m-6 text-xl text-center">سبد خرید</div>
@@ -100,7 +99,7 @@ console.log("finalPay",finalPay)
              totalPrice={totalPrice}
              finalPay={finalPay}
            />
-          {/* <CustomerManagement /> */}
+          <CustomerManagement />
           <DetailPreForma />
         </div>
       ) : (
@@ -109,11 +108,10 @@ console.log("finalPay",finalPay)
         </div>
       )}
       <MoveToShipping
-      // exceptionsPrice={exceptionsPrice}
-      // totalInvoice={totalInvoice}
-      // discountAmount={discountAmount}
-      // marketerDiscount={marketerDiscount}
-      // finalPay={finalPay}
+      exceptionsPrice={exceptionsPrice}
+      totalInvoice={totalPrice}
+      discountAmount={discount}
+      finalPay={finalPay}
       />
     </>
   );

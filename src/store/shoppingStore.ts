@@ -3,7 +3,6 @@ import { create } from "zustand";
 import toast from "react-hot-toast";
 import Cookies from "js-cookie";
 import { CartState } from "@/types/preForma";
-// import { Customer } from "@/types/customer";
 const useShoppingStore = create<CartState>((set) => ({
   cart: Cookies.get("cart")
     ? JSON.parse(Cookies.get("cart") as string)
@@ -20,12 +19,12 @@ const useShoppingStore = create<CartState>((set) => ({
       Cookies.set("cart", JSON.stringify(updatedCart));
       return { cart: updatedCart };
     }),
-    setDiscount: (discount) =>
-    set((state) => {
-      const updatedCart = { ...state.cart, discount };
-      Cookies.set("cart", JSON.stringify(updatedCart));
-      return { cart: updatedCart };
-    }),
+    setDiscount: (discount: number) =>
+      set((state) => {
+        const updatedCart = { ...state.cart, discount: Number(discount) }; // تبدیل رشته به عدد
+        Cookies.set("cart", JSON.stringify(updatedCart));
+        return { cart: updatedCart };
+      }),
     removeDiscount: () =>
     set((state) => {
       const updatedCart = { ...state.cart, discount: 0 };
