@@ -9,7 +9,6 @@ import { useModalStore } from "@/store/modalStore";
 import { hashtagTypeStore } from "@/store/hashtagTypeStore";
 import Modal from "@/components/MainComponents/Modal";
 import { Hashtag } from "@/types/hashtags";
-
 interface FormValues {
   hashatg_count: number;
 }
