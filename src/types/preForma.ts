@@ -34,5 +34,20 @@ export interface MoveToShippingProps {
   exceptionsPrice: Record<string, number>; 
   totalInvoice: number;
   discountAmount: number | undefined;
-  finalPay: number;
+}
+
+export interface OrderItem {
+  product_name: string;
+  document_id: string;
+  second_price: number;
+  quantity: number;
+  price: number;
+}
+
+export interface MoveToShippingRequestProps {
+  customer_id: string | null;
+  total_price: number;
+  order_items: OrderItem[];
+  status: number;
+  discount: number;
 }

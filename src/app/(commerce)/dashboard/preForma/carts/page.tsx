@@ -111,7 +111,6 @@ export default function Carts() {
       exceptionsPrice={exceptionsPrice}
       totalInvoice={totalPrice}
       discountAmount={discount}
-      finalPay={finalPay}
       />
     </>
   );

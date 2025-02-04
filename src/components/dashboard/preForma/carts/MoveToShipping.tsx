@@ -1,23 +1,23 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { postPreFormaService } from "@/services/preForma";
+import { postOrderService } from "@/services/orders";
 import useShoppingStore from "@/store/shoppingStore";
 import toast from "react-hot-toast";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { MoveToShippingProps } from "@/types/preForma";
-
+import { MoveToShippingRequestProps } from "@/types/preForma";
+import { OrderItem } from "@/types/preForma";
 const MoveToShipping = ({
   exceptionsPrice,
   totalInvoice,
   discountAmount,
-  finalPay,
 }: MoveToShippingProps) => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const { cart, deleteAllCart } = useShoppingStore();
   const { cartItems, customer } = cart;
-
+  console.log("exceptionsPrice", exceptionsPrice);
   const placeOrderHandler = async () => {
     if (!customer) {
       toast.error("لطفا یک مشتری انتخاب کنید");
@@ -29,33 +29,28 @@ const MoveToShipping = ({
       return;
     }
 
-    const orderItems = cartItems.map((item) => {
-      const numberInPack = exceptionsPrice[item.document_id] || 0;
-
-      return {
-        product_name: item.product_name,
-        document_id: item.document_id,
-        number_in_pack: numberInPack,
-        quantity: item.quantity,
-        price: item.price,
-      };
-    });
-
     setLoading(true);
 
     try {
-      const bodyreq = JSON.stringify({
-        order_items: orderItems,
-        total_price: totalInvoice / 1000,
+      const data: MoveToShippingRequestProps = {
+        customer_id: customer.document_id ? customer.document_id: null,
+        total_price: totalInvoice ,
+        order_items: cartItems.map(
+          (item): OrderItem => ({
+            product_name: item.product_name,
+            document_id: item.document_id,
+            second_price: exceptionsPrice[item.document_id] || 0,
+            quantity: item.quantity,
+            price: item.price,
+          })
+        ),
         status: 6,
-        customer: customer,
-        discount_amount: discountAmount
-          ? (discountAmount / 1000).toFixed(3)
+        discount: discountAmount
+          ? parseFloat((discountAmount ).toFixed(3))
           : 0,
-        final_pay: (finalPay / 1000).toFixed(3),
-      });
-
-      const res = await postPreFormaService(bodyreq);
+      };
+// console.log("bodyreq",bodyreq)
+      const res = await postOrderService(data);
 
       if (res.data.status === 200) {
         toast.success("فاکتور با موفقیت ثبت شد");

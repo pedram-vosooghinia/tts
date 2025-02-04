@@ -1,16 +1,17 @@
 import { NextResponse, NextRequest } from "next/server";
 import { query } from "@/db";
-import { MoveToShippingProps } from "@/types/preForma";
+import { MoveToShippingRequestProps } from "@/types/preForma";
+import { UUID24C } from "@/utils/api/uuid16c";
 
 interface RequestBody {
-  data: MoveToShippingProps;  // اینجا MoveToShippingProps رو مستقیم استفاده می‌کنیم
+  data: MoveToShippingRequestProps;
 }
-export async function POST(req:NextRequest) {
+export async function POST(req: NextRequest) {
   const body: RequestBody = await req.json();
 
-  const { exceptionsPrice, totalInvoice, discountAmount, finalPay } = body.data;
+  const { customer_id, total_price, order_items, status, discount } = body.data;
 
-  if (!exceptionsPrice || totalInvoice == null || discountAmount == null || finalPay == null) {
+  if (!customer_id || !order_items || !total_price || !status || !discount) {
     return NextResponse.json({
       success: false,
       message: "تمامی فیلدها الزامی هستند",
@@ -18,38 +19,26 @@ export async function POST(req:NextRequest) {
     });
   }
 
+  const document_id = UUID24C();
   const createdAt = new Date().toISOString();
-  try {
-    const {
-      order_items,
-      total_price,
-      status,
-      customer,
-      discount_amount,
-      marketer_discount,
-      final_pay,
-      buy_type
-    } = await req.json();
-    const orderItemsJson = JSON.stringify(order_items);
+  const orderItemsJson = JSON.stringify(order_items);
 
+  try {
     const sqlQuery = `
-      INSERT INTO pre_forma (order_items, total_price, status , customer , jalali_date_nopay  ,discount_amount, marketer_discount,final_pay, buy_type)
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8 ,$9)
+      INSERT INTO orders (document_id, customer_id, total_price, order_items, status ,discount, created_at)
+      VALUES ($1, $2, $3, $4, $5, $6, $7)
       RETURNING *;
     `;
 
     const result = await query(sqlQuery, [
-      orderItemsJson,
+      document_id,
+      customer_id,
       total_price,
+      orderItemsJson,
       status,
-      customer,
-      discount_amount,
-      marketer_discount,
-      final_pay,
-      buy_type,
-      createdAt
+      discount,
+      createdAt,
     ]);
-
     if (result.rows.length > 0) {
       return NextResponse.json({
         status: 200,
