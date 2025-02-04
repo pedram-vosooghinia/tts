@@ -3,7 +3,6 @@ import * as React from "react";
 import useSWR, { mutate } from "swr";
 import LoadingModal from "@/components/MainComponents/LoadingModal";
 import PTable2 from "@/components/PComponent/table/Ptable2";
-import { Hashtag } from "@/types/hashtags";
 import { Hashtagcolumns } from "./HashtagColumns";
 import { Button } from "@/components/ui/button";
 import { ChevronDown } from "lucide-react";

@@ -1,6 +1,5 @@
 "use client";
 import * as React from "react";
-import { Hashtag } from "@/types/hashtags";
 import { mutate } from "swr";
 import toast from "react-hot-toast";
 import { Button } from "@/components/ui/button";
