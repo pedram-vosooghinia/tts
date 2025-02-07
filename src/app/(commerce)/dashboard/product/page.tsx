@@ -25,24 +25,18 @@ export default function ShowPrimery() {
     <div className="rtl flex flex-col justify-center items-center">
       <Button onClick={handleAddProduct}>افزودن محصول</Button>
       <div className="flex justify-center flex-wrap">
-        {products.length > 0 ? (
-          products.map((product) => (
-            <div key={product.id} className=" flex flex-col items-center m-2">
-              <PrimeryCard product={product} />
-              <Button
-                variant="destructive"
-                onClick={() => handleEditProduct(product.id)}
-                className="mt-2"
-              >
-                ویرایش محصول
-              </Button>
-            </div>
-          ))
-        ) : (
-          <div className="flex justify-center items-center mt-40">
-            هیچ محصولی برای تکمیل و ادامه وجود ندارد
+        {products.map((product) => (
+          <div key={product.id} className=" flex flex-col items-center m-2">
+            <PrimeryCard product={product} />
+            <Button
+              variant="destructive"
+              onClick={() => handleEditProduct(product.id)}
+              className="mt-2"
+            >
+              ویرایش محصول
+            </Button>
           </div>
-        )}
+        ))}
       </div>
     </div>
   );
