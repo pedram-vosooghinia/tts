@@ -40,7 +40,7 @@ const MoveToShipping = ({
             document_id: item.id,
             second_price: exceptionsPrice[item.id] || 0,
             quantity: item.quantity,
-            price: item.price,
+            omdePrice: item.omdePrice,
           })
         ),
         status: 6,

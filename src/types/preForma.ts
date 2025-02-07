@@ -5,8 +5,7 @@ export interface CartItem {
   name: string;
   quantity: number;
   image:string
-  price: number
-  omdePrise:number | null
+  omdePrice:number 
 }
 
 export interface CartState {
@@ -42,7 +41,7 @@ export interface OrderItem {
   document_id: string;
   second_price: number;
   quantity: number;
-  price: number;
+  omdePrice: number;
 }
 
 export interface MoveToShippingRequestProps {

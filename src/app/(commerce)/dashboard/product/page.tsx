@@ -9,6 +9,7 @@ export default function ShowPrimery() {
   const router = useRouter();
   const { data: prodctData, isLoading } = useSWR("/proxy/getProduct");
   const products = Array.isArray(prodctData) ? prodctData : [];
+  console.log("products",products)
   const handleAddProduct = () => {
     router.push("/dashboard/product/add");
   };

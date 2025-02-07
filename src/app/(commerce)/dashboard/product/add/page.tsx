@@ -34,9 +34,7 @@ export default function AddProduct() {
     },
   });
 
-  // const handleFilesChange = (files: File[]) => {
-  //   form.setValue("files", [...form.getValues("files"), ...files]);
-  // };
+
   const onSubmit = async (data: Product) => {
     try {
       setLoading(true);

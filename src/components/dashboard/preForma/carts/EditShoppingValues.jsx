@@ -6,7 +6,7 @@ const EditShoppingValues = ({ product }) => {
     useShoppingStore();
   const cartItems = cart ? cart.cartItems : [];
   const productInCart = cartItems.find(
-    (item) => item.barcode === product.barcode
+    (item) => item.id === product.id
   );
 
   const quantity = productInCart?.quantity;

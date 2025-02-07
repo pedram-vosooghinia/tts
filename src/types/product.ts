@@ -8,6 +8,7 @@ export interface Product {
   price: number;
   image: string;
   stock_type?: string;
+  omdePrice: number
 }
 
 export interface ProductAddProp {
