@@ -17,7 +17,6 @@ const MoveToShipping = ({
   const router = useRouter();
   const { cart, deleteAllCart } = useShoppingStore();
   const { cartItems, customer } = cart;
-  console.log("exceptionsPrice", exceptionsPrice);
   const placeOrderHandler = async () => {
     if (!customer) {
       toast.error("لطفا یک مشتری انتخاب کنید");

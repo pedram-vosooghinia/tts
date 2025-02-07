@@ -33,8 +33,8 @@ export default function Carts() {
     quantity: number;
     omdePrise: number |null
   }) => {
-    const price = exceptionsPrice[item.id] ?? item.omdePrise;
-    return price * item.quantity;
+    const omdePrise = exceptionsPrice[item.id] ?? item.omdePrise;
+    return omdePrise * item.quantity;
   };
   const totalPrice = cartItems.reduce(
     (sum, item) => sum + calculateTotalPrice(item),

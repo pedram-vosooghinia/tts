@@ -37,24 +37,17 @@ export default function New() {
         </div>
       )}
       <div className="flex flex-col justify-center items-center">
-        <div className="flex my-6 gap-4 flex-wrap justify-center items-start">
-          {products.map((product: Product) => (
-            <ProductCart key={product.id} product={product} />
-          ))}
-        </div>
+       
         <div className="flex justify-center flex-wrap">
-        {/* {products.length > 0 ? (
-          products.map((product) => (
-            <div key={product.id} className="m-4 flex flex-col items-center">
-              <PrimeryCard product={product} />
-           
-            </div>
-          ))
+        {products.length > 0 ? (
+         products.map((product: Product) => (
+          <ProductCart key={product.id} product={product} />
+        ))
         ) : (
           <div className="flex justify-center items-center mt-40">
             هیچ محصولی برای تکمیل و ادامه وجود ندارد
           </div>
-        )} */}
+        )}
       </div>
       </div>
     </>

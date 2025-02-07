@@ -17,12 +17,11 @@ const PrimeryCard = ({ product }: { product: Product }) => {
   const omdePrise: number | null = match ? hashToPrice(match[0]) : null;
 
   return (
-    <div className="m-4">
-      <Card>
+      <Card className="">
         <CardContent className="flex flex-col items-center">
           <CardDescription>{product.id}</CardDescription>
           {product.image ? (
-            <OneImage imageUrl={product.image} size={250} />
+            <OneImage imageUrl={product.image} size={150} />
           ) : (
             <p>تصویری یافت نشد</p>
           )}
@@ -42,7 +41,6 @@ const PrimeryCard = ({ product }: { product: Product }) => {
           </CardFooter>
         </CardContent>
       </Card>
-    </div>
   );
 };
 

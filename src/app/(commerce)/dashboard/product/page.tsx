@@ -27,7 +27,7 @@ export default function ShowPrimery() {
       <div className="flex justify-center flex-wrap">
         {products.length > 0 ? (
           products.map((product) => (
-            <div key={product.id} className="m-4 flex flex-col items-center">
+            <div key={product.id} className=" flex flex-col items-center m-2">
               <PrimeryCard product={product} />
               <Button
                 variant="destructive"
