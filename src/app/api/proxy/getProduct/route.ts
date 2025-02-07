@@ -19,7 +19,7 @@ export async function GET() {
     const productsWithImages: Product[] = [];
     for (const product of products) {
       try {
-        await delay(100); 
+        await delay(10); 
         const imageResponse = await apiTetisan.get(`products/${product.id}/images`);
         const images = imageResponse.data.result;
         const englishName = product?.english_name ?? "";
