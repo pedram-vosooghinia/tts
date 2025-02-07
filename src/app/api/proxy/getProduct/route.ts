@@ -14,19 +14,16 @@ export async function GET() {
       return NextResponse.json({ error: "No products found" }, { status: 404 });
     }
 
-    const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
     const productsWithImages: Product[] = [];
     for (const product of products) {
       try {
-        await delay(10); 
         const imageResponse = await apiTetisan.get(`products/${product.id}/images`);
         const images = imageResponse.data.result;
         const englishName = product?.english_name ?? "";
         const match = englishName.match(/PRD-[A-F0-9]+/);
         const omdePrice: number | null = match ? hashToPrice(match[0]) : null;
-
-        
+    
         productsWithImages.push({
           ...product,
           image: images.length > 0 ? images[0].image : null,
