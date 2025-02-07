@@ -1,9 +1,6 @@
 "use client";
-import { useRouter } from "next/navigation";
 import React from "react";
-// import OneImage from "@/components/MainComponents/OneImage";
-import { Button } from "@/components/ui/button";
-import { ProductAddProp } from "../../../types/product";
+import OneImage from "@/components/MainComponents/OneImage";
 import {
   Card,
   CardContent,
@@ -11,35 +8,40 @@ import {
   CardFooter,
   CardDescription,
 } from "@/components/ui/card";
-const PrimeryCard = ({ products }: ProductAddProp) => {
-  const router = useRouter();
+import { Product } from "../../../types/product";
+import { hashToPrice } from "@/utils/price/hashPrice";
 
-  const handleClick = (document_id: string) => {
-    router.push(`/dashboard/product/editPrimery/${document_id}`);
-  };
-  console.log("products", products);
+const PrimeryCard = ({ product }: { product: Product }) => {
+  const englishName = product?.english_name ?? "";
+  const match = englishName.match(/PRD-[A-F0-9]+/);
+  const omdePrise: number | null = match ? hashToPrice(match[0]) : null;
+
   return (
-    <div className="flex flex-col justify-center   md:flex-row">
-      {products.map((product, index) => (
-        <div key={index} className="m-4">
-          <Card>
-            <CardContent className=" flex flex-col items-center  ">
-              {/* <OneImage product={product} size={250} justOneImage={false} /> */}
-              <div>{index + 1}</div>
-              <CardHeader>{product.product_name}</CardHeader>
-              <CardDescription>{product.brand}</CardDescription>
-              <CardDescription>{product.sale_type}</CardDescription>
-              <CardFooter>{product.price}</CardFooter>
-              <Button
-                variant="destructive"
-                onClick={() => handleClick(product.document_id)}
-              >
-                ویرایش محصول
-              </Button>
-            </CardContent>
-          </Card>
-        </div>
-      ))}
+    <div className="m-4">
+      <Card>
+        <CardContent className="flex flex-col items-center">
+          <CardDescription>{product.id}</CardDescription>
+          {product.image ? (
+            <OneImage imageUrl={product.image} size={250} />
+          ) : (
+            <p>تصویری یافت نشد</p>
+          )}
+          <CardHeader>{product.name}</CardHeader>
+          <CardDescription>
+            {product.brand === 1 ? "راین جی" : "هبه"}
+          </CardDescription>
+          <CardFooter>
+            قیمت تک:
+            {product?.price ? product.price.toLocaleString() : "نامشخص"} تومان
+          </CardFooter>
+          <CardFooter>
+            قیمت عمده:
+            {typeof omdePrise === "number"
+              ? `${(omdePrise * 1000).toLocaleString()} تومان`
+              : "نامعتبر"}
+          </CardFooter>
+        </CardContent>
+      </Card>
     </div>
   );
 };

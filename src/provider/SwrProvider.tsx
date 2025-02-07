@@ -15,7 +15,7 @@ export default function SwrProvider({ children }:SwrProviderProps) {
           value={{
             fetcher,
             revalidateOnFocus: false, 
-            errorRetryCount: 3,
+            errorRetryCount: 1,
             refreshWhenOffline:true
           }}
         >

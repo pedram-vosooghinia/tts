@@ -4,7 +4,6 @@ import { query } from "@/db";
 export async function DELETE(req: NextRequest) {
   try {
     const { document_id } = await req.json();
-console.log("document_id",document_id)
     const sqlQuery = `
       DELETE FROM hashtags
       WHERE document_id = $1

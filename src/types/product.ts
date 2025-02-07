@@ -1,11 +1,13 @@
 export interface Product {
-  document_id: string;
-  product_name: string;
-  brand: string;
+  id: string;
+  available: boolean;
+  name: string;
+  brand: number
+  english_name:string
   sale_type: string;
   price: number;
-  barcode: number;
-  files: File[];
+  image: string;
+  stock_type?: string;
 }
 
 export interface ProductAddProp {

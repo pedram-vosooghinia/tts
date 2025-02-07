@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import LoadingModal from "@/components/MainComponents/LoadingModal";
 import toast from "react-hot-toast";
-// import ImageUploader from "@/components/PComponent/form/ImageUploader";
 import { addProductService } from "@/services/product";
 import { Product } from "@/types/product";
 import {
@@ -29,11 +28,9 @@ export default function AddProduct() {
 
   const form = useForm<Product>({
     defaultValues: {
-      product_name: "",
-      brand: "",
+      name: "",
       sale_type: "",
       price: 0,
-      files: [],
     },
   });
 
@@ -63,7 +60,7 @@ export default function AddProduct() {
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
           <FormField
             control={form.control}
-            name="product_name"
+            name="name"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>نام محصول</FormLabel>
@@ -74,27 +71,7 @@ export default function AddProduct() {
               </FormItem>
             )}
           />
-          <FormField
-            control={form.control}
-            name="brand"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>برند</FormLabel>
-                <Select onValueChange={field.onChange}>
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="انتخاب برند" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent className="rtl">
-                    <SelectItem value="rain.g">rain.g</SelectItem>
-                    <SelectItem value="hebe">hebe</SelectItem>
-                  </SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+     
 
           <FormField
             control={form.control}
@@ -131,17 +108,7 @@ export default function AddProduct() {
               </FormItem>
             )}
           />
-          {/* 
-          <FormField
-            control={form.control}
-            name="files"
-            render={() => (
-              <FormItem>
-                <ImageUploader onFilesChange={handleFilesChange} />
-                <FormMessage />
-              </FormItem>
-            )}
-          /> */}
+ 
           <Button type="submit">ارسال</Button>
         </form>
       </Form>

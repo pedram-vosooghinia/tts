@@ -26,7 +26,6 @@ const Customers = () => {
     setSelectedSeller(seller);
   };
   const customers = customersData?.data || [];
-  console.log("customers", customers);
   const handelAddcustomer = () => {
     router.push("/dashboard/customers/add");
   };

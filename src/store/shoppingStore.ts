@@ -34,11 +34,11 @@ const useShoppingStore = create<CartState>((set) => ({
   firstAddToCart: (newItem) => {
     set((state) => {
       const existingItem = state.cart?.cartItems?.find(
-        (item) => item.document_id === newItem.document_id
+        (item) => item.id === newItem.id
       );
       const cartItems = existingItem
         ? (state.cart?.cartItems || []).map((item) =>
-            item.product_name === existingItem.product_name ? newItem : item
+            item.name === existingItem.name ? newItem : item
           )
         : [...(state.cart?.cartItems || []), newItem];
 
@@ -51,7 +51,7 @@ const useShoppingStore = create<CartState>((set) => ({
   increaseValueCart: (newItem) =>
     set((state) => {
       const existingItem = state.cart.cartItems.find(
-        (item) => item.document_id === newItem.document_id
+        (item) => item.id === newItem.id
       );
 
       if (existingItem) {
@@ -84,7 +84,7 @@ const useShoppingStore = create<CartState>((set) => ({
   decreaseValueCart: (item) =>
     set((state) => {
       const existingItem = state.cart.cartItems.find(
-        (cartItem) => cartItem.document_id === item.document_id
+        (cartItem) => cartItem.id === item.id
       );
 
       if (existingItem) {
@@ -107,7 +107,7 @@ const useShoppingStore = create<CartState>((set) => ({
   deleteValueCart: (item) =>
     set((state) => {
       const updatedCartItems = state.cart.cartItems.filter(
-        (cartItem) => cartItem.document_id !== item.document_id
+        (cartItem) => cartItem.id !== item.id
       );
 
       const updatedCart = { ...state.cart, cartItems: updatedCartItems };

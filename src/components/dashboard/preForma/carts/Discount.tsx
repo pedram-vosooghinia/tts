@@ -24,7 +24,7 @@ const Discount = () => {
     formState: { errors },
   } = useForm<Discount>();
   const onSubmit = async (values: Discount) => {
-    setDiscount(values.discount);
+    setDiscount(values.discount * 1000);
     closeModal();
     toast.success("تخفیف با موفقیت ذخیره شد");
   };
@@ -43,7 +43,7 @@ const Discount = () => {
       {cart.discount && typeof cart.discount === "number" && (
         <Card className="mx-2">
           <CardContent className="flex flex-wrap justify-center items-center gap-4 mt-6">
-            <div>تخفیف: {cart.discount}</div>
+            <div>تخفیف: {cart.discount.toLocaleString()}</div>
             <div>
               <Button className=" bg-red-500 " onClick={handleRemoveDetails}>
                 حذف تخفیف

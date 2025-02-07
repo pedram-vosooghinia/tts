@@ -4,14 +4,14 @@ import { UUID24C } from "@/utils/api/uuid16c";
 import { Product } from "@/types/product";
 
 export async function POST(req: NextRequest) {
-  const document_id = UUID24C();
+  const id = UUID24C();
   const created_at = new Date().toISOString();
 
   try {
     const body: Product = await req.json();
 
-    const { product_name, brand, sale_type, price } = body;
-    if (!product_name || !brand || !sale_type || !price) {
+    const { name, brand, sale_type, price } = body;
+    if (!name || !brand || !sale_type || !price) {
       return NextResponse.json({
         success: false,
         message: "تمامی فیلدها الزامی هستند",
@@ -23,8 +23,8 @@ export async function POST(req: NextRequest) {
     VALUES ($1, $2, $3, $4, $5, $6)
   `;
     const values: (string | number | null)[] = [
-      document_id,
-      product_name,
+      id,
+      name,
       brand,
       sale_type,
       price,

@@ -4,7 +4,7 @@ const nextConfig = {
         remotePatterns: [
             {
               protocol: 'https',
-              hostname: 'tts-images-omde.storage.c2.liara.space',
+              hostname: 'tetisan.ir',
               port: '',
             },
         

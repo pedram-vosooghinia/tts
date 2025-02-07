@@ -37,9 +37,9 @@ const MoveToShipping = ({
         total_price: totalInvoice ,
         order_items: cartItems.map(
           (item): OrderItem => ({
-            product_name: item.product_name,
-            document_id: item.document_id,
-            second_price: exceptionsPrice[item.document_id] || 0,
+            product_name: item.name,
+            document_id: item.id,
+            second_price: exceptionsPrice[item.id] || 0,
             quantity: item.quantity,
             price: item.price,
           })
@@ -49,7 +49,6 @@ const MoveToShipping = ({
           ? parseFloat((discountAmount ).toFixed(3))
           : 0,
       };
-// console.log("bodyreq",bodyreq)
       const res = await postOrderService(data);
 
       if (res.data.status === 200) {

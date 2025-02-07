@@ -2,15 +2,18 @@
 import { useState } from "react";
 import ProductCart from "@/components/dashboard/preForma/carts/ProductCart";
 import LoadingModal from "@/components/MainComponents/LoadingModal";
+// import PrimeryCard from "@/components/dashboard/product/PrimeryCard";
+
 import { Button } from "@/components/ui/button";
 import useSWR from "swr";
 import { Product } from "@/types/product";
 export default function New() {
   const [searchedProduct, setSearchedProduct] = useState<Product | null>(null);
  
-  const { data: prodctData, isLoading } = useSWR("/products/get");
+  // const { data: prodctData, isLoading } = useSWR("/products/get");
 
-  const products = prodctData?.data || [];
+  const { data: prodctData, isLoading } = useSWR("/proxy/getProduct");
+
 
   if (isLoading) {
     return <LoadingModal />;
@@ -19,7 +22,7 @@ export default function New() {
   const handleClearSearch = () => {
     setSearchedProduct(null);
   };
-  const displayedProducts = searchedProduct ? [searchedProduct] : products;
+  const products = Array.isArray(prodctData) ? prodctData : [];
 
   return (
     <>
@@ -35,16 +38,24 @@ export default function New() {
       )}
       <div className="flex flex-col justify-center items-center">
         <div className="flex my-6 gap-4 flex-wrap justify-center items-start">
-          {displayedProducts.map((product: Product) => (
-            <ProductCart key={product.document_id} product={product} />
+          {products.map((product: Product) => (
+            <ProductCart key={product.id} product={product} />
           ))}
         </div>
-
-        {displayedProducts.length === 0 && (
+        <div className="flex justify-center flex-wrap">
+        {/* {products.length > 0 ? (
+          products.map((product) => (
+            <div key={product.id} className="m-4 flex flex-col items-center">
+              <PrimeryCard product={product} />
+           
+            </div>
+          ))
+        ) : (
           <div className="flex justify-center items-center mt-40">
-            هیچ محصولی برای نمایش وجود ندارد
+            هیچ محصولی برای تکمیل و ادامه وجود ندارد
           </div>
-        )}
+        )} */}
+      </div>
       </div>
     </>
   );

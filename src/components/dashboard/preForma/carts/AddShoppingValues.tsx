@@ -3,10 +3,16 @@ import toast from "react-hot-toast";
 import { useState } from "react";
 import useShoppingStore from "@/store/shoppingStore";
 import { ProductCartProps } from "@/types/preForma"; 
-
+import { hashToPrice } from "@/utils/price/hashPrice";
 const AddShoppingValues = ({ product}: ProductCartProps ) => {
   const [quantity, setQuantity] = useState(1);
   const { firstAddToCart, cart } = useShoppingStore();
+
+  const englishName = product?.english_name ?? "";
+  const match = englishName.match(/PRD-[A-F0-9]+/);
+  const omdePrise: number | null = match ? hashToPrice(match[0]) : null;
+
+
   const increaseQuantity = () => {
       setQuantity(quantity + 1);
   };
@@ -17,12 +23,12 @@ const AddShoppingValues = ({ product}: ProductCartProps ) => {
     }
   };
   const addToCartHandler = () => {
-    const newItem = { ...product, quantity };
+    const newItem = { ...product, quantity ,omdePrise};
     firstAddToCart(newItem);
     toast.success("محصول اضافه شد");
   };
   const isInCart = cart.cartItems.some(
-    (item) => item.barcode === product.barcode
+    (item) => item.id === product.id
   );
   return (
     <>

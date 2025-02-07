@@ -20,7 +20,7 @@ const CartSummary = ({ totalPrice, finalPay }) => {
                   className="flex justify-center items-center m-2"
                 >
                   <div className="px-2">{item.label}:</div>
-                  <div>{(item.value * 1000).toLocaleString()}</div>
+                  <div>{item.value.toLocaleString()}</div>
                   <div className="px-2"> تومان </div>
                 </div>
               ))}

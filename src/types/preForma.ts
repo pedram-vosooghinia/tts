@@ -1,11 +1,12 @@
 import { Product } from "@/types/product"; 
 import { Customer } from "./customer";
 export interface CartItem {
-  document_id: string;
-  barcode:number
-  product_name: string;
+  id: string;
+  name: string;
   quantity: number;
+  image:string
   price: number
+  omdePrise:number | null
 }
 
 export interface CartState {

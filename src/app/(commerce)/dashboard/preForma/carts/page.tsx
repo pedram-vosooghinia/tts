@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import EditShoppingValues from "@/components/dashboard/preForma/carts/EditShoppingValues";
 import MoveToShipping from "@/components/dashboard/preForma/carts/MoveToShipping";
 import useShoppingStore from "@/store/shoppingStore";
-// import OneImage from "@/components/Main/OneImage";
+import OneImage from "@/components/MainComponents/OneImage";
 import CustomerManagement from "@/components/dashboard/preForma/carts/CustomerManagement";
 import DetailPreForma from "@/components/dashboard/preForma/carts/Discount";
 import CartSummary from "@/components/dashboard/preForma/carts/CartSummary";
@@ -13,7 +13,6 @@ export default function Carts() {
   const [exceptionsPrice, setExceptionsPrice] = useState<
     Record<string, number>
   >({});
-  console.log("exceptionsValue", exceptionsPrice);
   const { cartItems ,discount} = cart;
   useEffect(() => {
     if (cartItems.length !== 0) {
@@ -21,19 +20,20 @@ export default function Carts() {
     }
   }, [cartItems]);
 
-  const handleExceptionsPriceChange = (document_id: string, value: number) => {
+  const handleExceptionsPriceChange = (id: string, value: number) => {
     setExceptionsPrice((prev) => ({
       ...prev,
-      [document_id]: value,
+      [id]: value,
     }));
   };
 
   const calculateTotalPrice = (item: {
-    document_id: string;
+    id: string;
     price: number;
     quantity: number;
+    omdePrise: number |null
   }) => {
-    const price = exceptionsPrice[item.document_id] ?? item.price;
+    const price = exceptionsPrice[item.id] ?? item.omdePrise;
     return price * item.quantity;
   };
   const totalPrice = cartItems.reduce(
@@ -50,21 +50,21 @@ export default function Carts() {
           <div className="flex flex-wrap justify-center items-end mx-4">
             {cart?.cartItems.map((item) => (
               <div
-                key={item.document_id}
+                key={item.id}
                 className="flex justify-center items-center"
               >
                 <div className="flex flex-col">
                   <div className="flex flex-col mx-2">
-                    {/* <OneImage product={item} size={100} /> */}
+                    <OneImage imageUrl={item.image} size={100} />
                     <EditShoppingValues
-                      key={item?.document_id}
+                      key={item?.id}
                       product={item}
                     />
                   </div>
                   <div className="flex flex-col">
-                    <div className="mx-2 font-bold">{item.product_name}</div>
+                    <div className="mx-2 font-bold">{item.name}</div>
                     <div className="mx-2">
-                      قیمت: {(item?.price * 1000).toLocaleString()} تومان
+                      قیمت: {(item.omdePrise ? item.omdePrise: 0 ).toLocaleString()} تومان
                     </div>
 
                     <div className="mx-2 mt-2">
@@ -73,10 +73,10 @@ export default function Carts() {
                         type="number"
                         className="w-full p-2 border rounded"
                         min={1}
-                        value={exceptionsPrice[item.document_id] || 0}
+                        value={exceptionsPrice[item.id] || 0}
                         onChange={(e) =>
                           handleExceptionsPriceChange(
-                            item.document_id,
+                            item.id,
                             Number(e.target.value)
                           )
                         }
@@ -85,7 +85,7 @@ export default function Carts() {
 
                     <div className="mx-2 font-bold">
                       قیمت کل:
-                      {(calculateTotalPrice(item) * 1000).toLocaleString()}{" "}
+                      {(calculateTotalPrice(item) ).toLocaleString()}{" "}
                       تومان
                     </div>
                   </div>
