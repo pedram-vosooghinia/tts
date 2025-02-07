@@ -10,8 +10,6 @@ import { Product } from "@/types/product";
 export default function New() {
   const [searchedProduct, setSearchedProduct] = useState<Product | null>(null);
  
-  // const { data: prodctData, isLoading } = useSWR("/products/get");
-
   const { data: prodctData, isLoading } = useSWR("/proxy/getProduct");
 
 
