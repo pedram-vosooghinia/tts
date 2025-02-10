@@ -30,7 +30,8 @@ const PrimeryCard = ({ product }: { product: Product }) => {
         </CardFooter>
         <CardFooter>
           قیمت عمده:
-          {product.omdePrice}
+          {product?.omdePrice ? product.omdePrice.toLocaleString() : "نامشخص"}
+          تومان
         </CardFooter>
       </CardContent>
     </Card>

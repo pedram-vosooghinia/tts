@@ -7,7 +7,7 @@ import { Card, CardContent, CardDescription } from "@/components/ui/card";
 
 function HashToPrice() {
   const [hashedPrice, setHashedPrice] = useState<string>("");
-  const [decodedPrice, setDecodedPrice] = useState<number | null>(null);
+  const [decodedPrice, setDecodedPrice] = useState<{ price: number; percent: number } | null>(null);
 
   const handleHashedPriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -21,7 +21,13 @@ function HashToPrice() {
       <CardContent>
         <Label className="my-2">کد مخفی:</Label>
         <Input type="text" value={hashedPrice} onChange={handleHashedPriceChange} />
-        {decodedPrice !== null && <div className="m-2">قیمت اصلی: {decodedPrice}</div>}
+        
+        {decodedPrice !== null && (
+          <div className="m-2">
+            <div>قیمت عمده: {decodedPrice.price}</div>
+            <div>درصد تک: {decodedPrice.percent}</div>
+          </div>
+        )}
       </CardContent>
     </Card>
   );

@@ -24,22 +24,20 @@ export const apiFile = axios.create({
   },
 });
 
-
 const TETISAN_API_URL = "https://tetisan.ir/api/management/v1/";
 
 export const apiTetisan = axios.create({
   baseURL: TETISAN_API_URL,
   headers: {
     "Content-Type": "application/json",
-    "Authorization": process.env.NEXT_PUBLIC_TETISAN_API_KEY, 
+    Authorization: process.env.NEXT_PUBLIC_TETISAN_API_KEY,
   },
 });
-
 
 const errorInterceptor = async (axiosError: AxiosError) => {
   return Promise.reject(axiosError);
 };
 
 api.interceptors.response.use((response) => response, errorInterceptor);
-
 apiFile.interceptors.response.use((response) => response, errorInterceptor);
+apiTetisan.interceptors.response.use((response) => response, errorInterceptor);
