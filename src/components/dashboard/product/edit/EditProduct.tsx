@@ -10,7 +10,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import LoadingModal from "@/components/MainComponents/LoadingModal";
 import toast from "react-hot-toast";
 import ModalSimple from "@/components/MainComponents/ModalSimple";
-import { editProductTetisanService } from "@/services/product";
+import { editProductTetisanService ,addOrEditProductTtsService } from "@/services/product";
 import { priceToHash } from "@/utils/price/hashPrice";
 interface EditProductProps {
   product: Product;
@@ -37,10 +37,10 @@ export default function EditProduct({
     watch,
   } = useForm<FormValues>();
 
-  const omdePrice = Number(watch("omde_price", 0));
+  const omde_price = Number(watch("omde_price", 0));
   const percentTak = Number(watch("percent_tak", 5));
 
-  const singlePrice = omdePrice + omdePrice * (percentTak / 100);
+  const singlePrice = omde_price + omde_price * (percentTak / 100);
 
   const onSubmit = async (value: FormValues) => {
     const mohasebetak = priceToHash(
@@ -51,17 +51,29 @@ export default function EditProduct({
       /(\s*PRD-[\d\w_]+)$/,
       ` ${mohasebetak}`
     );
-    const data = {
+    const dataTetisan = {
       pk: product.id,
       english_name: updatedEnglishName,
       price: singlePrice,
     };
+    const dataTts = {
+      id: product.id,
+      available: product.available,
+      brand: product.brand,
+      name: product.name,
+      english_name: updatedEnglishName,
+      image: product.image,
+      omde_price: omde_price,
+      main_category: product.main_category,
+      tak_price: singlePrice
+    };
     try {
       setLoading(true);
-      await editProductTetisanService(data);
+      // await editProductTetisanService(dataTetisan);
+      await addOrEditProductTtsService(dataTts);
       // mutate(`/hashtags/getAll?type=${selectedType}`);
 
-      toast.success("هشتگ با موفقیت ثبت شد");
+      toast.success("محصول با موفقیت ثبت شد");
     } catch {
       toast.error("خطایی رخ داد");
     } finally {
@@ -90,7 +102,7 @@ export default function EditProduct({
             <div>
               <div className=" flex items-center gap-2">
                 <Label htmlFor="omde_price">قیمت عمده</Label>
-                <div>{(product?.omdePrice).toLocaleString()}</div>
+                <div>{(product?.omde_price).toLocaleString()}</div>
               </div>
               <Input
                 id="omde_price"

@@ -4,12 +4,15 @@ export interface Product {
   name: string;
   brand: number
   english_name:string
-  sale_type: string;
   price: number;
   image: string;
-  stock_type?: string;
-  omdePrice: number
+  omde_price: number
+  has_variants: boolean;
+  main_category: number;
+  tak_price: number;
+  stock_type?:string
 }
+
 
 export interface ProductAddProp {
   products: Product[];

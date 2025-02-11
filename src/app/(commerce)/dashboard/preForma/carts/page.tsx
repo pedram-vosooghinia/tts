@@ -30,10 +30,10 @@ export default function Carts() {
   const calculateTotalPrice = (item: {
     id: string;
     quantity: number;
-    omdePrice: number 
+    omde_price: number 
   }) => {
-    const omdePrice = exceptionsPrice[item.id] ?? item.omdePrice;
-    return omdePrice * item.quantity;
+    const omde_price = exceptionsPrice[item.id] ?? item.omde_price;
+    return omde_price * item.quantity;
   };
   const totalPrice = cartItems.reduce(
     (sum, item) => sum + calculateTotalPrice(item),
@@ -63,7 +63,7 @@ export default function Carts() {
                   <div className="flex flex-col">
                     <div className="mx-2 font-bold">{item.name}</div>
                     <div className="mx-2">
-                      قیمت: {(item.omdePrice ? item.omdePrice: 0 ).toLocaleString()} تومان
+                      قیمت: {(item.omde_price ? item.omde_price: 0 ).toLocaleString()} تومان
                     </div>
 
                     <div className="mx-2 mt-2">

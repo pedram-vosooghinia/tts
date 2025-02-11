@@ -15,7 +15,7 @@ function ProductCart({ product }: ProductCartProps) {
               <div>{product.id}</div>
             </div>
             <div className="flex">
-              <div>{product.omdePrice}</div>
+              <div>{product.omde_price}</div>
               <div className="rtl px-2">تومان</div>
             </div>
           </div>
