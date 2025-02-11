@@ -22,11 +22,11 @@ export const DashboardMenuitems = [
     link: "/dashboard/preForma",
   },
 
-  {
-    id: 5,
-    label: "فاکتورهای نهایی",
-    link: "/dashboard/orders",
-  },
+  // {
+  //   id: 5,
+  //   label: "فاکتورهای نهایی",
+  //   link: "/dashboard/orders",
+  // },
   {
     id: 6,
     label: "محاسبه خرید",

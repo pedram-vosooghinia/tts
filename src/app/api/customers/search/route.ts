@@ -29,8 +29,7 @@ export async function GET(request: NextRequest) {
       status: result.rows.length > 0 ? 200 : 404,
       message: result.rows.length > 0 ? undefined : "No customers found",
     });
-  } catch (error) {
-    console.error("Error fetching customer:", error);
+  } catch  {
     return NextResponse.json({
       status: 500,
       success: false,

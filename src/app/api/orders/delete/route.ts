@@ -21,8 +21,7 @@ export async function DELETE(req:NextRequest) {
         message: "Order not found.",
       });
     }
-  } catch (error) {
-    console.error("Error in deleting order (server) => ", error);
+  } catch  {
     return NextResponse.json({
       status: 500,
       success: false,

@@ -12,7 +12,6 @@ export default function Products() {
   const { data: productData, isLoading } = useSWR("/proxy/getProduct");
 
   const products = Array.isArray(productData) ? productData : [];
-console.log("products",products)
   const handleEditProduct = (product: Product) => {
     setSelectedProduct(product);
   };

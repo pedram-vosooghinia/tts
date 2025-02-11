@@ -18,7 +18,7 @@ const PrimeryCard = ({ product }: { product: Product }) => {
         {product.image ? (
           <OneImage imageUrl={product.image} size={150} />
         ) : (
-          <p>تصویری یافت نشد</p>
+          <div>تصویری یافت نشد</div>
         )}
         <CardHeader>{product.name}</CardHeader>
         <CardDescription>

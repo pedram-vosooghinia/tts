@@ -1,22 +1,33 @@
 "use client";
+
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { postOrderService } from "@/services/orders";
 import useShoppingStore from "@/store/shoppingStore";
 import toast from "react-hot-toast";
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { MoveToShippingProps } from "@/types/preForma";
-import { MoveToShippingRequestProps } from "@/types/preForma";
-import { OrderItem } from "@/types/preForma";
+import {
+  MoveToShippingProps,
+  MoveToShippingRequestProps,
+  OrderItem,
+} from "@/types/preForma";
+
 const MoveToShipping = ({
   exceptionsPrice,
+  numberInPack,
   totalInvoice,
   discountAmount,
 }: MoveToShippingProps) => {
   const [loading, setLoading] = useState(false);
+  const [isClient, setIsClient] = useState(false);
   const router = useRouter();
   const { cart, deleteAllCart } = useShoppingStore();
   const { cartItems, customer } = cart;
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   const placeOrderHandler = async () => {
     if (!customer) {
       toast.error("لطفا یک مشتری انتخاب کنید");
@@ -32,21 +43,19 @@ const MoveToShipping = ({
 
     try {
       const data: MoveToShippingRequestProps = {
-        customer_id: customer.document_id ? customer.document_id: null,
-        total_price: totalInvoice ,
+        customer_id: customer.document_id || null,
+        total_price: totalInvoice,
         order_items: cartItems.map(
           (item): OrderItem => ({
             product_name: item.name,
             document_id: item.id,
-            second_price: exceptionsPrice[item.id] || 0,
             quantity: item.quantity,
-            omde_price: item.omde_price,
+            omde_price: exceptionsPrice[item.id] || item.omde_price,
+            number_in_pack: numberInPack[item.id] || 1,
           })
         ),
         status: 6,
-        discount: discountAmount
-          ? parseFloat((discountAmount ).toFixed(3))
-          : 0,
+        discount: discountAmount ? parseFloat(discountAmount.toFixed(3)) : 0,
       };
       const res = await postOrderService(data);
 
@@ -65,14 +74,14 @@ const MoveToShipping = ({
   };
 
   return (
-    <div className="rtl flex justify-between items-center w-full px-4 mb-6">
+    <div className="flex justify-between items-center w-full px-4 mb-6">
       <Button
         className="bg-pedram-2 text-gray-100"
         onClick={() => router.push("/dashboard/preForma/new")}
       >
         افزودن محصول
       </Button>
-      {cartItems.length > 0 && (
+      {isClient && cartItems.length > 0 && (
         <Button
           className="bg-pedram-1 text-gray-100"
           onClick={placeOrderHandler}

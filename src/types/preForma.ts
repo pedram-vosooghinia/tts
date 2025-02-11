@@ -34,14 +34,16 @@ export interface MoveToShippingProps {
   exceptionsPrice: Record<string, number>; 
   totalInvoice: number;
   discountAmount: number | undefined;
+  numberInPack:Record<string, number>
 }
 
 export interface OrderItem {
   product_name: string;
   document_id: string;
-  second_price: number;
   quantity: number;
   omde_price: number;
+  number_in_pack:number
+
 }
 
 export interface MoveToShippingRequestProps {

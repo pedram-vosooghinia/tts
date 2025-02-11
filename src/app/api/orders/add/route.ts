@@ -52,8 +52,7 @@ export async function POST(req: NextRequest) {
         message: "Failed to save pre_forma.",
       });
     }
-  } catch (error) {
-    console.error("Error in save pre_forma (server) => ", error);
+  } catch  {
     return NextResponse.json({
       status: 500,
       success: false,

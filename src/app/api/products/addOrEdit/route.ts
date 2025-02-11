@@ -16,16 +16,6 @@ export async function POST(req: NextRequest) {
       tak_price,
     }: Product = await req.json();
 
-    console.log("id", id);
-    console.log("available", available);
-    console.log("name", name);
-    console.log("brand", brand);
-    console.log("english_name", english_name);
-    console.log("image", image);
-    console.log("omde_price", omde_price);
-    console.log("main_category", main_category);
-    console.log("tak_price", tak_price);
-
     if (
       !id ||
       !brand ||
@@ -91,8 +81,7 @@ export async function POST(req: NextRequest) {
       },
       { status: 200 }
     );
-  } catch (error) {
-    console.error("Database error:", error);
+  } catch {
     return NextResponse.json(
       {
         success: false,

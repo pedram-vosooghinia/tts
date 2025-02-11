@@ -35,8 +35,7 @@ export async function POST(req: NextRequest) {
       },
       { status: 200 }
     );
-  } catch (error) {
-    console.error("Error updating product:", error);
+  } catch {
 
     return NextResponse.json(
       {

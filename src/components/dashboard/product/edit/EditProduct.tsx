@@ -69,7 +69,7 @@ export default function EditProduct({
     };
     try {
       setLoading(true);
-      // await editProductTetisanService(dataTetisan);
+      await editProductTetisanService(dataTetisan);
       await addOrEditProductTtsService(dataTts);
       // mutate(`/hashtags/getAll?type=${selectedType}`);
 

@@ -8,7 +8,6 @@ const EditShoppingValues = ({ product }) => {
   const productInCart = cartItems.find(
     (item) => item.id === product.id
   );
-
   const quantity = productInCart?.quantity;
   const increaseQuantity = () => {
     const newItem = { ...product };
