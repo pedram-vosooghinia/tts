@@ -10,7 +10,11 @@ import { Card, CardContent } from "@/components/ui/card";
 import LoadingModal from "@/components/MainComponents/LoadingModal";
 import toast from "react-hot-toast";
 import ModalSimple from "@/components/MainComponents/ModalSimple";
-import { editProductTetisanService ,addOrEditProductTtsService } from "@/services/product";
+import { mutate } from "swr";
+import {
+  editProductTetisanService,
+  addOrEditProductTtsService,
+} from "@/services/product";
 import { priceToHash } from "@/utils/price/hashPrice";
 interface EditProductProps {
   product: Product;
@@ -29,7 +33,6 @@ export default function EditProduct({
   onClose,
 }: EditProductProps) {
   const [loading, setLoading] = useState(false);
-
   const {
     register,
     handleSubmit,
@@ -65,13 +68,14 @@ export default function EditProduct({
       image: product.image,
       omde_price: omde_price,
       main_category: product.main_category,
-      tak_price: singlePrice
+      tak_price: singlePrice,
     };
+
     try {
       setLoading(true);
       await editProductTetisanService(dataTetisan);
       await addOrEditProductTtsService(dataTts);
-      // mutate(`/hashtags/getAll?type=${selectedType}`);
+      mutate("/proxy/getProduct");
 
       toast.success("محصول با موفقیت ثبت شد");
     } catch {
@@ -155,7 +159,7 @@ export default function EditProduct({
               )}
             </div>
             <p className="text-lg font-semibold">
-              {isNaN(singlePrice) ? "0" : singlePrice.toLocaleString()} تومان
+              {singlePrice ? singlePrice.toLocaleString() : "0"} تومان
             </p>
 
             <Button type="submit">تغییر قیمت</Button>

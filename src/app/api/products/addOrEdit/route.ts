@@ -81,7 +81,9 @@ export async function POST(req: NextRequest) {
       },
       { status: 200 }
     );
-  } catch {
+  } catch(error) {
+    console.error("Error in addOrEditProduct API:", error);
+
     return NextResponse.json(
       {
         success: false,
