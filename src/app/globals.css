@@ -6,6 +6,11 @@
 
 
 @layer base {
+  html { 
+    direction: rtl;
+    writing-mode: horizontal-tb;
+    text-orientation: upright;
+  }
   .rtl {
     direction: rtl;
   }
@@ -41,7 +46,6 @@
     right: 10px;
     background: none;
     border: none;
-    font-size: 32px;
     cursor: pointer;
     color: #333;
   }

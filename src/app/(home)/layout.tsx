@@ -12,6 +12,9 @@ const vazirFont = localFont({
 export const metadata: Metadata = {
   title: "tts",
   description: "E-commerse",
+  icons: {
+    icon: [{ url: "/favicon.ico" }],
+  },
 };
 
 export default function RootLayout({

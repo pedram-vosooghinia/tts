@@ -1,5 +1,7 @@
 "use client";
 import React from "react";
+import { useState } from "react";
+import EditProduct from "@/components/dashboard/product/edit/EditProduct";
 import OneImage from "@/components/MainComponents/OneImage";
 import {
   Card,
@@ -9,10 +11,16 @@ import {
   CardDescription,
 } from "@/components/ui/card";
 import { Product } from "../../../types/product";
+import { Button } from "@/components/ui/button";
 
 const PrimeryCard = ({ product }: { product: Product }) => {
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+
+  const handleEditProduct = (product: Product) => {
+    setSelectedProduct(product);
+  };
   return (
-    <Card className="">
+    <Card className="flex flex-col items-center m-2 ">
       <CardContent className="flex flex-col items-center">
         <CardDescription>{product.id}</CardDescription>
         {product.image ? (
@@ -34,7 +42,22 @@ const PrimeryCard = ({ product }: { product: Product }) => {
           {product?.omde_price ? product.omde_price.toLocaleString() : 0}
           <div>تومان</div>
         </CardFooter>
+        <Button
+          variant="destructive"
+          onClick={() => handleEditProduct(product)}
+          className="my-2"
+        >
+          ویرایش محصول
+        </Button>
       </CardContent>
+
+      {selectedProduct && (
+        <EditProduct
+          product={selectedProduct}
+          isOpen={!!selectedProduct}
+          onClose={() => setSelectedProduct(null)}
+        />
+      )}
     </Card>
   );
 };
