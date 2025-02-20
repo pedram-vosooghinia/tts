@@ -9,21 +9,33 @@ import { Product } from "@/types/product";
 
 export default function Products() {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
-  const { data: productData, isLoading } = useSWR("/proxy/getProduct");
+  const { data: productData, isLoading :isLoadingProduct } = useSWR("/proxy/getProduct");
 
   const products = Array.isArray(productData) ? productData : [];
+
+  const { data: imagesData, isLoading: isLoadingImages } = useSWR(
+    products.length ? `/proxy/getImage/?ids=${products.map((p) => p.id).join(",")}` : null
+  );
+
+ 
+  if (isLoadingProduct || isLoadingImages) {
+    return <LoadingModal />;
+  }
+  const fullProducts = products.map((p) => {
+    const imageObj = imagesData.find((item:Product) => item.id === String(p.id));
+    return {
+      ...p,
+      image: imageObj ? imageObj.images : [],
+    };
+  });
+
   const handleEditProduct = (product: Product) => {
     setSelectedProduct(product);
   };
-
-  if (isLoading) {
-    return <LoadingModal />;
-  }
-
   return (
     <div className="rtl flex flex-col justify-center items-center">
       <div className="flex justify-center flex-wrap">
-        {products.map((product) => (
+        {fullProducts.map((product) => (
           <div key={product.id} className="flex flex-col items-center m-2">
             <PrimeryCard product={product} />
             <Button

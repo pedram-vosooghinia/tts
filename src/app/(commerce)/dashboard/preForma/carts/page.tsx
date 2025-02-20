@@ -57,7 +57,7 @@ export default function Carts() {
                     <div className="mx-2 font-bold">{item.name}</div>
                     <div className="mx-2">
                       قیمت:{" "}
-                      {(item.omde_price ? item.omde_price : 0).toLocaleString()}{" "}
+                      {/* {(item.omde_price ? item.omde_price : 0).toLocaleString()}{" "} */}
                       تومان
                     </div>
 

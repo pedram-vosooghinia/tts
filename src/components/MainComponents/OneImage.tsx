@@ -8,7 +8,6 @@ interface OneImageProps {
 
 const OneImage = ({ imageUrl, size }: OneImageProps) => {
   const validImageUrl = imageUrl ? imageUrl : "/placeholder.jpg";
-
   return (
     <div className="flex justify-center items-center w-80  ">
       <Image
@@ -17,7 +16,7 @@ const OneImage = ({ imageUrl, size }: OneImageProps) => {
         className="rounded-xl mt-4"
         width={size}
         height={size}
-        priority={true}
+        loading="lazy" // بارگذاری زمانی که لازم باشد
         style={{ width: "auto", height: "auto" }}
       />
     </div>

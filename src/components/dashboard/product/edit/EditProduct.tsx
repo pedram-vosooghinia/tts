@@ -94,7 +94,7 @@ export default function EditProduct({
         <CardContent>
           <div className="flex flex-col justify-center items-center">
             <OneImage
-              imageUrl={product?.image || "/placeholder.jpg"}
+              imageUrl={product?.image[0] || "/placeholder.jpg"}
               size={100}
             />
           </div>

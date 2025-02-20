@@ -18,10 +18,6 @@ export async function GET() {
     const productsWithImages = await Promise.all(
       products.map(async (product: Product) => {
         try {
-          const imageResponse = await apiTetisan.get(
-            `products/${product.id}/images`
-          );
-          const images = imageResponse.data.result;
 
           const englishName = product?.english_name ?? "";
           const match = englishName.match(/PRD-[A-F0-9]+_[A-F0-9]+/);
@@ -42,7 +38,6 @@ export async function GET() {
 
           return {
             ...filteredProduct,
-            image: images.length > 0 ? images[0].image : null,
             omde_price,
             tak_price,
           };

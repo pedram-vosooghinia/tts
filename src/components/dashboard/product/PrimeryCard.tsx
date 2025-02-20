@@ -16,7 +16,7 @@ const PrimeryCard = ({ product }: { product: Product }) => {
       <CardContent className="flex flex-col items-center">
         <CardDescription>{product.id}</CardDescription>
         {product.image ? (
-          <OneImage imageUrl={product.image} size={150} />
+          <OneImage imageUrl={product.image[0]} size={150} />
         ) : (
           <div>تصویری یافت نشد</div>
         )}
