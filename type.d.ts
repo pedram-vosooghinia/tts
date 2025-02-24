@@ -1,8 +1,8 @@
 // stores
 interface User {
   username: string;
-  email: string;
   family: string;
+  email: string;
   user_role: string;
   password?: string,
 }
@@ -29,11 +29,6 @@ interface JalaliDate {
   fullDate: string;
 }
 
-//login
-interface LoginFormInputs {
-  identifier: string;
-  password: string;
-}
 
 
 //Analyze
