@@ -34,7 +34,19 @@ export const apiTetisan = axios.create({
   },
 });
 
+// const errorInterceptor = async (axiosError: AxiosError) => {
+//   return Promise.reject(axiosError);
+// };
+
 const errorInterceptor = async (axiosError: AxiosError) => {
+  if (axiosError.response) {
+    console.error("خطای سمت سرور:", axiosError.response.data);
+  } else if (axiosError.request) {
+    console.error("مشکل در ارتباط با سرور");
+  } else {
+    console.error("خطای نامشخص:", axiosError.message);
+  }
+
   return Promise.reject(axiosError);
 };
 

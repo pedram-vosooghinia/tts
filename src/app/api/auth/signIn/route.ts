@@ -1,19 +1,17 @@
-import { NextResponse,NextRequest } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 import { hash } from "bcryptjs";
 import { query } from "@/db";
-
-export async function POST(req:NextRequest) {
+import { SignInFormInputs } from "@/types/signin";
+export async function POST(req: NextRequest) {
   try {
-    const values = await req.json();
-    const mobile = values.phoneNumber;
-    const password = values.password;
-    const address = values.address;
+    const values: SignInFormInputs = await req.json();
     const first_name = values.firstName;
     const last_name = values.lastName;
+    const mobile = values.mobile;
+    const password = values.password;
     const role = "marketer";
     const is_active = false;
-
-    if (!first_name || !last_name || !password || !mobile || !address) {
+    if (!first_name || !last_name || !mobile || !password) {
       return NextResponse.json(
         {
           success: false,
@@ -39,28 +37,24 @@ export async function POST(req:NextRequest) {
 
     const hashedPassword = await hash(password, 12);
     const newUserResult = await query(
-      "INSERT INTO users (first_name, last_name, mobile, password, role, is_active, address) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
-      [first_name, last_name, mobile, hashedPassword, role, is_active, address]
+      "INSERT INTO users (first_name, last_name, mobile, password, role, is_active) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
+      [first_name, last_name, mobile, hashedPassword, role, is_active]
     );
-
-    const newUser = newUserResult.rows[0];
-    if (!newUser) {
-      return NextResponse.json({
-        success: false,
-        message: "ثبت نام موفق نبود دوباره تلاش نمایید",
-        status: 404,
-      });
+    if (!newUserResult.rows.length) {
+      return NextResponse.json(
+        { success: false, message: "خطا در ثبت‌ نام، لطفا دوباره تلاش کنید" },
+        { status: 500 }
+      );
     }
+
     return NextResponse.json(
       {
         success: true,
-        message:
-          "شما با موفقیت ثبت نام کرده اید، لطفا منتظر تایید مدیریت باشید",
+        message: "ثبت‌ نام موفقیت‌آمیز بود، منتظر تأیید مدیریت باشید",
       },
       { status: 201 }
     );
-  } catch (error) {
-    console.error("Error during user registration:", error);
+  } catch {
     return NextResponse.json(
       {
         success: false,

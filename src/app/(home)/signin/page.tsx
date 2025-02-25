@@ -12,6 +12,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import toast from "react-hot-toast";
 import { signInSchema } from "@/validation/signinSchema";
+import { AxiosError } from "axios";
 export default function Signin() {
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
@@ -28,15 +29,21 @@ export default function Signin() {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   };
   const signInHandler = async (values: SignInFormInputs) => {
-    console.log("va", values);
     try {
-      signInServices(values);
-      toast.success(
-        "شما با موفقیت ثبت نام کرده اید، لطفا منتظر تایید مدیریت باشید"
-      );
-      reset();
-    } catch {
-      toast.error("ثبت نام ناموفق بود");
+      const res = await signInServices(values);
+      if (res.status == 201) {
+        toast.success(
+          "ثبت نام با موفقیت انجام شد لطفا منتظر تایید ادمین باشید"
+        );
+      }
+    } catch (error) {
+      const err = error as AxiosError;
+      const message =
+        (err.response?.data as { message?: string })?.message ||
+        "خطایی رخ داده است";
+      toast.error(message);
+    } finally {
+      reset()
     }
   };
 
@@ -47,45 +54,44 @@ export default function Signin() {
 
         <form className="grid gap-4" onSubmit={handleSubmit(signInHandler)}>
           <div className="grid gap-2">
-            <Label htmlFor="username">نام</Label>
+            <Label htmlFor="firstName">نام</Label>
 
             <Input
-              {...register("username", { required: true })}
+              {...register("firstName", { required: true })}
               type="text"
-              id="username"
+              id="firstName"
               placeholder="نام"
-              autoComplete="username"
+              autoComplete="firstName"
               autoFocus
             />
-            {errors.username && (
-              <div className="text-red-500">{errors.username.message}</div>
+            {errors.firstName && (
+              <div className="text-red-500">{errors.firstName.message}</div>
             )}
 
-            <Label htmlFor="family">نام خانوادگی</Label>
+            <Label htmlFor="lastName">نام خانوادگی</Label>
 
             <Input
-              {...register("family", { required: true })}
+              {...register("lastName", { required: true })}
               type="text"
-              id="family"
+              id="lastName"
               placeholder="نام"
-              autoComplete="family"
+              autoComplete="lastName"
               autoFocus
             />
-            {errors.family && (
-              <div className="text-red-500">{errors.family.message}</div>
+            {errors.lastName && (
+              <div className="text-red-500">{errors.lastName.message}</div>
             )}
 
-            <Label htmlFor="email">ایمیل</Label>
-
+            <Label htmlFor="mobile">شماره موبایل</Label>
             <Input
-              {...register("email", { required: true })}
+              {...register("mobile", { required: "شماره موبایل الزامی است" })}
               type="text"
-              id="email"
-              autoComplete="email"
-              placeholder="email@email.com"
+              id="mobile"
+              autoComplete="tel"
+              placeholder="09123456789"
             />
-            {errors.email && (
-              <div className="text-red-500">{errors.email.message}</div>
+            {errors.mobile && (
+              <div className="text-red-500">{errors.mobile.message}</div>
             )}
 
             <div className="flex justify-between items-end gap-2 ">

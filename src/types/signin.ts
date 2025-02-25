@@ -1,7 +1,7 @@
 export interface SignInFormInputs {
-    username: string;
-    family: string;
-    email: string;
-    password?: string,
+  firstName: string;
+  lastName: string;
+    mobile: number
+    password: string,
   }
   
