@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const loginSchema = z.object({
-  identifier: z.string().min(1, "ایمیل الزامی است").email("ایمیل معتبر وارد کنید"),
+  mobile: z.string().regex(/^09[0-9]{9}$/, "شماره موبایل نامعتبر است"),
   password: z.string().min(8, "رمز عبور باید حداقل 8 کاراکتر باشد"),
 });
 

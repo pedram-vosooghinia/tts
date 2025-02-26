@@ -1,11 +1,4 @@
-// stores
-interface User {
-  username: string;
-  family: string;
-  email: string;
-  user_role: string;
-  password?: string,
-}
+
 
 //pages
 interface MountOrdersProps {

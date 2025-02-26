@@ -2,7 +2,7 @@
 import useUserStore from "@/store/userStore";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
-
+import { User } from "@/types/user";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -21,7 +21,7 @@ const MenuDrop = () => {
   const handleLogout = useLogout();
   const router = useRouter();
   return (
-    <div className="flex  gap-4 mr-auto md:gap-2 lg:gap-4">
+    <div className=" flex  gap-4 mr-auto md:gap-2 lg:gap-4 ">
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="secondary" size="icon" className="rounded-full">
@@ -37,18 +37,18 @@ const MenuDrop = () => {
               </DropdownMenuSubTrigger>
               <DropdownMenuPortal>
                 <DropdownMenuSubContent>
-                  <DropdownMenuItem>
-                    <div>نام: {user?.username}</div>
+                  <DropdownMenuItem className="rtl">
+                    <div>نام: {user?.first_name}</div>
                   </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    <div>نام خانوادگی: {user?.family}</div>
+                  <DropdownMenuItem className="rtl">
+                    <div>نام خانوادگی: {user?.last_name}</div>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem>
-                    <div>ایمیل: {user?.email}</div>
+                  <DropdownMenuItem className="rtl">
+                    <div>موبایل: {user?.mobile}</div>
                   </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    <div className="rtl"> نقش: {user?.user_role}</div>
+                  <DropdownMenuItem className="rtl">
+                    <div className="rtl"> نقش: {user?.role}</div>
                   </DropdownMenuItem>
                 </DropdownMenuSubContent>
               </DropdownMenuPortal>

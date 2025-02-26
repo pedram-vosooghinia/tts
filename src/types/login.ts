@@ -1,5 +1,5 @@
 export interface LoginFormInputs {
-    identifier: string;
+    mobile: string;
     password: string;
   }
   
