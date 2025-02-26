@@ -74,7 +74,7 @@ export default function Signin() {
               {...register("lastName", { required: true })}
               type="text"
               id="lastName"
-              placeholder="نام"
+              placeholder="نام خانوادگی"
               autoComplete="lastName"
               autoFocus
             />

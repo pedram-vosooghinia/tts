@@ -32,18 +32,9 @@ export async function GET(req: NextRequest) {
     return NextResponse.json(images, { status: 200 });
   } catch (error: unknown) {
     if (isAxiosError(error)) {
-      console.error(
-        "API Fetch Error:",
-        error.response?.status,
-        error.response?.data
-      );
-      return NextResponse.json(
-        { error: error.response?.data || "Failed to fetch data" },
-        { status: error.response?.status || 500 }
-      );
+      return NextResponse.json({ error: "Failed to fetch data" });
     }
 
-    console.error("Unexpected Error:", error);
     return NextResponse.json(
       { error: "Unexpected error occurred" },
       { status: 500 }

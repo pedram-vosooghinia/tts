@@ -64,7 +64,7 @@ export default function Login() {
         <div className="grid gap-2">
           <Label htmlFor="mobile">موبایل</Label>
           <Input
-            placeholder="login@gmail.com"
+            placeholder="09123456789"
             {...register("mobile")}
             type="text"
             className=" rtl"

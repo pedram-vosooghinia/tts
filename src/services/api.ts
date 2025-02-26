@@ -1,4 +1,5 @@
 import axios, { AxiosError } from "axios";
+import toast from "react-hot-toast";
 const API_BASE_URL =
   process.env.NODE_ENV === "production"
     ? "https://tts-five-xi.vercel.app/api/"
@@ -34,17 +35,13 @@ export const apiTetisan = axios.create({
   },
 });
 
-// const errorInterceptor = async (axiosError: AxiosError) => {
-//   return Promise.reject(axiosError);
-// };
-
 const errorInterceptor = async (axiosError: AxiosError) => {
   if (axiosError.response) {
-    console.error("خطای سمت سرور:", axiosError.response.data);
+    toast.error("خطای سمت سرور:");
   } else if (axiosError.request) {
-    console.error("مشکل در ارتباط با سرور");
+    toast.error("مشکل در ارتباط با سرور");
   } else {
-    console.error("خطای نامشخص:", axiosError.message);
+    toast.error("خطای نامشخص:");
   }
 
   return Promise.reject(axiosError);

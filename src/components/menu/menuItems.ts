@@ -1,7 +1,7 @@
 export const DashboardMenuitems = [
   {
     id: 1,
-    label: "داشبرد",
+    label: "داشبورد",
     link: "/dashboard",
   },
   {

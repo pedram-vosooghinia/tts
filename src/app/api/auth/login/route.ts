@@ -30,7 +30,8 @@ export async function POST(req: NextRequest) {
         { status: 404 }
       );
     }
-    if (user.is_active) {
+
+    if (!user.is_active) {
       return NextResponse.json(
         {
           success: false,
@@ -73,8 +74,7 @@ export async function POST(req: NextRequest) {
       },
       { status: 200 }
     );
-  } catch (error) {
-    console.error("Error in login:", error);
+  } catch {
     return NextResponse.json(
       {
         success: false,

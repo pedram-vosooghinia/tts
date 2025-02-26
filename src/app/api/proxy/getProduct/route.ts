@@ -18,7 +18,6 @@ export async function GET() {
     const productsWithImages = await Promise.all(
       products.map(async (product: Product) => {
         try {
-
           const englishName = product?.english_name ?? "";
           const match = englishName.match(/PRD-[A-F0-9]+_[A-F0-9]+/);
           const hashData = match ? hashToPrice(match[0]) : null;
@@ -66,18 +65,12 @@ export async function GET() {
     return NextResponse.json(productsWithImages, { status: 200 });
   } catch (error: unknown) {
     if (isAxiosError(error)) {
-      console.error(
-        "API Fetch Error:",
-        error.response?.status,
-        error.response?.data
-      );
       return NextResponse.json(
         { error: error.response?.data || "Failed to fetch data" },
         { status: error.response?.status || 500 }
       );
     }
 
-    console.error("Unexpected Error:", error);
     return NextResponse.json(
       { error: "Unexpected error occurred" },
       { status: 500 }
