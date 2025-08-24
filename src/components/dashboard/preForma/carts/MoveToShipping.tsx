@@ -1,39 +1,18 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { postOrderService } from "@/services/orders";
 import useShoppingStore from "@/store/shoppingStore";
 import toast from "react-hot-toast";
 import { Button } from "@/components/ui/button";
-import {
-  MoveToShippingProps,
-  MoveToShippingRequestProps,
-  OrderItem,
-} from "@/types/preForma";
 
-const MoveToShipping = ({
-  exceptionsPrice,
-  numberInPack,
-  totalInvoice,
-  discountAmount,
-}: MoveToShippingProps) => {
+const MoveToShipping = ({ totalInvoice }: MoveToShippingProps) => {
   const [loading, setLoading] = useState(false);
-  const [isClient, setIsClient] = useState(false);
   const router = useRouter();
   const { cart, deleteAllCart } = useShoppingStore();
-  const { cartItems, customer } = cart;
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
+  const { cartItems } = cart;
 
   const placeOrderHandler = async () => {
-    if (!customer) {
-      toast.error("لطفا یک مشتری انتخاب کنید");
-      return;
-    }
-
     if (cartItems.length === 0) {
       toast.error("سبد خرید خالی است");
       return;
@@ -43,30 +22,41 @@ const MoveToShipping = ({
 
     try {
       const data: MoveToShippingRequestProps = {
-        customer_id: customer.document_id || null,
+        customer_id: null,
         total_price: totalInvoice,
         order_items: cartItems.map(
           (item): OrderItem => ({
-            product_name: item.name,
-            document_id: item.id,
+            product_name: item.product.title,
+            document_id: item.product.id,
             quantity: item.quantity,
-            omde_price: exceptionsPrice[item.id] || item.omde_price,
-            number_in_pack: numberInPack[item.id] || 1,
+            price: item.product.price,
+            image: item.product.image,
+            category: item.product.category,
           })
         ),
-        status: 6,
-        discount: discountAmount ? parseFloat(discountAmount.toFixed(3)) : 0,
       };
-      const res = await postOrderService(data);
+    // localStorage.setItem("orderData", JSON.stringify(data));
 
-      if (res.data.status === 200) {
-        toast.success("فاکتور با موفقیت ثبت شد");
-        router.push("/dashboard/preForma/completed");
-        deleteAllCart();
-      } else {
-        toast.error("خطا در ثبت سفارش");
-      }
-    } catch {
+const existingOrders = localStorage.getItem("orderData");
+    let ordersList: MoveToShippingRequestProps[] = [];
+    if (existingOrders) {
+      ordersList = JSON.parse(existingOrders);
+    }
+
+    // اضافه کردن سفارش جدید
+    ordersList.push(data);
+
+    // ذخیره مجدد
+    localStorage.setItem("orderData", JSON.stringify(ordersList));
+
+
+
+
+    toast.success("فاکتور با موفقیت ثبت شد");
+    router.push("/preForma/completed");
+    deleteAllCart();
+
+     } catch {
       toast.error("لطفا دوباره تلاش نمایید");
     } finally {
       setLoading(false);
@@ -77,11 +67,11 @@ const MoveToShipping = ({
     <div className="flex justify-between items-center w-full px-4 mb-6">
       <Button
         className="bg-pedram-2 text-gray-100"
-        onClick={() => router.push("/dashboard/preForma/new")}
+        onClick={() => router.push("/")}
       >
         افزودن محصول
       </Button>
-      {isClient && cartItems.length > 0 && (
+      {cartItems.length > 0 && (
         <Button
           className="bg-pedram-1 text-gray-100"
           onClick={placeOrderHandler}

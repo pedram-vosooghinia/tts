@@ -16,7 +16,7 @@ const OneImage = ({ imageUrl, size }: OneImageProps) => {
         className="rounded-xl mt-4"
         width={size}
         height={size}
-        loading="lazy" // بارگذاری زمانی که لازم باشد
+        loading="lazy" 
         style={{ width: "auto", height: "auto" }}
       />
     </div>

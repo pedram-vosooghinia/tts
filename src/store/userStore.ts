@@ -1,7 +1,6 @@
 "use strict";
 import { create } from "zustand";
 import Cookies from "js-cookie";
-import { User } from "@/types/user";
 
 interface IuseUserStore {
   user: User | null;

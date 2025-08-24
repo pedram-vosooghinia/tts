@@ -95,7 +95,7 @@ export default function Signin() {
             )}
 
             <div className="flex justify-between items-end gap-2 ">
-              <div className=" w-full ">
+              <div className=" w-full grid gap-2">
                 <Label htmlFor="password">رمز عبور</Label>
                 <Input
                   id="password"

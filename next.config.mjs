@@ -4,7 +4,7 @@ const nextConfig = {
         remotePatterns: [
             {
               protocol: 'https',
-              hostname: 'tetisan.ir',
+              hostname: 'fakestoreapi.com',
               port: '',
             },
         

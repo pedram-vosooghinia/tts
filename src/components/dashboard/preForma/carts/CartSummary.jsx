@@ -1,10 +1,9 @@
 "use client";
 import { Card, CardContent } from "@/components/ui/card";
 import useShoppingStore from "@/store/shoppingStore";
-const CartSummary = ({ totalPrice, finalPay }) => {
+const CartSummary = ({ totalPrice }) => {
   const summaryItems = [
     { label: "جمع فاکتور", value: totalPrice },
-    { label: "مبلغ واریزی", value: finalPay },
   ];
   const { cart } = useShoppingStore();
   const { cartItems } = cart;
@@ -21,7 +20,7 @@ const CartSummary = ({ totalPrice, finalPay }) => {
                 >
                   <div className="px-2">{item.label}:</div>
                   <div>{item.value.toLocaleString()}</div>
-                  <div className="px-2"> تومان </div>
+                  <div className="px-2"> $ </div>
                 </div>
               ))}
             </div>

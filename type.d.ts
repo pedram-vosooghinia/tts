@@ -1,19 +1,28 @@
+//product
+interface Product {
+  id: number;
+  title: string;
+  price: number;
+  image: string;
+  category: string;
+  description: string;
+  rating: {
+    rate: number;
+    count: number;
+  };
+}
 
+interface ProductAddProp {
+  products: Product[];
+}
 
 //pages
 interface MountOrdersProps {
   data: Order[];
   month: string;
 }
-//data
-interface Order {
-  clear_profit: string;
-  total_value: string;
-  final_pay: string;
-  total_price: string;
-  discount_amount: string;
-  marketer_discount: string;
-}
+
+
 //utils
 interface JalaliDate {
   year: string;
@@ -21,8 +30,6 @@ interface JalaliDate {
   day: string;
   fullDate: string;
 }
-
-
 
 //Analyze
 interface ProductData {
@@ -66,37 +73,77 @@ interface PFormProps<T extends FormItem> {
   onSubmit: SubmitHandler<T>;
 }
 
-//
-interface MainProduct {
-  id: number;
-  barcode: number;
-  category: string;
-  season: string;
+
+
+
+//cart
+interface MoveToShippingProps {
+  totalInvoice: number;
+}
+
+interface MoveToShippingRequestProps {
+  customer_id: id | null;
+  total_price: number;
+  order_items: OrderItem[];
+  
+}
+
+//order
+interface OrderItem {
   product_name: string;
-  detail_color: string;
-  number_in_pack: number;
+  document_id: number;
+  quantity: number;
   price: number;
-  size: string;
-  title: string;
-  inventory: number;
-  validation_value: number;
-  sell_code: number;
-  person: string;
-  images: { image1: string; [key: string]: string };
+  image: string
+  category:string
 }
 
 
+interface Order {
+  total_price: number;
+  order_items: OrderItem[];
+  date: string;
+}
 
-//hashtags
+ interface CartItem {
+  quantity: number;
+  product: Product
+}
 
-interface Hashtag {
-  created_at: string;
-  created_by_id: number;
-  document_id: string;
-  hashtag: string;
-  published_at: string;
-  updated_at: string;
-  updated_by_id: number;
-  name:string
-};
+ interface CartState {
+  cart: {
+    cartItems: CartItem[];
+  };
+  firstAddToCart: (newItem: CartItem) => void;
+  increaseValueCart: (newItem: CartItem) => void;
+  decreaseValueCart: (item: CartItem) => void;
+  deleteValueCart: (item: CartItem) => void;
+  deleteAllCart: () => void;
+}
 
+ interface ProductCartProps {
+  product: Product;
+}
+
+ interface LoginFormInputs {
+    mobile: string;
+    password: string;
+  }
+  
+
+
+ interface SignInFormInputs {
+  firstName: string;
+  lastName: string;
+    mobile: string
+    password: string,
+  }
+  
+// stores
+ interface User {
+    first_name: string;
+    last_name: string;
+    mobile: string;
+    role: string;
+    password?: string,
+  }

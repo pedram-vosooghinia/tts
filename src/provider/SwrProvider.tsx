@@ -1,6 +1,6 @@
 "use client"
 import { SWRConfig } from 'swr'
-import { api } from '@/services/api'
+import { api  } from '@/services/api'
 interface SwrProviderProps {
   children: React.ReactNode;
 }

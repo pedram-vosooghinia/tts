@@ -2,7 +2,6 @@
 import toast from "react-hot-toast";
 import { useState } from "react";
 import useShoppingStore from "@/store/shoppingStore";
-import { ProductCartProps } from "@/types/preForma"; 
 const AddShoppingValues = ({ product}: ProductCartProps ) => {
   const [quantity, setQuantity] = useState(1);
   const { firstAddToCart, cart } = useShoppingStore();
@@ -18,17 +17,17 @@ const AddShoppingValues = ({ product}: ProductCartProps ) => {
     }
   };
   const addToCartHandler = () => {
-    const newItem = { ...product, quantity };
+    const newItem = { product, quantity };
     firstAddToCart(newItem);
     toast.success("محصول اضافه شد");
   };
   const isInCart = cart.cartItems.some(
-    (item) => item.id === product.id
+    (item) => item?.product?.id === product?.id
   );
   return (
     <>
       {!isInCart ? (
-        <div className=" flex flex-col">
+        <div className="rtl flex flex-col">
           <div className=" flex items-center justify-between mx-8 ">
             <button
               className="bg-pedram-1 text-white px-4 py-2 rounded-md  focus:outline-none"
