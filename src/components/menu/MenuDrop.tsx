@@ -2,7 +2,6 @@
 import useUserStore from "@/store/userStore";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
-import { User } from "@/types/user";
 import {
   DropdownMenu,
   DropdownMenuContent,

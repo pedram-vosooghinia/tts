@@ -7,7 +7,6 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { signInServices } from "@/services/auth";
 import { Button } from "@/components/ui/button";
-import { SignInFormInputs } from "@/types/signin";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import toast from "react-hot-toast";

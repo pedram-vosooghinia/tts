@@ -1,7 +1,6 @@
 import { NextResponse, NextRequest } from "next/server";
 import { hash } from "bcryptjs";
 import { query } from "@/db";
-import { SignInFormInputs } from "@/types/signin";
 export async function POST(req: NextRequest) {
   try {
     const values: SignInFormInputs = await req.json();
@@ -9,8 +8,8 @@ export async function POST(req: NextRequest) {
     const last_name = values.lastName;
     const mobile = values.mobile;
     const password = values.password;
-    const role = "marketer";
-    const is_active = false;
+    const role = "customer";
+    const is_active = true;
     if (!first_name || !last_name || !mobile || !password) {
       return NextResponse.json(
         {
@@ -50,7 +49,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(
       {
         success: true,
-        message: "ثبت‌ نام موفقیت‌آمیز بود، منتظر تأیید مدیریت باشید",
+        message: "ثبت‌ نام موفقیت‌آمیز بود",
       },
       { status: 201 }
     );
