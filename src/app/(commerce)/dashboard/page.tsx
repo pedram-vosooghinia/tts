@@ -12,34 +12,18 @@ import {
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
-interface OrderItem {
-  product_name: string;
-  document_id: number;
-  quantity: number;
-  price: number;
-  image: string;
-  category: string;
-}
-
-interface Order {
-  total_price: number;
-  order_items: OrderItem[];
-  date?: string;
-}
-
 const Dashboard = () => {
   const [orders, setOrders] = useState<Order[]>([]);
   const [activeModal, setActiveModal] = useState<number | null>(null);
 
-
   useEffect(() => {
     const storedOrder = localStorage.getItem("orderData");
     if (storedOrder) {
-      const parsedOrder: Order = JSON.parse(storedOrder);
-      setOrders([parsedOrder]);
+      const parsedOrders: Order[] = JSON.parse(storedOrder);
+      setOrders(parsedOrders);
     }
   }, []);
-
+  console.log("orders", orders);
   const openModal = (index: number) => setActiveModal(index);
   const closeModal = () => setActiveModal(null);
 
@@ -80,7 +64,6 @@ const Dashboard = () => {
               ))}
             </TableBody>
           </Table>
-
           {activeModal !== null && (
             <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
               <Card className="w-11/12 md:w-2/3 lg:w-1/2 max-h-[80vh] overflow-y-auto">
@@ -103,7 +86,7 @@ const Dashboard = () => {
                         className="flex justify-between items-center border-b py-2"
                       >
                         <div className="truncate max-w-xs">
-                          {item.product_name}
+                          {item.product_title}
                         </div>
                         <div>تعداد: {item.quantity}</div>
                         <div>قیمت: {item.price} $</div>
@@ -113,7 +96,7 @@ const Dashboard = () => {
                 </CardContent>
               </Card>
             </div>
-          )}
+          )}{" "}
         </>
       )}
     </div>

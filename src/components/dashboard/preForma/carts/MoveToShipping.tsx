@@ -22,11 +22,10 @@ const MoveToShipping = ({ totalInvoice }: MoveToShippingProps) => {
 
     try {
       const data: MoveToShippingRequestProps = {
-        customer_id: null,
-        total_price: totalInvoice,
+        total_price: Number(totalInvoice.toFixed(2)),
         order_items: cartItems.map(
           (item): OrderItem => ({
-            product_name: item.product.title,
+            product_title: item.product.title,
             document_id: item.product.id,
             quantity: item.quantity,
             price: item.product.price,
@@ -35,28 +34,23 @@ const MoveToShipping = ({ totalInvoice }: MoveToShippingProps) => {
           })
         ),
       };
-    // localStorage.setItem("orderData", JSON.stringify(data));
 
-const existingOrders = localStorage.getItem("orderData");
-    let ordersList: MoveToShippingRequestProps[] = [];
-    if (existingOrders) {
-      ordersList = JSON.parse(existingOrders);
-    }
+      const existingOrders = localStorage.getItem("orderData");
+      let ordersList: MoveToShippingRequestProps[] = [];
+      if (existingOrders) {
+        ordersList = JSON.parse(existingOrders);
+      }
 
-    // اضافه کردن سفارش جدید
-    ordersList.push(data);
+      ordersList.push(data);
 
-    // ذخیره مجدد
-    localStorage.setItem("orderData", JSON.stringify(ordersList));
+      localStorage.setItem("orderData", JSON.stringify(ordersList));
 
+      console.log("data", data);
 
-
-
-    toast.success("فاکتور با موفقیت ثبت شد");
-    router.push("/preForma/completed");
-    deleteAllCart();
-
-     } catch {
+      toast.success("فاکتور با موفقیت ثبت شد");
+      router.push("/preForma/completed");
+      deleteAllCart();
+    } catch {
       toast.error("لطفا دوباره تلاش نمایید");
     } finally {
       setLoading(false);

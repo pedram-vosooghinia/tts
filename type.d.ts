@@ -82,7 +82,6 @@ interface MoveToShippingProps {
 }
 
 interface MoveToShippingRequestProps {
-  customer_id: id | null;
   total_price: number;
   order_items: OrderItem[];
   
@@ -90,8 +89,8 @@ interface MoveToShippingRequestProps {
 
 //order
 interface OrderItem {
-  product_name: string;
   document_id: number;
+  product_title: string;
   quantity: number;
   price: number;
   image: string
@@ -147,3 +146,5 @@ interface Order {
     role: string;
     password?: string,
   }
+
+
