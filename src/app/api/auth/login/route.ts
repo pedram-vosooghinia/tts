@@ -18,7 +18,11 @@ export async function POST(req: NextRequest) {
 
         {
           status: 400,
-          headers: { "Access-Control-Allow-Origin": allowedOrigin },
+          headers: {
+            "Access-Control-Allow-Origin": allowedOrigin,
+            "Access-Control-Allow-Methods": "POST, OPTIONS",
+            "Access-Control-Allow-Headers": "Content-Type, Authorization",
+          },
         }
       );
 
@@ -34,7 +38,11 @@ export async function POST(req: NextRequest) {
         },
         {
           status: 404,
-          headers: { "Access-Control-Allow-Origin": allowedOrigin },
+          headers: {
+            "Access-Control-Allow-Origin": allowedOrigin,
+            "Access-Control-Allow-Methods": "POST, OPTIONS",
+            "Access-Control-Allow-Headers": "Content-Type, Authorization",
+          },
         }
       );
     }
@@ -47,7 +55,11 @@ export async function POST(req: NextRequest) {
         },
         {
           status: 403,
-          headers: { "Access-Control-Allow-Origin": allowedOrigin },
+          headers: {
+            "Access-Control-Allow-Origin": allowedOrigin,
+            "Access-Control-Allow-Methods": "POST, OPTIONS",
+            "Access-Control-Allow-Headers": "Content-Type, Authorization",
+          },
         }
       );
     }
@@ -62,7 +74,11 @@ export async function POST(req: NextRequest) {
 
         {
           status: 404,
-          headers: { "Access-Control-Allow-Origin": allowedOrigin },
+          headers: {
+            "Access-Control-Allow-Origin": allowedOrigin,
+            "Access-Control-Allow-Methods": "POST, OPTIONS",
+            "Access-Control-Allow-Headers": "Content-Type, Authorization",
+          },
         }
       );
     }
@@ -85,7 +101,14 @@ export async function POST(req: NextRequest) {
         message: "شما با موفقیت وارد شدید",
         user,
       },
-      { status: 200, headers: { "Access-Control-Allow-Origin": allowedOrigin } }
+      {
+        status: 200,
+        headers: {
+          "Access-Control-Allow-Origin": allowedOrigin,
+          "Access-Control-Allow-Methods": "POST, OPTIONS",
+          "Access-Control-Allow-Headers": "Content-Type, Authorization",
+        },
+      }
     );
   } catch {
     return NextResponse.json(
@@ -93,7 +116,14 @@ export async function POST(req: NextRequest) {
         success: false,
         message: "خطای شبکه لطفا دوباره تلاش نمایید",
       },
-      { status: 500, headers: { "Access-Control-Allow-Origin": allowedOrigin } }
+      {
+        status: 500,
+        headers: {
+          "Access-Control-Allow-Origin": allowedOrigin,
+          "Access-Control-Allow-Methods": "POST, OPTIONS",
+          "Access-Control-Allow-Headers": "Content-Type, Authorization",
+        },
+      }
     );
   }
 }
