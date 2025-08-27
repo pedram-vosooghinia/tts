@@ -3,6 +3,9 @@ import { NextResponse, NextRequest } from "next/server";
 import { cookies } from "next/headers";
 import { sign } from "jsonwebtoken";
 import { query } from "@/db";
+
+const allowedOrigin = "http://localhost:4200"; // آدرس Angular در حالت توسعه
+
 export async function POST(req: NextRequest) {
   try {
     const { mobile, password } = await req.json();
@@ -12,8 +15,10 @@ export async function POST(req: NextRequest) {
           success: false,
           message: "لطفا مقادیر فرم را پر نمایید",
         },
+
         {
           status: 400,
+          headers: { "Access-Control-Allow-Origin": allowedOrigin },
         }
       );
 
@@ -27,7 +32,10 @@ export async function POST(req: NextRequest) {
           success: false,
           message: "کاربر یافت نشد",
         },
-        { status: 404 }
+        {
+          status: 404,
+          headers: { "Access-Control-Allow-Origin": allowedOrigin },
+        }
       );
     }
 
@@ -37,7 +45,10 @@ export async function POST(req: NextRequest) {
           success: false,
           message: "حساب کاربری شما غیرفعال است",
         },
-        { status: 403 }
+        {
+          status: 403,
+          headers: { "Access-Control-Allow-Origin": allowedOrigin },
+        }
       );
     }
 
@@ -48,8 +59,10 @@ export async function POST(req: NextRequest) {
           success: false,
           message: "پسورد صحیح نمی باشد",
         },
+
         {
           status: 404,
+          headers: { "Access-Control-Allow-Origin": allowedOrigin },
         }
       );
     }
@@ -72,7 +85,7 @@ export async function POST(req: NextRequest) {
         message: "شما با موفقیت وارد شدید",
         user,
       },
-      { status: 200 }
+      { status: 200, headers: { "Access-Control-Allow-Origin": allowedOrigin } }
     );
   } catch {
     return NextResponse.json(
@@ -80,7 +93,7 @@ export async function POST(req: NextRequest) {
         success: false,
         message: "خطای شبکه لطفا دوباره تلاش نمایید",
       },
-      { status: 500 }
+      { status: 500, headers: { "Access-Control-Allow-Origin": allowedOrigin } }
     );
   }
 }

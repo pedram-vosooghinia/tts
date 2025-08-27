@@ -15,15 +15,6 @@ export const api = axios.create({
   },
 });
 
-// export const apiFile = axios.create({
-//   baseURL: API_BASE_URL,
-//   headers: {
-//     "Content-Type": "multipart/form-data",
-//     "Cache-Control": "no-cache",
-//     Pragma: "no-cache",
-//     Expires: "0",
-//   },
-// });
 
 const FAKESTORE_API_URL = "https://fakestoreapi.com/";
 
@@ -31,7 +22,6 @@ export const apiFakestore = axios.create({
   baseURL: FAKESTORE_API_URL,
   headers: {
     "Content-Type": "application/json",
-    Authorization: process.env.NEXT_PUBLIC_TETISAN_API_KEY,
   },
 });
 
@@ -48,5 +38,4 @@ const errorInterceptor = async (axiosError: AxiosError) => {
 };
 
 api.interceptors.response.use((response) => response, errorInterceptor);
-// apiFile.interceptors.response.use((response) => response, errorInterceptor);
 apiFakestore.interceptors.response.use((response) => response, errorInterceptor);

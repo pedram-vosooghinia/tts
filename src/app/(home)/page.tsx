@@ -5,14 +5,10 @@ import AddShoppingValues from "@/components/dashboard/preForma/carts/AddShopping
 import { Card, CardContent } from "@/components/ui/card";
 import useSWR from "swr";
 import { apiFakestore } from "@/services/api";
-import useShoppingStore from "@/store/shoppingStore";
 export default function Home() {
   const { data: products, isLoading } = useSWR("products", (url) =>
     apiFakestore.get(url).then((res) => res.data)
   );
-const {cart}=useShoppingStore()
-  console.log("prod", products);
-  console.log("cart", cart);
 
   if (isLoading) {
     return <LoadingModal />;
