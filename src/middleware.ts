@@ -1,20 +1,20 @@
 import { NextResponse, NextRequest } from "next/server";
 import { cookies } from "next/headers";
-
 export async function middleware(request: NextRequest) {
   const tokenValue = cookies().get("token");
+  const path = request.nextUrl.pathname;
 
-  if (tokenValue && ["/", "/signin"].includes(request.nextUrl.pathname)) {
+  if (tokenValue && ["/login", "/signin"].includes(path)) {
     return NextResponse.redirect(new URL("/dashboard", request.url));
   }
 
-  if (!tokenValue && request.nextUrl.pathname.startsWith("/dashboard")) {
-    return NextResponse.redirect(new URL("/", request.url));
+  if (!tokenValue && path.startsWith("/dashboard")) {
+    return NextResponse.redirect(new URL("/login", request.url));
   }
 
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/", "/signin", "/dashboard/:path*"], 
-  };
+  matcher: ["/login", "/signin", "/dashboard/:path*"],
+};

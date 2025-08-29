@@ -3,7 +3,8 @@ import localFont from "next/font/local";
 import "../globals.css";
 import ToastProvider from "@/provider/ToastProvider";
 import SwrProvider from "@/provider/SwrProvider";
-import { MenuDashboard } from "@/components/menu/MenuDashboard";
+import { MenuDashboard } from "@/components/layout/menu/MenuDashboard";
+import Footer from "@/components/layout/footer";
 const vazirFont = localFont({
   src: "../fonts/Vazir-Medium.woff2",
   variable: "--font-geist-mono",
@@ -27,7 +28,8 @@ export default function RootLayout({
             <SwrProvider>
               <MenuDashboard />
 
-              <div className="pt-28">{children}</div>
+              <div className="pt-28 bg-theme text-theme">{children}</div>
+              <Footer/>
             </SwrProvider>
           </ToastProvider>
         </main>

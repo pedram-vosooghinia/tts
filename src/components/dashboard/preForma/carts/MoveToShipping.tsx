@@ -21,8 +21,12 @@ const MoveToShipping = ({ totalInvoice }: MoveToShippingProps) => {
     setLoading(true);
 
     try {
-      const data: MoveToShippingRequestProps = {
-        total_price: Number(totalInvoice.toFixed(2)),
+      const data: Order = {
+        id: String(Date.now()),
+        totalPrice: Number(totalInvoice.toFixed(2)),
+        createdAt: new Date().toISOString(),
+        isPaid: false,
+        isDelivered: false,
         order_items: cartItems.map(
           (item): OrderItem => ({
             product_title: item.product.title,
@@ -36,7 +40,7 @@ const MoveToShipping = ({ totalInvoice }: MoveToShippingProps) => {
       };
 
       const existingOrders = localStorage.getItem("orderData");
-      let ordersList: MoveToShippingRequestProps[] = [];
+      let ordersList: Order[] = [];
       if (existingOrders) {
         ordersList = JSON.parse(existingOrders);
       }

@@ -81,11 +81,7 @@ interface MoveToShippingProps {
   totalInvoice: number;
 }
 
-interface MoveToShippingRequestProps {
-  total_price: number;
-  order_items: OrderItem[];
-  
-}
+
 
 //order
 interface OrderItem {
@@ -99,9 +95,12 @@ interface OrderItem {
 
 
 interface Order {
-  total_price: number;
+  id: string
+  createdAt: string;
+  totalPrice: number;
+  isPaid:boolean
+  isDelivered:boolean
   order_items: OrderItem[];
-  date: string;
 }
 
  interface CartItem {

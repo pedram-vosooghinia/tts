@@ -2,11 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
-
 @layer base {
-  html { 
+  html {
     direction: rtl;
     writing-mode: horizontal-tb;
     text-orientation: upright;
@@ -31,15 +28,15 @@
   }
   .modal {
     position: relative;
-    max-width: 500px; 
+    max-width: 500px;
     width: 90%;
     z-index: 1001;
   }
   .modal-content {
-    max-height: 80vh; 
+    max-height: 80vh;
     overflow-y: auto;
   }
-  
+
   .modal-close {
     position: absolute;
     top: 10px;
@@ -49,16 +46,67 @@
     cursor: pointer;
     color: #333;
   }
+  .border-b {
+    border-bottom: 2px solid #f36d6d;
+  }
+
+  :root {
+    --color-bg: #ffffff;
+    --color-text: #111111;
+    --color-primary: #ef4444;
+  }
+
+  .theme-dark {
+    --color-bg: #111111;
+    --color-text: #eeeeee;
+    --color-primary: #3b82f6;
+  }
+
+  .theme-green {
+    --color-bg: #d1fae5;
+    --color-text: #064e3b;
+    --color-primary: #10b981;
+  }
 }
 
-.border-b {
-  border-bottom: 2px solid #f36d6d; 
+@layer components {
+  .bg-primary {
+    background-color: var(--color-primary) !important;
+  }
+  .text-primary {
+    color: var(--color-primary) !important;
+  }
+  .bg-theme {
+    background-color: var(--color-bg) !important;
+  }
+  .text-theme {
+    color: var(--color-text) !important;
+  }
+  .fjc{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  .fbc{
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    align-items: center;
+  }
+  .fje{
+    display: flex;
+    flex-direction: row;
+    justify-content:end;
+    align-items: center;
+  }
+  .fcc{
+    display: flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items: center;
+  }
 }
-
-
-
-
-
 
 @layer base {
   :root {
@@ -86,7 +134,7 @@
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
-    --radius: 0.5rem
+    --radius: 0.5rem;
   }
   .dark {
     --background: 222.2 84% 4.9%;
@@ -112,7 +160,7 @@
     --chart-2: 160 60% 45%;
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%
+    --chart-5: 340 75% 55%;
   }
 }
 @layer base {

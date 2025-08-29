@@ -9,7 +9,6 @@ export default function Home() {
   const { data: products, isLoading } = useSWR("products", (url) =>
     apiFakestore.get(url).then((res) => res.data)
   );
-
   if (isLoading) {
     return <LoadingModal />;
   }
