@@ -1,14 +1,10 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { Metadata } from "next";
 import Link from "next/link";
 import React from "react";
 import { accountItems } from "@/components/dashboard/acount/accountItems";
 
-const PAGE_TITLE = "Your Account";
 const PAGE_TITLEـP = "حساب کاربری شما";
-export const metadata: Metadata = {
-  title: PAGE_TITLE,
-};
+
 
 export default function AccountPage() {
   return (

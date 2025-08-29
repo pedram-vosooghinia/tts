@@ -36,7 +36,7 @@ export default function OrdersPage() {
   return (
     <div className="fcc  ">
       <div className=" fje w-full p-4 ">
-        <Button variant="outline" onClick={() => router.back()}>
+        <Button variant="outline" onClick={() => router.push("/dashboard/account")}>
           بازگشت
         </Button>
       </div>

@@ -100,6 +100,12 @@
     justify-content:end;
     align-items: center;
   }
+  .fjs{
+    display: flex;
+    flex-direction: row;
+    justify-content:start;
+    align-items: center;
+  }
   .fcc{
     display: flex;
     flex-direction:column;
