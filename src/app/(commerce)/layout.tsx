@@ -1,5 +1,5 @@
 import { MenuDashboard } from "@/components/layout/menu/MenuDashboard";
-import "../globals.css";
+// import "../globals.css";
 import localFont from "next/font/local";
 import ToastProvider from "@/provider/ToastProvider";
 import SwrProvider from "@/provider/SwrProvider";

@@ -1,23 +1,28 @@
 "use client";
-import Image from "next/image";
-import LoadingModal from "@/components/MainComponents/LoadingModal";
-import AddShoppingValues from "@/components/dashboard/preForma/carts/AddShoppingValues";
-import { Card, CardContent } from "@/components/ui/card";
-import useSWR from "swr";
-import { apiFakestore } from "@/services/api";
+// import Image from "next/image";
+// import LoadingModal from "@/components/MainComponents/LoadingModal";
+// import AddShoppingValues from "@/components/dashboard/preForma/carts/AddShoppingValues";
+// import { Card, CardContent } from "@/components/ui/card";
+// import useSWR from "swr";
+// import { apiFakestore } from "@/services/api";
+import BusinessDashborad from "./BusinessDashborad";
+import Product from "./Product";
 export default function Home() {
-  const { data: products, isLoading } = useSWR("products", (url) =>
-    apiFakestore.get(url).then((res) => res.data)
-  );
-  if (isLoading) {
-    return <LoadingModal />;
-  }
+  // const { data: products, isLoading } = useSWR("products", (url) =>
+  //   apiFakestore.get(url).then((res) => res.data)
+  // );
+  // if (isLoading) {
+  //   return <LoadingModal />;
+  // }
 
   return (
     <main className=" ltr  flex flex-col items-center justify-center ">
       <h1 className="text-3xl font-bold mb-6">tts-shop</h1>
-
-      <div className="flex flex-wrap justify-center items-center gap-4 ">
+      <div className="w-full ">
+        <BusinessDashborad />
+        <Product />
+      </div>
+      {/* <div className="flex flex-wrap justify-center items-center gap-4 ">
         {products?.map((product: Product) => (
           <Card
             key={product.id}
@@ -48,7 +53,7 @@ export default function Home() {
             </CardContent>
           </Card>
         ))}
-      </div>
+      </div> */}
     </main>
   );
 }
