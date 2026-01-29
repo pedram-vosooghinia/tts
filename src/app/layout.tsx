@@ -3,9 +3,9 @@ import localFont from "next/font/local";
 import "./globals.css";
 import ToastProvider from "@/provider/ToastProvider";
 import SwrProvider from "@/provider/SwrProvider";
-import { MenuDashboard } from "@/components/layout/menu/MenuDashboard";
 import Footer from "@/components/layout/footer";
 import { cn } from "@/lib/utils";
+import ConditionalHeader from "@/components/layout/header/ConditionalHeader";
 
 const yekanBakh = localFont({
   src: [
@@ -54,15 +54,14 @@ export default function RootLayout({
       <body
         className={cn(
           yekanBakh.variable,
-          " font-yekan antialiased custom-scrollbar min-h-full mb-36  bg-transparent flex justify-center p-0 m-0 ",
+          "relative font-yekan antialiased custom-scrollbar bg-neutral-3 flex flex-col items-center    ",
         )}
       >
-        <main className="w-full h-screen flex flex-col  ">
+        <main className="w-full max-w-[580px]  h-screen flex flex-col items-center  ">
           <ToastProvider>
             <SwrProvider>
-              <MenuDashboard />
-
-              <div className="pt-28 ">{children}</div>
+              <ConditionalHeader />
+              <div className="pt-8 ">{children}</div>
               <Footer />
             </SwrProvider>
           </ToastProvider>

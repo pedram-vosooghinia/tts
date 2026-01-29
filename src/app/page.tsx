@@ -4,21 +4,19 @@ import LoadingModal from "@/components/MainComponents/LoadingModal";
 import AddShoppingValues from "@/components/dashboard/preForma/carts/AddShoppingValues";
 import { Card, CardContent } from "@/components/ui/card";
 import useSWR from "swr";
-
-
-
-
 import { apiFakestore } from "@/services/api";
 export default function Home() {
   const { data: products, isLoading } = useSWR("products", (url) =>
     apiFakestore.get(url).then((res) => res.data),
   );
+  console.log("products",products)
   if (isLoading) {
     return <LoadingModal />;
   }
 
   return (
     <main className=" ltr  flex flex-col items-center justify-center ">
+      
       <h1 className="text-3xl font-bold mb-6">tts فروشگاه</h1>
       <div className="flex flex-wrap justify-center items-center gap-4 ">
         {products?.map((product: Product) => (
