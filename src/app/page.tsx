@@ -19,7 +19,7 @@ export default function Home() {
 
   return (
     <main className=" ltr  flex flex-col items-center justify-center ">
-      <h1 className="text-3xl font-bold mb-6">tts-shopsssss</h1>
+      <h1 className="text-3xl font-bold mb-6">tts فروشگاه</h1>
       <div className="flex flex-wrap justify-center items-center gap-4 ">
         {products?.map((product: Product) => (
           <Card
