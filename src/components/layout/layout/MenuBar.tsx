@@ -32,21 +32,19 @@ const MenuBar = () => {
   ];
 
   return (
-    <div
-      className="fixed bottom-0 left-1/2 z-50 w-full max-w-[700px] rounded-t-2xl -translate-x-1/2 bg-neutral-4
-      h-[4.25rem] backdrop-blur-md border-t border-gray-100 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.03)] pt-2 px-6"
-    >
-      <div className="flex justify-between items-center max-w-md mx-auto h-16">
-        {navItems.map((item) => {
-          const isActive = pathname === item.href;
-          const Icon = item.icon;
+    <div className="fixed bottom-0  z-1000 w-full max-w-[43.75rem]  rounded-t-2xl  flex justify-center items-center">
+      <div className=" w-full  rounded-t-2xl  bg-neutral-4 pt-2 px-6">
+        <div className="flex  justify-between  items-center w-full mx-auto h-20">
+          {navItems.map((item) => {
+            const isActive = pathname === item.href;
+            const Icon = item.icon;
 
-          return (
-            <Button
-              key={item.id}
-              variant="outline"
-              onClick={() => router.push(`${item?.href}`)}
-              className={`
+            return (
+              <Button
+                key={item.id}
+                variant="outline"
+                onClick={() => router.push(`${item?.href}`)}
+                className={`
               group flex items-center justify-center rounded-full 
               transition-[background-color,box-shadow,transform,padding] duration-400 ease-in-out
               min-w-10 bg-neutral-1
@@ -56,16 +54,16 @@ const MenuBar = () => {
                     : " p-2 "
                 }
               `}
-            >
-              <Icon
-                size={26}
-                className={`transition-transform duration-400 ease-in-out
+              >
+                <Icon
+                  size={26}
+                  className={`transition-transform duration-400 ease-in-out
 
                    ${isActive ? "scale-105" : "group-hover:scale-110"}`}
-              />
+                />
 
-              <span
-                className={`whitespace-nowrap overflow-hidden font-medium text-sm
+                <span
+                  className={`whitespace-nowrap overflow-hidden font-medium text-sm
                 transition-[max-width,opacity,transform] duration-400 ease-in-out
                   ${
                     isActive
@@ -73,12 +71,13 @@ const MenuBar = () => {
                       : "max-w-0 opacity-0 -translate-x-2"
                   }
                 `}
-              >
-                {item.name}
-              </span>
-            </Button>
-          );
-        })}
+                >
+                  {item.name}
+                </span>
+              </Button>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

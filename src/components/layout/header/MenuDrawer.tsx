@@ -16,13 +16,16 @@ import { statcicMenuItems } from "./menuItems";
 const MenuDrawer = () => {
   return (
     <>
-      <Sheet key="top">
+      <Sheet>
         <SheetTrigger asChild>
-          <Button variant="outline" className="capitalize">
+          <Button variant="outline" className="">
             <MenuIcon size={28} />
           </Button>
         </SheetTrigger>
-        <SheetContent side="top" className=" w-full max-w-[700px] mx-auto rounded-b-2xl ">
+        <SheetContent
+          side="right"
+          className=" w-full max-w-[700px] mx-auto rounded-b-2xl "
+        >
           <SheetHeader>
             <SheetTitle>
               <MenuIcon size={28} />

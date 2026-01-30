@@ -5,9 +5,8 @@ import ToastProvider from "@/provider/ToastProvider";
 import SwrProvider from "@/provider/SwrProvider";
 import Footer from "@/components/layout/footer";
 import { cn } from "@/lib/utils";
-import ConditionalHeader from "@/components/layout/header/ConditionalHeader";
-import ConditionalMenuBar from "@/components/layout/layout/ConditionalMenuBar";
-
+import Header from "@/components/layout/header/Header";
+import MenuBar from "@/components/layout/layout/MenuBar";
 const yekanBakh = localFont({
   src: [
     {
@@ -55,19 +54,19 @@ export default function RootLayout({
       <body
         className={cn(
           yekanBakh.variable,
-          "relative font-yekan antialiased custom-scrollbar bg-neutral-3 flex flex-col items-center    ",
+          "relative font-yekan antialiased    bg-neutral-3 flex flex-col items-center    ",
         )}
       >
-        <main className="w-full max-w-[700px]  h-screen flex flex-col items-center  ">
+        <Header />
+        <main className="w-full max-w-[700px]   flex flex-col items-center  ">
           <ToastProvider>
             <SwrProvider>
-              <ConditionalHeader />
               <div className="pt-8 ">{children}</div>
               <Footer />
-              <ConditionalMenuBar />
             </SwrProvider>
           </ToastProvider>
         </main>
+        <MenuBar />
       </body>
     </html>
   );

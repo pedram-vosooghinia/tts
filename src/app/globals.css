@@ -82,34 +82,34 @@
   .text-theme {
     color: var(--color-text) !important;
   }
-  .fjc{
+  .fjc {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
   }
-  .fbc{
+  .fbc {
     display: flex;
     flex-direction: row;
-    justify-content:space-between;
+    justify-content: space-between;
     align-items: center;
   }
-  .fje{
+  .fje {
     display: flex;
     flex-direction: row;
-    justify-content:end;
+    justify-content: end;
     align-items: center;
   }
-  .fjs{
+  .fjs {
     display: flex;
     flex-direction: row;
-    justify-content:start;
+    justify-content: start;
     align-items: center;
   }
-  .fcc{
+  .fcc {
     display: flex;
-    flex-direction:column;
-    justify-content:center;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
   }
 }
@@ -177,4 +177,3 @@
     @apply bg-background text-foreground;
   }
 }
-
