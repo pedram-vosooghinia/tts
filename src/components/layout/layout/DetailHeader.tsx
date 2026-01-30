@@ -7,7 +7,7 @@ import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { HiChevronRight } from "react-icons/hi2";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import Shopping from "@/app/components/layout/Shoping";
+// import Shopping from "@/app/components/layout/Shoping";
 interface SliderNavbarProps {
   isFavorite?: boolean;
   showFavorite?: boolean;
@@ -100,7 +100,7 @@ const DetailHeader: React.FC<SliderNavbarProps> = ({
             <BsShare className="text-[#8D8D8D] " />
           </button>
 
-          <Shopping />
+          {/* <Shopping /> */}
         </div>
       </div>
     </div>
