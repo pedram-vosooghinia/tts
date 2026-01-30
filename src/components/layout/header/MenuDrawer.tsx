@@ -22,7 +22,7 @@ const MenuDrawer = () => {
             <MenuIcon size={28} />
           </Button>
         </SheetTrigger>
-        <SheetContent side="top" className=" w-full max-w-[580px] mx-auto rounded-b-2xl ">
+        <SheetContent side="top" className=" w-full max-w-[700px] mx-auto rounded-b-2xl ">
           <SheetHeader>
             <SheetTitle>
               <MenuIcon size={28} />

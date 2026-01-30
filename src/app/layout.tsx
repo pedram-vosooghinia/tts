@@ -6,6 +6,7 @@ import SwrProvider from "@/provider/SwrProvider";
 import Footer from "@/components/layout/footer";
 import { cn } from "@/lib/utils";
 import ConditionalHeader from "@/components/layout/header/ConditionalHeader";
+import ConditionalMenuBar from "@/components/layout/layout/ConditionalMenuBar";
 
 const yekanBakh = localFont({
   src: [
@@ -57,12 +58,13 @@ export default function RootLayout({
           "relative font-yekan antialiased custom-scrollbar bg-neutral-3 flex flex-col items-center    ",
         )}
       >
-        <main className="w-full max-w-[580px]  h-screen flex flex-col items-center  ">
+        <main className="w-full max-w-[700px]  h-screen flex flex-col items-center  ">
           <ToastProvider>
             <SwrProvider>
               <ConditionalHeader />
               <div className="pt-8 ">{children}</div>
               <Footer />
+              <ConditionalMenuBar />
             </SwrProvider>
           </ToastProvider>
         </main>

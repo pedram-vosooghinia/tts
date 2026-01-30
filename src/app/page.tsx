@@ -9,20 +9,19 @@ export default function Home() {
   const { data: products, isLoading } = useSWR("products", (url) =>
     apiFakestore.get(url).then((res) => res.data),
   );
-  console.log("products",products)
+  console.log("products", products);
   if (isLoading) {
     return <LoadingModal />;
   }
 
   return (
     <main className=" ltr  flex flex-col items-center justify-center ">
-      
       <h1 className="text-3xl font-bold mb-6">tts فروشگاه</h1>
       <div className="flex flex-wrap justify-center items-center gap-4 ">
         {products?.map((product: Product) => (
           <Card
             key={product.id}
-            className="shadow-lg rounded-2xl overflow-hidden flex flex-col w-[240px] h-[550px]"
+            className="bg-neutral-6 shadow-lg rounded-2xl overflow-hidden flex flex-col w-full max-w-[300px] h-[550px]"
           >
             <CardContent className="p-4 flex flex-col justify-between h-full">
               <Image
@@ -32,19 +31,21 @@ export default function Home() {
                 height={200}
                 className="h-40 object-contain mx-auto"
               />
-              <h2 className="text-lg font-semibold mt-4 line-clamp-2">
+              <h2 className=" text-neutral-1 text-lg font-semibold mt-4 line-clamp-2">
                 {product.title}
               </h2>
-              <p className="text-sm text-gray-500 line-clamp-2">
+              <p className="text-neutral-1 text-sm  line-clamp-2">
                 {product.description}
               </p>
               <div className="flex justify-between items-center mt-2 text-sm text-gray-600">
-                <span>{product.category}</span>
-                <span>
+                <span className="text-neutral-1 text-sm ">
+                  {product.category}
+                </span>
+                <span className="text-neutral-1 text-sm ">
                   ⭐ {product.rating.rate} ({product.rating.count})
                 </span>
               </div>
-              <p className="text-gray-600 mt-2">{product.price} $</p>
+              <p className="text-neutral-1 mt-2">{product.price} $</p>
               <AddShoppingValues product={product} />
             </CardContent>
           </Card>

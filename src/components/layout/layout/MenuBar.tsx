@@ -1,27 +1,22 @@
 "use client";
-import Link from "next/link";
-import { RiHome5Fill } from "react-icons/ri";
 import { BsPersonFill } from "react-icons/bs";
 import { FaCartShopping } from "react-icons/fa6";
 import { usePathname } from "next/navigation";
-import { IoWallet } from "react-icons/io5";
+import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
+import { IoHome } from "react-icons/io5";
 
 const MenuBar = () => {
   const pathname = usePathname();
-
+  const router = useRouter();
   const navItems = [
     {
       id: 4,
       name: "خانه",
       href: "/",
-      icon: RiHome5Fill,
+      icon: IoHome,
     },
-    {
-      id: 3,
-      name: "کیف‌‌پول",
-      href: "/wallet",
-      icon: IoWallet,
-    },
+
     {
       id: 2,
       name: "سبدخرید",
@@ -38,7 +33,7 @@ const MenuBar = () => {
 
   return (
     <div
-      className="fixed bottom-0 left-1/2 z-50 w-full  -translate-x-1/2 bg-white/95
+      className="fixed bottom-0 left-1/2 z-50 w-full max-w-[700px] rounded-t-2xl -translate-x-1/2 bg-neutral-4
       h-[4.25rem] backdrop-blur-md border-t border-gray-100 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.03)] pt-2 px-6"
     >
       <div className="flex justify-between items-center max-w-md mx-auto h-16">
@@ -47,17 +42,18 @@ const MenuBar = () => {
           const Icon = item.icon;
 
           return (
-            <Link
+            <Button
               key={item.id}
-              href={item.href}
+              variant="outline"
+              onClick={() => router.push(`${item?.href}`)}
               className={`
               group flex items-center justify-center rounded-full 
               transition-[background-color,box-shadow,transform,padding] duration-400 ease-in-out
-
+              min-w-10 bg-neutral-1
                 ${
                   isActive
-                    ? "bg-whiteLotion text-green-600 px-5 py-2.5 gap-2 shadow-sm scale-[1.02]"
-                    : "text-gray-600 p-2 hover:text-gray-800"
+                    ? " px-5 py-2.5 gap-2 shadow-sm scale-[1.02]"
+                    : " p-2 "
                 }
               `}
             >
@@ -80,7 +76,7 @@ const MenuBar = () => {
               >
                 {item.name}
               </span>
-            </Link>
+            </Button>
           );
         })}
       </div>

@@ -2,13 +2,13 @@
 import toast from "react-hot-toast";
 import { useState } from "react";
 import useShoppingStore from "@/store/shoppingStore";
-const AddShoppingValues = ({ product}: ProductCartProps ) => {
+import { Button } from "@/components/ui/button";
+const AddShoppingValues = ({ product }: ProductCartProps) => {
   const [quantity, setQuantity] = useState(1);
   const { firstAddToCart, cart } = useShoppingStore();
 
-
   const increaseQuantity = () => {
-      setQuantity(quantity + 1);
+    setQuantity(quantity + 1);
   };
 
   const decreaseQuantity = () => {
@@ -22,35 +22,35 @@ const AddShoppingValues = ({ product}: ProductCartProps ) => {
     toast.success("محصول اضافه شد");
   };
   const isInCart = cart.cartItems.some(
-    (item) => item?.product?.id === product?.id
+    (item) => item?.product?.id === product?.id,
   );
   return (
     <>
       {!isInCart ? (
-        <div className="rtl flex flex-col">
-          <div className=" flex items-center justify-between mx-8 ">
-            <button
-              className="bg-pedram-1 text-white px-4 py-2 rounded-md  focus:outline-none"
+        <div className="rtl flex flex-col items-center ">
+          <div className=" flex w-full items-center justify-between ">
+            <Button
+              variant="ghost"
+              className="bg-neutral-4 text-white px-4 py-2 rounded-md  focus:outline-none"
               onClick={increaseQuantity}
             >
               +
-            </button>
-            <span className="text-gray-700 text-xl">{quantity}</span>
-            <button
-              className="bg-pedram-1 text-white px-4 py-2 rounded-md  focus:outline-none"
+            </Button>
+            <span className="text-neutral-1 text-xl">{quantity}</span>
+            <Button
+              className="bg-neutral-4 text-white px-4 py-2 rounded-md  focus:outline-none"
               onClick={decreaseQuantity}
+              variant="destructive"
             >
               -
-            </button>
+            </Button>
           </div>
-          <div>
-            <button
-              onClick={addToCartHandler}
-              className="flex mx-auto rounded-md bg-pedram-3 text-gray-100 m-2 p-3"
-            >
-              افزودن به سبد خرید
-            </button>
-          </div>
+          <Button
+            onClick={addToCartHandler}
+            className="w-full bg-neutral-7 text-gray-100 m-2 p-3"
+          >
+            افزودن به سبد خرید
+          </Button>
         </div>
       ) : (
         <div className="text-center m-4 py-2 rounded bg-pedram-12">

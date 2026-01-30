@@ -7,7 +7,7 @@ import MenuDrawer from "./MenuDrawer";
 export default function Header() {
   return (
     <>
-      <div className="bg-white w-full sticky top-0 z-[30]  px-6 pb-2.5 rounded-b-2xl ">
+      <div className="bg-neutral-4 w-full sticky top-0 z-[30]  px-6 pb-2.5 rounded-b-2xl ">
         <div className="w-full flex justify-between  items-center pt-4   ">
           <MenuDrawer />
           <Link href="/" className="justify-self-end">
@@ -22,7 +22,7 @@ export default function Header() {
             />
           </Link>
         </div>
-        <div className="max-w-[580px] mx-auto border-t border-e-grayborder my-2.5"></div>
+        <div className="max-w-[700px] mx-auto border-t border-e-grayborder my-2.5"></div>
         {/* {searchShow && <SearchComponent />} */}
       </div>
     </>
