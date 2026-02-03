@@ -1,15 +1,12 @@
 "use client";
 
-import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
-import { BiChevronLeft } from "react-icons/bi";
-import Link from "next/link";
-
+import { Card, CardContent } from "@/components/ui/card";
+import ProductImage from "./ProductImage";
 export default function ProductSlider({
-  hasCaption,
   data,
 }: {
   hasCaption?: boolean;
@@ -24,7 +21,7 @@ export default function ProductSlider({
       <Swiper
         modules={[Pagination, Autoplay]}
         spaceBetween={16}
-        slidesPerView={1}
+        slidesPerView={1.3}
         autoplay={{ delay: 4000, disableOnInteraction: false }}
         pagination={{
           clickable: true,
@@ -32,41 +29,31 @@ export default function ProductSlider({
           bulletActiveClass:
             "swiper-pagination-bullet-active custom-bullet-active",
         }}
-        className="w-full !pb-10"
+        className="w-full !pb-16"
       >
-        {data?.map((slide: Product, index: number) => (
-          <SwiperSlide key={slide.id}>
-            <div className="flex flex-col gap-3">
-              <div
-                // href={`/business/${data?.id}/${item?.id}`}
-                className="relative w-full overflow-hidden rounded-2xl shadow-sm"
-              >
-                <Image
-                  src={slide.image}
-                  alt={slide.title || "بنر تبلیغاتی"}
-                  width={500}
-                  height={700}
-                  className="h-44 object-cover"
-                  priority={index === 0}
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 100vw"
-                />
-              </div>
+        {data?.map((product: Product) => (
+          <SwiperSlide key={product.id}>
+            <Card
+              key={product.id}
+              className="bg-neutral-6 shadow-lg rounded-2xl overflow-hidden flex flex-col w-full max-w-[350px] "
+            >
+              <CardContent className="p-4 flex flex-col justify-between h-full">
+                <ProductImage src={product.image} alt={product.title} />
 
-              {hasCaption && (
-                <div className="flex items-center justify-between px-1">
-                  <span className="text-base font-bold text-gray-800">
-                    {slide?.title}
+                <h2 className=" cursor-pointer text-neutral-1 text-lg font-semibold mt-4 line-clamp-1">
+                  {product.title}
+                </h2>
+
+                <div className="flex justify-between items-center mt-2 text-sm">
+                  <span className="text-neutral-1">{product.category}</span>
+                  <span className="text-neutral-1">
+                    ⭐ {product.rating.rate} ({product.rating.count})
                   </span>
-                  <Link
-                    href={`/${slide?.id}`}
-                    className="flex items-center gap-1 text-sm font-medium text-green-700 hover:text-green-800 transition-colors"
-                  >
-                    {"نمایش بیشتر"}
-                    <BiChevronLeft className="inline" />
-                  </Link>
                 </div>
-              )}
-            </div>
+
+                <span className="text-neutral-1 mt-2">{product.price} $</span>
+              </CardContent>
+            </Card>
           </SwiperSlide>
         ))}
       </Swiper>
@@ -75,7 +62,7 @@ export default function ProductSlider({
         .swiper-pagination-bullet.custom-bullet {
           width: 8px;
           height: 8px;
-          background-color: #e5e7eb;
+          background-color: #dddfde;
           opacity: 1;
           border-radius: 50%;
           transition: all 0.3s ease;
@@ -84,7 +71,7 @@ export default function ProductSlider({
         }
         .swiper-pagination-bullet-active.custom-bullet-active {
           width: 73px;
-          background-color: #15803d;
+          background-color: #232325;
           border-radius: 999px;
         }
       `}</style>

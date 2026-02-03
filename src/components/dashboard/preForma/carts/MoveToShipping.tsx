@@ -35,7 +35,7 @@ const MoveToShipping = ({ totalInvoice }: MoveToShippingProps) => {
             price: item.product.price,
             image: item.product.image,
             category: item.product.category,
-          })
+          }),
         ),
       };
 
@@ -64,14 +64,14 @@ const MoveToShipping = ({ totalInvoice }: MoveToShippingProps) => {
   return (
     <div className="flex justify-between items-center w-full px-4 mb-6">
       <Button
-        className="bg-pedram-2 text-gray-100"
+        className="bg-red-900 text-gray-100"
         onClick={() => router.push("/")}
       >
         افزودن محصول
       </Button>
       {cartItems.length > 0 && (
         <Button
-          className="bg-pedram-1 text-gray-100"
+          className="bg-red-900 text-gray-100"
           onClick={placeOrderHandler}
           disabled={loading}
         >

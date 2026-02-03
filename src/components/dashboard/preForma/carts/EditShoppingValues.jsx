@@ -6,7 +6,7 @@ const EditShoppingValues = ({ product }) => {
     useShoppingStore();
   const cartItems = cart ? cart.cartItems : [];
   const productInCart = cartItems.find(
-    (item) => item.product.id === product.id
+    (item) => item.product.id === product.id,
   );
   const quantity = productInCart?.quantity;
   const increaseQuantity = () => {
@@ -26,7 +26,7 @@ const EditShoppingValues = ({ product }) => {
     <div className=" flex flex-col ">
       <div className=" flex items-center justify-between my-4">
         <button
-          className="bg-pedram-1 font-bold text-l text-white px-3 py-3  rounded-md hover:bg-pedram-2 focus:outline-none"
+          className="bg-red-500 font-bold text-l text-white px-3 py-3  rounded-md hover:bg-red-900 focus:outline-none"
           onClick={increaseQuantity}
         >
           +
@@ -34,7 +34,7 @@ const EditShoppingValues = ({ product }) => {
         <span className="text-gray-700 text-xl mx-2">{quantity}</span>
         {quantity > 1 && (
           <button
-            className="bg-pedram-1  font-bold text-l text-white px-3 py-3  rounded-md hover:bg-pedram-2 focus:outline-none"
+            className="bg-red-500  font-bold text-l text-white px-3 py-3  rounded-md hover:bg-red-900 focus:outline-none"
             onClick={decreaseQuantity}
           >
             -
@@ -42,14 +42,13 @@ const EditShoppingValues = ({ product }) => {
         )}
         {quantity === 1 && (
           <button
-            className="bg-pedram-3 text-white px-3 py-3  rounded-md hover:bg-pedram-2 focus:outline-none"
+            className="bg-red-500 text-white px-3 py-3  rounded-md hover:bg-red-900 focus:outline-none"
             onClick={deleteQuantity}
           >
-            <Trash2  size="22" />
+            <Trash2 size="22" />
           </button>
         )}
       </div>
-
     </div>
   );
 };

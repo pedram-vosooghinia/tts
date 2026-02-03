@@ -16,7 +16,7 @@ export default function ProductImage({ src, alt }: ProductImageProps) {
   const [error, setError] = useState(false);
 
   return (
-    <div className="relative w-[200px] h-[160px] mx-auto flex items-center justify-center bg-gray-100 rounded">
+    <div className=" cursor-pointer relative w-[200px] h-[160px] mx-auto flex items-center justify-center bg-gray-100 rounded">
       {/* Skeleton */}
       {loading && !error && <Skeleton className="absolute inset-0" />}
 

@@ -28,7 +28,7 @@ export async function getMainBanners() {
     const data: ApiBannerItem[] = await res.json();
 
     return data;
-  } catch (error) {
+  } catch  {
     toast.error("");
     return [];
   }

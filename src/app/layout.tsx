@@ -58,14 +58,14 @@ export default function RootLayout({
         )}
       >
         <Header />
-        <main className="w-full max-w-[700px]   flex flex-col items-center  ">
-          <ToastProvider>
-            <SwrProvider>
-              <div className="pt-8 ">{children}</div>
-              <Footer />
-            </SwrProvider>
-          </ToastProvider>
-        </main>
+        <ToastProvider>
+          <SwrProvider>
+            <main className="w-full max-w-[700px] flex flex-col  items-center px-6  pt-8 pb-28  ">
+              {children}
+            </main>
+          </SwrProvider>
+        </ToastProvider>
+        <Footer />
         <MenuBar />
       </body>
     </html>

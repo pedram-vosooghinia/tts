@@ -1,13 +1,13 @@
-"use client"
+"use client";
 import { BiChevronLeft } from "react-icons/bi";
-import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { MainBannerSectionProps } from "@/types/slider";
 import ProductSlider from "./ProductSlider";
 import LoadingModal from "@/components/MainComponents/LoadingModal";
 import useSWR from "swr";
 import { apiFakestore } from "@/services/api";
-
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 export const MainProductSection = ({
   title,
   link,
@@ -18,22 +18,20 @@ export const MainProductSection = ({
   );
 
   if (isLoading) return <LoadingModal />;
-  console.log("p", products);
   return (
-    <section
-      className={cn(`w-full flex flex-col max-w-md mx-auto  gap-y-4`, style)}
-      dir="rtl"
-    >
-      <div className={`flex justify-between items-center `}>
-        {title && <h2 className="text-xl font-bold text-primary">{title}</h2>}
+    <section className={cn(`w-full flex flex-col gap-y-4`, style)} dir="rtl">
+      <div className={`flex w-full justify-between items-center `}>
+        {title && <h2 className="text-xl font-bold text-neutral-5">{title}</h2>}
 
         {link && (
-          <Link
-            href={link || "/"}
-            className="flex items-center text-greenprimary text-sm font-medium hover:text-green-950 transition-colors"
-          >
-            نمایش همه
-            <BiChevronLeft className="inline" />
+          <Link href="/products">
+            <Button
+              variant="ghost"
+              className=" flex justify-between gap-x-1 items-center text-neutral-4 hover:bg-neutral-8 text-sm font-medium hover:text-neutral-4 transition-colors"
+            >
+              <span>نمایش همه</span>
+              <BiChevronLeft className="inline" />
+            </Button>
           </Link>
         )}
       </div>

@@ -18,7 +18,7 @@ export default function BannerSlider({
   }
 
   return (
-    <div className="w-full my-20    flex flex-col max-w-md mx-auto  gap-y-4">
+    <div className="w-full   flex flex-col items-center max-w-xl mx-auto  gap-y-4">
       <Swiper
         modules={[Pagination, Autoplay]}
         spaceBetween={16}
@@ -34,15 +34,12 @@ export default function BannerSlider({
       >
         {data?.map((slide: SliderDataType, index: number) => (
           <SwiperSlide key={slide.id}>
-            <div className="flex flex-col gap-3">
-              <div
-                // href={`/business/${data?.id}/${item?.id}`}
-                className="relative w-full overflow-hidden rounded-2xl shadow-sm"
-              >
+            <div className="flex flex-col items-center gap-3">
+              <div className="relative w-full overflow-hidden rounded-2xl shadow-sm">
                 <Image
                   src={slide?.image_url}
                   alt={slide?.title || "بنر تبلیغاتی"}
-                  width={500}
+                  width={700}
                   height={700}
                   className="h-44 object-cover"
                   priority={index === 0}

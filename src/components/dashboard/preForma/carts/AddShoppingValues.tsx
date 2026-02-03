@@ -53,7 +53,7 @@ const AddShoppingValues = ({ product }: ProductCartProps) => {
           </Button>
         </div>
       ) : (
-        <div className="text-center m-4 py-2 rounded bg-pedram-12">
+        <div className="text-center m-4 py-2 rounded bg-neutral-3 ">
           محصول به سبد خرید شما اضافه شده است
         </div>
       )}

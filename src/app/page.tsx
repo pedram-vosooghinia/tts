@@ -4,10 +4,10 @@ import BannerSlider from "@/components/home/banner/BannerSlider";
 export default async function Home() {
   const data = await getMainBanners();
   return (
-    <main className="ltr ">
+    <div className="ltr w-full flex flex-col gap-y-10 mx-10 pb-28 ">
       <BannerSlider data={data} />
 
-      <MainProductSection title="محصولات جدید" />
-    </main>
+      <MainProductSection title="محصولات جدید" link="/products" />
+    </div>
   );
 }
