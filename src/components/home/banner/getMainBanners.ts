@@ -1,4 +1,3 @@
-import toast from "react-hot-toast";
 
 interface ApiBannerItem {
   id: number;
@@ -29,7 +28,6 @@ export async function getMainBanners() {
 
     return data;
   } catch  {
-    toast.error("");
     return [];
   }
 }

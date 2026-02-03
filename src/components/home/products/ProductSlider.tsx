@@ -32,26 +32,26 @@ export default function ProductSlider({
         className="w-full !pb-16"
       >
         {data?.map((product: Product) => (
-          <SwiperSlide key={product.id}>
+          <SwiperSlide key={product?.id}>
             <Card
-              key={product.id}
+              key={product?.id}
               className="bg-neutral-6 shadow-lg rounded-2xl overflow-hidden flex flex-col w-full max-w-[350px] "
             >
               <CardContent className="p-4 flex flex-col justify-between h-full">
-                <ProductImage src={product.image} alt={product.title} />
+                <ProductImage src={product?.image} alt={product?.title} />
 
                 <h2 className=" cursor-pointer text-neutral-1 text-lg font-semibold mt-4 line-clamp-1">
-                  {product.title}
+                  {product?.title}
                 </h2>
 
                 <div className="flex justify-between items-center mt-2 text-sm">
-                  <span className="text-neutral-1">{product.category}</span>
+                  <span className="text-neutral-1">{product?.category}</span>
                   <span className="text-neutral-1">
-                    ⭐ {product.rating.rate} ({product.rating.count})
+                    ⭐ {product?.rating?.rate} ({product?.rating?.count})
                   </span>
                 </div>
 
-                <span className="text-neutral-1 mt-2">{product.price} $</span>
+                <span className="text-neutral-1 mt-2">{product?.price} $</span>
               </CardContent>
             </Card>
           </SwiperSlide>
