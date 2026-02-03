@@ -7,7 +7,7 @@ import { query } from "@/db";
 
 export async function GET() {
   try {
-    const token = cookies().get("token");
+    const token = (await cookies()).get("token");
     if (!token || !token.value) {
       return NextResponse.json({
         success: false,

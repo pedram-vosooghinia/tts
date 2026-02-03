@@ -10,7 +10,7 @@ export async function GET(req: Request) {
       );
     }
 
-    cookies().set({
+    (await cookies()).set({
       name: "token",
       value: "",
       httpOnly: true,

@@ -1,6 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import notFoundImage from "@/public/notFoundImage.svg";
+import notFoundImage from "@/public/images/notFoundImage.svg";
 import Image from "next/image";
 import { IoHome } from "react-icons/io5";
 import { useRouter } from "next/navigation";

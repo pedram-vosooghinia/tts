@@ -70,7 +70,7 @@ export async function POST(req: NextRequest) {
     const secret = process.env.SESSION_SECRET || "";
     const token = sign({ tokenData }, secret, { expiresIn: "1d" });
 
-    cookies().set({
+    (await cookies()).set({
       name: "token",
       value: token,
       httpOnly: true,

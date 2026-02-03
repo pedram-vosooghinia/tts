@@ -5,13 +5,14 @@ import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { IoHome } from "react-icons/io5";
+import { CiSearch } from "react-icons/ci";
 
 const MenuBar = () => {
   const pathname = usePathname();
   const router = useRouter();
   const navItems = [
     {
-      id: 4,
+      id: 1,
       name: "خانه",
       href: "/",
       icon: IoHome,
@@ -24,7 +25,13 @@ const MenuBar = () => {
       icon: FaCartShopping,
     },
     {
-      id: 1,
+      id: 4,
+      name: "جستجو",
+      href: "/search",
+      icon: CiSearch,
+    },
+    {
+      id: 3,
       name: "حساب",
       href: "/dashboard",
       icon: BsPersonFill,
