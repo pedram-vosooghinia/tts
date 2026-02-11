@@ -30,18 +30,18 @@ const MenuDrawer = () => {
             <SheetTitle>
               <MenuIcon size={28} />
             </SheetTitle>
-            <SheetDescription>
+
+            <div className="flex flex-col pl-6">
               {statcicMenuItems.map((item) => (
-                <div className="flex flex-col pl-6" key={item.id}>
-                  <Link
-                    href={item.link || ""}
-                    className="flex items-center gap-2 py-2 text-sm text-gray-700"
-                  >
-                    <span>{item.title}</span>
-                  </Link>
-                </div>
+                <Link
+                  key={item.id}
+                  href={item.link}
+                  className="flex items-center gap-2 py-2 text-sm text-gray-700"
+                >
+                  {item.title}
+                </Link>
               ))}
-            </SheetDescription>
+            </div>
           </SheetHeader>
         </SheetContent>
       </Sheet>
