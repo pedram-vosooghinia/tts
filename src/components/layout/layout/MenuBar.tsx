@@ -40,7 +40,7 @@ const MenuBar = () => {
 
   return (
     <div className="fixed bottom-0  z-1000 w-full max-w-[43.75rem]  rounded-t-2xl  flex justify-center items-center">
-      <div className=" w-full  rounded-t-2xl  bg-neutral-4 pt-2 px-6">
+      <div className=" w-full  rounded-t-2xl  bg-thirdGray pt-2 px-6">
         <div className="flex  justify-between  items-center w-full mx-auto h-20">
           {navItems.map((item) => {
             const isActive = pathname === item.href;
@@ -54,7 +54,7 @@ const MenuBar = () => {
                 className={`
               group flex items-center justify-center rounded-full 
               transition-[background-color,box-shadow,transform,padding] duration-400 ease-in-out
-              min-w-10 bg-neutral-1
+              min-w-10 bg-mainWhite
                 ${
                   isActive
                     ? " px-5 py-2.5 gap-2 shadow-sm scale-[1.02]"

@@ -11,7 +11,7 @@ export default function NotFound() {
       <Image src={notFoundImage} alt="not-found-404" width={300} height={300} />
       <div className="mx-auto max-w-max">
         <main className="flex flex-col justify-center items-center gap-y-4">
-          <p className="bg-gradient-to-br from-neutral-7 to-neutral-6 bg-clip-text my-5 font-bold tracking-tight text-transparent text-5xl ">
+          <p className="bg-gradient-to-br from-mainGold to-mainBlack bg-clip-text my-5 font-bold tracking-tight text-transparent text-5xl ">
             404
           </p>
           <h1 className="text-3xl font-bold text-center tracking-tight text-gray-900 ">
@@ -23,9 +23,9 @@ export default function NotFound() {
           </p>
           <Button
             onClick={() => router.push("/")}
-            className="flex justify-between gap-4 bg-gradient-to-br from-neutral-7 to-neutral-6 hover:bg-gradient-to-br hover:from-neutral-6 hover:to-neutral-7"
+            className="flex justify-between gap-4 bg-gradient-to-br from-mainGold to-mainblack hover:bg-gradient-to-br hover:from-mainBlack hover:to-mainGold"
           >
-            <IoHome size={26} className="text-neutral-1" />
+            <IoHome size={26} className="text-mainWhite" />
           </Button>
         </main>
       </div>

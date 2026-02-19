@@ -16,7 +16,7 @@ export default function BannerSlider({
   if (!Array.isArray(data) || data.length === 0) {
     return null;
   }
-
+console.log("data",data)
   return (
     <div className="w-full   flex flex-col items-center max-w-xl mx-auto  gap-y-4">
       <Swiper

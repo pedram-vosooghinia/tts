@@ -1,12 +1,12 @@
 "use client";
 import Image from "next/image";
-import React from "react";
 interface OneImageProps {
   size: number;
   imageUrl: string;
 }
 
-const OneImage = ({ imageUrl, size }: OneImageProps) => {
+const OneImage = (props: OneImageProps) => {
+  const { imageUrl, size } = props;
   const validImageUrl = imageUrl ? imageUrl : "/placeholder.jpg";
   return (
     <div className="flex justify-center items-center w-80  ">
@@ -16,7 +16,7 @@ const OneImage = ({ imageUrl, size }: OneImageProps) => {
         className="rounded-xl mt-4"
         width={size}
         height={size}
-        loading="lazy" 
+        loading="lazy"
         style={{ width: "auto", height: "auto" }}
       />
     </div>

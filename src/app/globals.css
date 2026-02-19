@@ -94,18 +94,14 @@
     justify-content: space-between;
     align-items: center;
   }
-  .fje {
+  .fac {
     display: flex;
     flex-direction: row;
-    justify-content: end;
+    justify-content: space-around;
     align-items: center;
   }
-  .fjs {
-    display: flex;
-    flex-direction: row;
-    justify-content: start;
-    align-items: center;
-  }
+
+
   .fcc {
     display: flex;
     flex-direction: column;
@@ -122,13 +118,13 @@
     --card-foreground: 222.2 84% 4.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
-    --primary: 222.2 47.4% 11.2%;
+    --primary: 260 3% 22%;
     --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
+    --secondary: 36 11% 53%;
     --secondary-foreground: 222.2 47.4% 11.2%;
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
+    --accent: 36 11% 53%;
     --accent-foreground: 222.2 47.4% 11.2%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;

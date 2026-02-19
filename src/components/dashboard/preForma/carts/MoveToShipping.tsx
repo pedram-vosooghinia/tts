@@ -29,12 +29,12 @@ const MoveToShipping = ({ totalInvoice }: MoveToShippingProps) => {
         isDelivered: false,
         order_items: cartItems.map(
           (item): OrderItem => ({
-            product_title: item.product.title,
+            product_title: item.product.name,
             document_id: item.product.id,
             quantity: item.quantity,
             price: item.product.price,
-            image: item.product.image,
-            category: item.product.category,
+            image: item.product.images[0].image,
+            category: item.product.brand,
           }),
         ),
       };

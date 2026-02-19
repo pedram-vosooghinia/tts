@@ -2,33 +2,38 @@
 import AddShoppingValues from "@/components/dashboard/preForma/carts/AddShoppingValues";
 import { Card, CardContent } from "@/components/ui/card";
 import ProductImage from "./ProductImage";
-import { Product } from "@/types/product";
+import { ProductItem } from "@/types/product";
+import Link from "next/link";
 interface ProductCardProps {
-  product: Product;
+  product: ProductItem;
 }
 
-export default function ProductCard({ product }: ProductCardProps) {
+export default function ProductCard(props: ProductCardProps) {
+  const { product } = props;
   return (
     <>
       <Card
         key={product.id}
-        className=" flex-wrap justify-center items-center gap-4 bg-neutral-6 shadow-lg rounded-2xl overflow-hidden flex flex-col w-full max-w-[18.75rem] "
+        className=" flex-wrap justify-center items-center gap-4 bg-mainblack shadow-lg rounded-2xl overflow-hidden flex flex-col w-full max-w-[18.75rem] "
       >
         <CardContent className="p-4 flex flex-col justify-between h-full">
-          <ProductImage src={product.image} alt={product.title} />
+          <ProductImage
+            src={product?.images[0].image}
+            alt={product?.images[0].image || ""}
+          />
 
-          <h2 className="text-neutral-1 text-lg font-semibold mt-4 line-clamp-2">
-            {product.title}
-          </h2>
+          <Link
+            href={`/products/${product.id}`}
+            className="text-mainWhite text-lg font-semibold mt-4 line-clamp-2"
+          >
+            {product?.name}
+          </Link>
 
           <div className="flex justify-between items-center mt-2 text-sm">
-            <span className="text-neutral-1">{product.category}</span>
-            <span className="text-neutral-1">
-              ⭐ {product.rating.rate} ({product.rating.count})
-            </span>
+            <span className="text-mainWhite">{product.main_category}</span>
           </div>
 
-          <span className="text-neutral-1 mt-2">{product.price} $</span>
+          <span className="text-mainWhite mt-2">{product.price} $</span>
 
           <AddShoppingValues product={product} />
         </CardContent>

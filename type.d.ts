@@ -103,31 +103,7 @@ interface Order {
   order_items: OrderItem[];
 }
 
- interface CartItem {
-  quantity: number;
-  product: Product
-}
 
- interface CartState {
-  cart: {
-    cartItems: CartItem[];
-  };
-  firstAddToCart: (newItem: CartItem) => void;
-  increaseValueCart: (newItem: CartItem) => void;
-  decreaseValueCart: (item: CartItem) => void;
-  deleteValueCart: (item: CartItem) => void;
-  deleteAllCart: () => void;
-}
-
- interface ProductCartProps {
-  product: Product;
-}
-
- interface LoginFormInputs {
-    mobile: string;
-    password: string;
-  }
-  
 
 
  interface SignInFormInputs {

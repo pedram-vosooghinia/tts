@@ -2,7 +2,7 @@
 import { create } from "zustand";
 import toast from "react-hot-toast";
 import { persist } from "zustand/middleware";
-
+import { CartState } from "@/types/store/shoping";
 const useShoppingStore = create<CartState>()(
   persist(
     (set) => ({

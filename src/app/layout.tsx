@@ -54,7 +54,7 @@ export default function RootLayout({
       <body
         className={cn(
           yekanBakh.variable,
-          "relative font-yekan antialiased    bg-neutral-3 flex flex-col items-center    ",
+          "relative font-yekan antialiased    bg-mainGray flex flex-col items-center    ",
         )}
       >
         <Header />

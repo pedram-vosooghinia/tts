@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 const API_BASE_URL =
   // process.env.NODE_ENV === "production"
   //   ? "http://localhost:3000/api/"
-    // : "http://localhost:3000/api/";
+  // : "http://localhost:3000/api/";
   process.env.NODE_ENV === "production"
     ? "https://tts-five-xi.vercel.app/api/"
     : "http://localhost:3000/api/";
@@ -18,13 +18,13 @@ export const api = axios.create({
   },
 });
 
+const MIXIN_API_URL = process.env.NEXT_PUBLIC_MIXIN_API;
 
-const FAKESTORE_API_URL = "https://fakestoreapi.com/";
-
-export const apiFakestore = axios.create({
-  baseURL: FAKESTORE_API_URL,
+export const apiMixin = axios.create({
+  baseURL: MIXIN_API_URL,
   headers: {
     "Content-Type": "application/json",
+    Authorization: process.env.NEXT_PUBLIC_MIXIN_AUTH_KEY,
   },
 });
 
@@ -41,4 +41,4 @@ const errorInterceptor = async (axiosError: AxiosError) => {
 };
 
 api.interceptors.response.use((response) => response, errorInterceptor);
-apiFakestore.interceptors.response.use((response) => response, errorInterceptor);
+apiMixin.interceptors.response.use((response) => response, errorInterceptor);

@@ -29,7 +29,7 @@ export default function ProductImage({ src, alt }: ProductImageProps) {
           alt={alt}
           fill
           sizes="200px"
-          className={`object-contain transition-opacity duration-300 ${
+          className={`bg-white rounded-xl object-contain transition-opacity duration-300 ${
             loading ? "opacity-0" : "opacity-100"
           }`}
           placeholder="blur"

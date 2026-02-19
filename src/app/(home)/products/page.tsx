@@ -1,22 +1,29 @@
 "use client";
 
 import ProductCard from "@/components/home/products/ProductCard";
-import LoadingModal from "@/components/MainComponents/LoadingModal";
-import { apiFakestore } from "@/services/api";
+import { fetcherMixinApi } from "@/provider/fetchers";
 import useSWR from "swr";
+import { ProductItem } from "@/types/product";
+import { ProductCardSkeleton } from "@/components/home/products/ProductCardSkeleton";
 
 export default function Products() {
-  const { data: products, isLoading } = useSWR("products", (url) =>
-    apiFakestore.get(url).then((res) => res.data),
+  const { data: products, isLoading = true } = useSWR(
+    "management/v1/products",
+    fetcherMixinApi,
   );
 
-  if (isLoading) return <LoadingModal />;
   return (
     <>
-      <div className=" flex justify-center items-center flex-wrap gap-6">
-        {products.map((item: Product) => (
-          <ProductCard product={item} key={item.id} />
-        ))}
+      <div className=" w-full flex justify-between items-start flex-wrap gap-6">
+        {isLoading &&
+          Array.from({ length: 8 }).map((_, i) => (
+            <ProductCardSkeleton key={i} />
+          ))}
+
+        {!isLoading &&
+          products?.result.map((item: ProductItem) => (
+            <ProductCard product={item} key={item.id} />
+          ))}
       </div>
     </>
   );

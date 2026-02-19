@@ -5,38 +5,39 @@ import { MainBannerSectionProps } from "@/types/slider";
 import ProductSlider from "./ProductSlider";
 import LoadingModal from "@/components/MainComponents/LoadingModal";
 import useSWR from "swr";
-import { apiFakestore } from "@/services/api";
-import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { ButtonBase } from "@/components/ui/primitives";
+import { fetcherMixinApi } from "@/provider/fetchers";
 export const MainProductSection = ({
   title,
   link,
   style,
 }: MainBannerSectionProps) => {
-  const { data: products, isLoading } = useSWR("products", (url) =>
-    apiFakestore.get(url).then((res) => res.data),
+  const { data: products, isLoading } = useSWR(
+    "management/v1/products",
+    fetcherMixinApi,
   );
 
   if (isLoading) return <LoadingModal />;
   return (
-    <section className={cn(`w-full flex flex-col gap-y-4`, style)} dir="rtl">
-      <div className={`flex w-full justify-between items-center `}>
-        {title && <h2 className="text-xl font-bold text-neutral-5">{title}</h2>}
+    <section className={cn(`w-full fcc  gap-y-4`, style)} dir="rtl">
+      <div className={`fbc  w-full  `}>
+        {title && <h2 className="text-xl font-bold text-mainBlack">{title}</h2>}
 
         {link && (
-          <Link href="/products">
-            <Button
+          <>
+            <ButtonBase
+              className=" fjc gap-x-1 items-center   "
               variant="ghost"
-              className=" flex justify-between gap-x-1 items-center text-neutral-4 hover:bg-neutral-8 text-sm font-medium hover:text-neutral-4 transition-colors"
             >
-              <span>نمایش همه</span>
-              <BiChevronLeft className="inline" />
-            </Button>
-          </Link>
+              <Link href="/products">نمایش همه</Link>
+              <BiChevronLeft />
+            </ButtonBase>
+          </>
         )}
       </div>
 
-      <ProductSlider hasCaption={true} data={products} />
+      <ProductSlider hasCaption={true} data={products.result} />
     </section>
   );
 };

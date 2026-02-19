@@ -3,7 +3,12 @@ import toast from "react-hot-toast";
 import { useState } from "react";
 import useShoppingStore from "@/store/shoppingStore";
 import { Button } from "@/components/ui/button";
-const AddShoppingValues = ({ product }: ProductCartProps) => {
+import { ProductItem } from "@/types/product";
+interface AddShoppingValuesProps {
+  product: ProductItem;
+}
+const AddShoppingValues = (props: AddShoppingValuesProps) => {
+  const { product } = props;
   const [quantity, setQuantity] = useState(1);
   const { firstAddToCart, cart } = useShoppingStore();
 
@@ -22,7 +27,7 @@ const AddShoppingValues = ({ product }: ProductCartProps) => {
     toast.success("محصول اضافه شد");
   };
   const isInCart = cart.cartItems.some(
-    (item) => item?.product?.id === product?.id,
+    (item) => item?.product?.id === product?.id
   );
   return (
     <>
@@ -31,14 +36,14 @@ const AddShoppingValues = ({ product }: ProductCartProps) => {
           <div className=" flex w-full items-center justify-between ">
             <Button
               variant="ghost"
-              className="bg-neutral-4 text-white px-4 py-2 rounded-md  focus:outline-none"
+              className="bg-thirdGray text-white px-4 py-2 rounded-md  focus:outline-none"
               onClick={increaseQuantity}
             >
               +
             </Button>
-            <span className="text-neutral-1 text-xl">{quantity}</span>
+            <span className="text-mainWhite text-xl">{quantity}</span>
             <Button
-              className="bg-neutral-4 text-white px-4 py-2 rounded-md  focus:outline-none"
+              className="bg-thirdGray text-white px-4 py-2 rounded-md  focus:outline-none"
               onClick={decreaseQuantity}
               variant="destructive"
             >
@@ -47,13 +52,13 @@ const AddShoppingValues = ({ product }: ProductCartProps) => {
           </div>
           <Button
             onClick={addToCartHandler}
-            className="w-full bg-neutral-7 text-gray-100 m-2 p-3"
+            className="w-full bg-mainGold text-gray-100 m-2 p-3"
           >
             افزودن به سبد خرید
           </Button>
         </div>
       ) : (
-        <div className="text-center m-4 py-2 rounded bg-neutral-3 ">
+        <div className="text-center m-4 py-2 rounded bg-mainGray ">
           محصول به سبد خرید شما اضافه شده است
         </div>
       )}

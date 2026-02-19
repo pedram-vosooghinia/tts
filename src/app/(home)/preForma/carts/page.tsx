@@ -13,7 +13,7 @@ export default function Carts() {
 
   const totalPrice = cartItems.reduce(
     (acc, item) => acc + item.product.price * item.quantity,
-    0
+    0,
   );
 
   return (
@@ -29,14 +29,14 @@ export default function Carts() {
               >
                 <div className="flex flex-col">
                   <div className="flex flex-col mx-2">
-                    <OneImage imageUrl={item?.product?.image} size={100} />
+                    <OneImage imageUrl={item?.product?.images[0].image} size={100} />
                     <EditShoppingValues
                       key={item?.product?.id}
                       product={item}
                     />
                   </div>
                   <div className="flex flex-col">
-                    <div className="mx-2 font-bold">{item?.product?.title}</div>
+                    <div className="mx-2 font-bold">{item?.product?.name}</div>
                     <p className="text-gray-600 mt-2">
                       {item?.product?.price} $
                     </p>
@@ -56,9 +56,7 @@ export default function Carts() {
           <div>سبد خرید شما خالی می باشد</div>
         </div>
       )}
-      <MoveToShipping
-        totalInvoice={totalPrice}
-      />
+      <MoveToShipping totalInvoice={totalPrice} />
     </>
   );
 }

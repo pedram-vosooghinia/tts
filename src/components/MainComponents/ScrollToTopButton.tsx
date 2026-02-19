@@ -24,7 +24,7 @@ export default function ScrollToTopButton() {
       {isVisible && (
         <Button
           variant="ghost"
-          className="fixed bottom-4 right-4 bg-neutral-7 rounded-sm shadow-lg"
+          className="fixed bottom-4 right-4 bg-mainGold rounded-sm shadow-lg"
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
         >
           <ChevronUp className="h-4 w-4" />
