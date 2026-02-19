@@ -60,7 +60,7 @@ export default function RootLayout({
         <Header />
         <ToastProvider>
           <SwrProvider>
-            <main className="w-full max-w-[700px] flex flex-col  items-center px-6  pt-8 pb-28  ">
+            <main className="w-full max-w-[700px] flex flex-col  items-center px-4  pt-8 pb-28  ">
               {children}
             </main>
           </SwrProvider>

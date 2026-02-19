@@ -3,22 +3,18 @@ import { BiChevronLeft } from "react-icons/bi";
 import { cn } from "@/lib/utils";
 import { MainBannerSectionProps } from "@/types/slider";
 import ProductSlider from "./ProductSlider";
-import LoadingModal from "@/components/MainComponents/LoadingModal";
 import useSWR from "swr";
 import Link from "next/link";
 import { ButtonBase } from "@/components/ui/primitives";
 import { fetcherMixinApi } from "@/provider/fetchers";
+import { ProductSliderSkeleton } from "./ProductSliderSkeleton";
 export const MainProductSection = ({
   title,
   link,
   style,
 }: MainBannerSectionProps) => {
-  const { data: products, isLoading } = useSWR(
-    "management/v1/products",
-    fetcherMixinApi,
-  );
+  const { data, isLoading } = useSWR("management/v1/products", fetcherMixinApi);
 
-  if (isLoading) return <LoadingModal />;
   return (
     <section className={cn(`w-full fcc  gap-y-4`, style)} dir="rtl">
       <div className={`fbc  w-full  `}>
@@ -36,8 +32,10 @@ export const MainProductSection = ({
           </>
         )}
       </div>
-
-      <ProductSlider hasCaption={true} data={products.result} />
+      {isLoading && <ProductSliderSkeleton />}
+      {!isLoading && data?.result && (
+        <ProductSlider hasCaption={true} data={data?.result} />
+      )}
     </section>
   );
 };
