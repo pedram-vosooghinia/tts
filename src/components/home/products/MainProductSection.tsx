@@ -2,18 +2,17 @@
 import { BiChevronLeft } from "react-icons/bi";
 import { cn } from "@/lib/utils";
 import { MainBannerSectionProps } from "@/types/slider";
-import ProductSlider from "./ProductSlider";
-import useSWR from "swr";
+// import ProductSlider from "./ProductSlider";
+// import useSWR from "swr";
 import Link from "next/link";
 import { ButtonBase } from "@/components/ui/primitives";
-import { fetcherMixinApi } from "@/provider/fetchers";
-import { ProductSliderSkeleton } from "./ProductSliderSkeleton";
+// import { ProductSliderSkeleton } from "./ProductSliderSkeleton";
 export const MainProductSection = ({
   title,
   link,
   style,
 }: MainBannerSectionProps) => {
-  const { data, isLoading } = useSWR("management/v1/products", fetcherMixinApi);
+  // const { data, isLoading } = useSWR("management/v1/products", fetcherMixinApi);
 
   return (
     <section className={cn(`w-full fcc  gap-y-4`, style)} dir="rtl">
@@ -32,10 +31,10 @@ export const MainProductSection = ({
           </>
         )}
       </div>
-      {isLoading && <ProductSliderSkeleton />}
+      {/* {isLoading && <ProductSliderSkeleton />}
       {!isLoading && data?.result && (
         <ProductSlider hasCaption={true} data={data?.result} />
-      )}
+      )} */}
     </section>
   );
 };

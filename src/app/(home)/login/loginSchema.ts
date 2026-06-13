@@ -1,13 +1,14 @@
-import * as yup from "yup";
+import { z } from "zod";
 
-export const loginSchema = yup.object({
-  mobile: yup
+export const loginSchema = z.object({
+  mobile: z
     .string()
-    .required("شماره موبایل الزامی است")
-    .matches(/^[0-9]+$/, "شماره موبایل فقط باید شامل عدد باشد")
-    .matches(/^09\d{9}$/, "شماره موبایل نامعتبر است"),
-  password: yup
+    .min(1, "شماره موبایل الزامی است")
+    .regex(/^[0-9]+$/, "شماره موبایل فقط باید شامل عدد باشد")
+    .regex(/^09\d{9}$/, "شماره موبایل نامعتبر است"),
+
+  password: z
     .string()
-    .required("رمز عبور الزامی است")
+    .min(1, "رمز عبور الزامی است")
     .min(8, "رمز عبور باید حداقل ۸ کاراکتر باشد"),
 });

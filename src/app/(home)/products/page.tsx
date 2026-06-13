@@ -1,7 +1,7 @@
 "use client";
 
 import ProductCard from "@/components/home/products/ProductCard";
-import { fetcherMixinApi } from "@/provider/fetchers";
+import { fetcherApi } from "@/provider/fetchers";
 import useSWR from "swr";
 import { ProductItem } from "@/types/product";
 import { ProductCardSkeleton } from "@/components/home/products/ProductCardSkeleton";
@@ -9,7 +9,7 @@ import { ProductCardSkeleton } from "@/components/home/products/ProductCardSkele
 export default function Products() {
   const { data, isLoading = true } = useSWR(
     "management/v1/products",
-    fetcherMixinApi,
+    fetcherApi,
   );
   return (
     <>

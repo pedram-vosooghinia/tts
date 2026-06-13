@@ -1,6 +1,7 @@
 // import { getMainBanners } from "@/components/home/banner/getMainBanners";
 import { MainProductSection } from "@/components/home/products/MainProductSection";
 // import BannerSlider from "@/components/home/banner/BannerSlider";
+import AddApartment from "@/components/dashboard/apartment/AddApartment";
 export default async function Home() {
   // const data = await getMainBanners();
   // console.log("data", data);
@@ -10,6 +11,7 @@ export default async function Home() {
       {/* <BannerSlider data={data} /> */}
 
       <MainProductSection title="محصولات جدید" link="/products" />
+      <AddApartment/>
     </div>
   );
 }
