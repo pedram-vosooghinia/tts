@@ -1,9 +1,8 @@
 "use client";
 
 import { useForm } from "react-hook-form";
-import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-
+import { addApartmentServices } from "@/services/apartment";
 import {
   Form,
   FormControl,
@@ -25,38 +24,11 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 /* ---------------- ZOD ---------------- */
-
-const formSchema = z.object({
-  zone: z.string().min(1, "زون را انتخاب کنید"),
-
-  block: z.number().min(1, "شماره بلوک باید بیشتر از ۰ باشد"),
-  level: z.string().min(1, "طبقه را انتخاب کنید"),
-
-  direction: z.string().min(1, "جهت الزامی است"),
-
-  loanStatus: z.string().min(1, "وضعیت وام الزامی است"),
-
-  // ✅ NEW: عرصه (مثل وام)
-  areaStatus: z.string().min(1, "وضعیت عرصه الزامی است"),
-
-  transferStatus: z.string().min(1, "وضعیت نقل و انتقال الزامی است"),
-
-  unitStatus: z.string().min(1, "وضعیت واحد الزامی است"),
-
-  referrer: z.string().min(1, "نام معرف را وارد کنید"),
-
-  contact: z.string().min(10, "شماره تماس معتبر نیست"),
-
-  price: z.number().min(1, "قیمت باید بیشتر از ۰ باشد"),
-
-  // ✅ NEW: توضیحات
-  description: z.string().optional(),
-});
-type FormValues = z.infer<typeof formSchema>;
+import { ApartmentFormValues, apartmentFormSchema } from "./schema";
 
 export default function UnitForm() {
-  const form = useForm<FormValues>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<ApartmentFormValues>({
+    resolver: zodResolver(apartmentFormSchema),
     defaultValues: {
       zone: "",
       block: 0,
@@ -67,12 +39,17 @@ export default function UnitForm() {
       unitStatus: "",
       referrer: "",
       contact: "",
-
+      arseStatus: "",
       price: 0,
     },
   });
-  const onSubmit = (data: FormValues) => {
-    console.log(data);
+  const onSubmit = async (data: ApartmentFormValues) => {
+    try {
+      const res = await addApartmentServices(data);
+      console.log(res);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -82,7 +59,6 @@ export default function UnitForm() {
           onSubmit={form.handleSubmit(onSubmit)}
           className=" flex flex-wrap gap-x-4 gap-y-2"
         >
-          {/* ZONE */}
           <FormField
             name="zone"
             control={form.control}
@@ -108,7 +84,6 @@ export default function UnitForm() {
             )}
           />
 
-          {/* BLOCK */}
           <FormField
             name="block"
             control={form.control}
@@ -126,7 +101,6 @@ export default function UnitForm() {
               </FormItem>
             )}
           />
-          {/* LEVEL */}
           <FormField
             name="level"
             control={form.control}
@@ -154,7 +128,6 @@ export default function UnitForm() {
             )}
           />
 
-          {/* DIRECTION */}
           <FormField
             name="direction"
             control={form.control}
@@ -182,7 +155,6 @@ export default function UnitForm() {
             )}
           />
 
-          {/* LOAN */}
           <FormField
             name="loanStatus"
             control={form.control}
@@ -207,9 +179,8 @@ export default function UnitForm() {
               </FormItem>
             )}
           />
-          {/* AREA */}
           <FormField
-            name="areaStatus"
+            name="arseStatus"
             control={form.control}
             render={({ field }) => (
               <FormItem className="w-80 mx-auto">
@@ -235,7 +206,6 @@ export default function UnitForm() {
               </FormItem>
             )}
           />
-          {/* TRANSFER */}
           <FormField
             name="transferStatus"
             control={form.control}
@@ -261,7 +231,6 @@ export default function UnitForm() {
             )}
           />
 
-          {/* UNIT STATUS */}
           <FormField
             name="unitStatus"
             control={form.control}
@@ -289,7 +258,6 @@ export default function UnitForm() {
             )}
           />
 
-          {/* PRICE */}
           <FormField
             name="price"
             control={form.control}
@@ -301,14 +269,13 @@ export default function UnitForm() {
                     type="number"
                     value={field.value}
                     onChange={(e) => field.onChange(Number(e.target.value))}
-                  />{" "}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
 
-          {/* CONTACT */}
           <FormField
             name="contact"
             control={form.control}
@@ -323,7 +290,6 @@ export default function UnitForm() {
             )}
           />
 
-          {/* REFERRER */}
           <FormField
             name="referrer"
             control={form.control}
@@ -337,7 +303,6 @@ export default function UnitForm() {
               </FormItem>
             )}
           />
-          {/* DESCRIPTION */}
           <FormField
             name="description"
             control={form.control}
