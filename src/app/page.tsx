@@ -4,7 +4,6 @@ import { MainProductSection } from "@/components/home/products/MainProductSectio
 import AddApartment from "@/components/dashboard/apartment/AddApartment";
 export default async function Home() {
   // const data = await getMainBanners();
-  // console.log("data", data);
 
   return (
     <div className="ltr w-full flex flex-col gap-y-10 mx-10 pb-28 ">

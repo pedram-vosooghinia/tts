@@ -9,7 +9,6 @@ export default function Carts() {
   const { cart } = useShoppingStore();
 
   const { cartItems } = cart;
-  console.log("cart", cartItems);
 
   const totalPrice = cartItems.reduce(
     (acc, item) => acc + item.product.price * item.quantity,

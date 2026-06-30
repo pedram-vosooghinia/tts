@@ -49,7 +49,6 @@ const MoveToShipping = ({ totalInvoice }: MoveToShippingProps) => {
 
       localStorage.setItem("orderData", JSON.stringify(ordersList));
 
-      console.log("data", data);
 
       toast.success("فاکتور با موفقیت ثبت شد");
       router.push("/preForma/completed");

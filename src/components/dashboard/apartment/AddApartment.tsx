@@ -25,6 +25,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 /* ---------------- ZOD ---------------- */
 import { ApartmentFormValues, apartmentFormSchema } from "./schema";
+import toast from "react-hot-toast";
 
 export default function UnitForm() {
   const form = useForm<ApartmentFormValues>({
@@ -45,10 +46,9 @@ export default function UnitForm() {
   });
   const onSubmit = async (data: ApartmentFormValues) => {
     try {
-      const res = await addApartmentServices(data);
-      console.log(res);
-    } catch (error) {
-      console.error(error);
+      await addApartmentServices(data);
+    } catch {
+      toast.error("مشکلی در ثبت وجود دارد");
     }
   };
 

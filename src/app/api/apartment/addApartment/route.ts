@@ -75,7 +75,6 @@ export async function POST(req: NextRequest) {
         unitStatus,
       ],
     );
-console.log("res",result)
     return NextResponse.json(
       {
         success: true,
