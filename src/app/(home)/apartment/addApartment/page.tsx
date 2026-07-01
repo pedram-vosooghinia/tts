@@ -24,7 +24,10 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 /* ---------------- ZOD ---------------- */
-import { ApartmentFormValues, apartmentFormSchema } from "./schema";
+import {
+  ApartmentFormValues,
+  apartmentFormSchema,
+} from "@/components/dashboard/apartment/schema";
 import toast from "react-hot-toast";
 
 export default function UnitForm() {
