@@ -26,7 +26,7 @@ export default function Header() {
         <div className="w-full flex justify-between  items-center pt-4   ">
           <MenuDrawer />
           <div className="flex justify-center items-center">
-            <h1 className="text-3xl font-bold text-mainGold ">tts </h1>
+            <h1 className="text-3xl font-bold text-mainGold ">املاک خورشید </h1>
           </div>
 
           <Link href="/" className="justify-self-end">

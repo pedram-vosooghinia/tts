@@ -1,4 +1,11 @@
 import { api } from "../api";
-const addApartmentServices = <T>(data: T) => api.post("apartment/addApartment", data);
+import { AxiosResponse } from "axios";
+import { ResponseRequest } from "@/components/dashboard/apartment/apartments/DeleteDialog";
+const addApartmentServices = <T>(data: T) => api.post("apartment/add", data);
 
-export { addApartmentServices  };
+const deleteApartmentServices = (
+  id: string | number,
+): Promise<AxiosResponse<ResponseRequest>> => {
+  return api.delete(`/apartment/delete/${id}`);
+};
+export { addApartmentServices, deleteApartmentServices };
