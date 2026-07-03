@@ -1,13 +1,14 @@
 import { Button } from "@/components/ui/button";
 import { ApartmentType } from "@/types/apartment";
 import toast from "react-hot-toast";
+
 interface CopyApartmentTextType {
   item: ApartmentType | null;
 }
 
 export default function CopyApartmentText({ item }: CopyApartmentTextType) {
   if (!item) return null;
-console.log("item",item)
+
   const copyText = async (text: string) => {
     try {
       await navigator.clipboard.writeText(text);
@@ -17,42 +18,50 @@ console.log("item",item)
     }
   };
 
-  const divarText = `
-🏠 فروش آپارتمان
+  const smsText = [
+    `آپارتمان زون ${item.zone} بلوک ${item.block} طبقه ${
+      item.level === "0" ? "همکف" : item.level
+    } ${item.direction}`,
+    item.vazieatvahed !== "ندارد" ? `${item.vazieatvahed}` : null,
+    item.arse !== "ندارد" ? `عرصه ${item.arse}` : null,
+    item.vam !== "ندارد" ? `وام ${item.vam}` : null,
+    item.naghoentegal !== "ندارد" ? `نقل و انتقال ${item.naghoentegal}` : null,
+    `قیمت ${item.price}`,
+  ]
+    .filter(Boolean)
+    .join("\n");
 
-📍 زون: ${item.zone}
-🏢 بلوک: ${item.block}
-🏬 طبقه: ${item.level === "0" ? "همکف" : item.level}
-🧭 جهت: ${item.direction}
+  const divarText = [
+    `🏠 فروش آپارتمان`,
+    `📍 زون ${item.zone} | ${
+      item.level === "0" ? "همکف" : `طبقه ${item.level}`
+    }`,
+    `🧭 جهت: ${item.direction}`,
 
-💰 قیمت: ${item.price}
-
-📞 ${item.contact}
-`.trim();
-
-  const smsText = `
-آپارتمان زون ${item.zone} بلوک ${item.block} طبقه ${item.level === "0" ? "همکف" : item.level}
-قیمت: ${item.price}
-تماس: ${item.contact}
-`.trim();
-
-  const baleText = `
-🏠 مشخصات واحد
-
-زون: ${item.zone}
-بلوک: ${item.block}
-طبقه: ${item.level === "0" ? "همکف" : item.level}
-جهت: ${item.direction}
-
-قیمت: ${item.price}
-وضعیت وام: ${item.vam}
-وضعیت عرصه: ${item.arse}
-وضعیت واحد: ${item.vazieatvahed}
-وضعیت انتقال: ${item?.naghoentegal}
-
-معرف: ${item.referrer}
-شماره تماس: ${item.contact}
-`.trim();
+    item.vam !== "ندارد" ? `🏦 وام: ${item.vam}` : null,
+    item.arse !== "ندارد" ? `🏗 عرصه: ${item.arse}` : null,
+    item.naghoentegal !== "ندارد"
+      ? `📄 نقل و انتقال: ${item.naghoentegal}`
+      : null,
+    `🔹 واحد: ${item.vazieatvahed}`,
+  ]
+    .filter(Boolean)
+    .join("\n");
+  const baleText = [
+    `زون ${item.zone} بلوک ${item.block}`,
+    `طبقه ${item.level === "0" ? "همکف" : item.level} جهت ${item.direction}`,
+    item.vam !== "ندارد" ? `✅ وام: ${item.vam}` : null,
+    item.arse !== "ندارد" ? `✅ عرصه: ${item.arse}` : null,
+    item.naghoentegal !== "ندارد"
+      ? `✅ نقل و انتقال: ${item.naghoentegal}`
+      : null,
+    `✅ واحد: ${item.vazieatvahed}`,
+    `💰 قیمت: ${item.price}`,
+    `وثوقی
+    09909403511`,
+  ]
+    .filter(Boolean)
+    .join("\n");
 
   return (
     <div className="flex justify-between items-center">
