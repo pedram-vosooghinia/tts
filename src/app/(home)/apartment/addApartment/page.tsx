@@ -23,31 +23,28 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-/* ---------------- ZOD ---------------- */
-import {
-  ApartmentFormValues,
-  apartmentFormSchema,
-} from "@/components/dashboard/apartment/schema";
+import { apartmentFormSchema } from "@/components/dashboard/apartment/schema";
 import toast from "react-hot-toast";
+import { CreateApartment } from "@/types/apartment";
 
 export default function UnitForm() {
-  const form = useForm<ApartmentFormValues>({
+  const form = useForm<CreateApartment>({
     resolver: zodResolver(apartmentFormSchema),
     defaultValues: {
       zone: "",
       block: 0,
       direction: "",
       level: "",
-      loanStatus: "",
-      transferStatus: "",
-      unitStatus: "",
+      vam: "",
+      naghoentegal: "",
+      vazieatvahed: "",
       referrer: "",
       contact: "",
-      arseStatus: "",
+      arse: "",
       price: 0,
     },
   });
-  const onSubmit = async (data: ApartmentFormValues) => {
+  const onSubmit = async (data: CreateApartment) => {
     try {
       await addApartmentServices(data);
     } catch {
@@ -159,7 +156,7 @@ export default function UnitForm() {
           />
 
           <FormField
-            name="loanStatus"
+            name="vam"
             control={form.control}
             render={({ field }) => (
               <FormItem className="w-80 mx-auto">
@@ -183,7 +180,7 @@ export default function UnitForm() {
             )}
           />
           <FormField
-            name="arseStatus"
+            name="arse"
             control={form.control}
             render={({ field }) => (
               <FormItem className="w-80 mx-auto">
@@ -210,7 +207,7 @@ export default function UnitForm() {
             )}
           />
           <FormField
-            name="transferStatus"
+            name="naghoentegal"
             control={form.control}
             render={({ field }) => (
               <FormItem className="w-80 mx-auto">
@@ -235,7 +232,7 @@ export default function UnitForm() {
           />
 
           <FormField
-            name="unitStatus"
+            name="vazieatvahed"
             control={form.control}
             render={({ field }) => (
               <FormItem className="w-80 mx-auto">

@@ -1,35 +1,36 @@
 import { NextResponse, NextRequest } from "next/server";
 import { query } from "@/db";
-import { ApartmentFormValues } from "@/components/dashboard/apartment/schema";
+import { ApartmentType } from "@/types/apartment";
 export async function POST(req: NextRequest) {
   try {
+
     const {
       zone,
-      arseStatus,
+      arse,
       block,
       contact,
       description,
       direction,
       level,
-      loanStatus,
+      vam,
       price,
       referrer,
-      transferStatus,
-      unitStatus,
-    }: ApartmentFormValues = await req.json();
+      naghoentegal,
+      vazieatvahed,
+    }: ApartmentType = await req.json();
 
     if (
       !zone ||
-      !arseStatus ||
+      !arse ||
       !block ||
       !contact ||
       !direction ||
       !level ||
-      !loanStatus ||
+      !vam ||
       !price ||
       !referrer ||
-      !transferStatus ||
-      !unitStatus
+      !naghoentegal ||
+      !vazieatvahed
     ) {
       return NextResponse.json(
         {
@@ -43,17 +44,17 @@ export async function POST(req: NextRequest) {
       `
       INSERT INTO apartment (
         zone,
-        arse_status,
+        arse,
         block,
         contact,
         description,
         direction,
         level,
-        loan_status,
+        vam,
         price,
         referrer,
-        transfer_status,
-        unit_status
+        naghoentegal,
+        vazieatvahed
       )
       VALUES (
         $1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12
@@ -62,17 +63,17 @@ export async function POST(req: NextRequest) {
       `,
       [
         zone,
-        arseStatus,
+        arse,
         block,
         contact,
         description ?? null,
         direction,
         level,
-        loanStatus,
+        vam,
         price,
         referrer,
-        transferStatus,
-        unitStatus,
+        naghoentegal,
+        vazieatvahed,
       ],
     );
     return NextResponse.json(

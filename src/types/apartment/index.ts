@@ -4,12 +4,13 @@ export interface ApartmentType {
   block: number;
   level: string;
   direction: string;
-  loan_status: string;
-  arseStatus: string;
-  transferStatus: string;
-  unitStatus: string;
+  vam: string;
+  arse: string;
+  naghoentegal: string;
+  vazieatvahed: string;
   referrer: string;
   contact: string;
   price: number;
   description?: string;
 }
+export type CreateApartment = Omit<ApartmentType, "id">;

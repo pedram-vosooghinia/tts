@@ -11,6 +11,7 @@ import { Field } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ApartmentType } from "@/types/apartment";
+import CopyApartmentText from "./CopyApartmentText";
 interface ShowDetailsApartmentTypes {
   item: ApartmentType | null;
   open: boolean;
@@ -24,7 +25,10 @@ export default function ShowDetailsApartment({
   if (!item) return null;
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-lg" dir="rtl">
+      <DialogContent
+        className="sm:max-w-lg max-h-[90vh] overflow-y-auto"
+        dir="rtl"
+      >
         <DialogHeader>
           <DialogTitle>جزئیات آپارتمان</DialogTitle>
         </DialogHeader>
@@ -57,22 +61,22 @@ export default function ShowDetailsApartment({
 
           <Field>
             <Label>وضعیت وام</Label>
-            <Input value={item?.loan_status} readOnly />
+            <Input value={item?.vam} readOnly />
           </Field>
 
           <Field>
             <Label>وضعیت عرصه</Label>
-            <Input value={item?.arseStatus} readOnly />
+            <Input value={item?.arse} readOnly />
           </Field>
 
           <Field>
             <Label>وضعیت انتقال</Label>
-            <Input value={item?.transferStatus} readOnly />
+            <Input value={item?.naghoentegal} readOnly />
           </Field>
 
           <Field>
             <Label>وضعیت واحد</Label>
-            <Input value={item?.unitStatus} readOnly />
+            <Input value={item?.vazieatvahed} readOnly />
           </Field>
 
           <Field>
@@ -97,11 +101,12 @@ export default function ShowDetailsApartment({
           </div>
         )}
 
-        <DialogFooter>
+        <DialogFooter className=" flex flex-col">
           <DialogClose asChild>
             <Button variant="secondary">بستن</Button>
           </DialogClose>
         </DialogFooter>
+        <CopyApartmentText item={item} />
       </DialogContent>
     </Dialog>
   );
