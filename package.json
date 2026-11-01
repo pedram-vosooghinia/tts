@@ -58,7 +58,7 @@
     "@types/jsonwebtoken": "^9.0.7",
     "@types/lodash": "^4.17.10",
     "@types/next": "^8.0.7",
-    "@types/node": "^20",
+    "@types/node": "^26",
     "@types/pg": "^8.11.10",
     "@types/react": "19.2.10",
     "@types/react-dom": "19.2.3",
