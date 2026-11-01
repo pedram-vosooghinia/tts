@@ -39,8 +39,7 @@ export default function Login() {
     name: "mobile",
   });
   const onSubmit = async (values: LoginFormData) => {
-    // await login(values);
-    console.log("values", values);
+    await login(values);
   };
 
   return (

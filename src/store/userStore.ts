@@ -1,26 +1,18 @@
 "use strict";
 import { create } from "zustand";
-import Cookies from "js-cookie";
+import { User } from "@/types/user";
 
-interface IuseUserStore {
+interface UserState {
   user: User | null;
   addToUser: (newUser: User) => void;
   clearUser: () => void;
 }
-const useUserStore = create<IuseUserStore>((set) => ({
-  user: Cookies.get("user")
-    ? JSON.parse(Cookies.get("user") as string)
-    : null,
+const useUserStore = create<UserState>((set) => ({
+  user: null,
 
-  addToUser: (newUser:User) => {
-    Cookies.set("user", JSON.stringify(newUser), { sameSite: 'Strict', secure: true });
-    set({ user: newUser });
-  },
+  addToUser: (user) => set({ user }),
 
-  clearUser: () => {
-    set({ user: null });
-    Cookies.remove("user");
-  },
+  clearUser: () => set({ user: null }),
 }));
 
 export default useUserStore;
