@@ -1,5 +1,5 @@
 import { useRouter } from "next/navigation";
-import { logoutServices } from "@/services/auth";
+import { logoutServices } from "@/features/auth/services";
 import useUserStore from "@/store/userStore";
 import toast from "react-hot-toast";
 

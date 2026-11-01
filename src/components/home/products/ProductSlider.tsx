@@ -11,7 +11,6 @@ import { ProductItem } from "@/types/product";
 export default function ProductSlider({
   data,
 }: {
-  hasCaption?: boolean;
   data?: ProductItem[];
 }) {
   if (!Array.isArray(data) || data.length === 0) {

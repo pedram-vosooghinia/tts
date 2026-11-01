@@ -1,4 +1,4 @@
-import { api } from "../api";
+import { api } from "../../../services/api";
 const loginServices = <T>(data: T) => api.post("auth/login", data);
 const signInServices = <T>(data: T) => api.post("auth/signIn", data);
 const logoutServices = () => api.get("/auth/logout");

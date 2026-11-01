@@ -2,9 +2,9 @@ import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import toast from "react-hot-toast";
 import { AxiosError } from "axios";
-import { loginServices } from "@/services/auth";
+import { loginServices } from "@/features/auth/services";
 import useUserStore from "@/store/userStore";
-import { LoginFormInputs } from "@/app/(home)/login/type";
+import { LoginFormInputs } from "@/features/auth/types";
 
 export function useLogin() {
   const router = useRouter();
