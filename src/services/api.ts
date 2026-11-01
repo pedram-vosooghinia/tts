@@ -12,6 +12,16 @@ export const api = axios.create({
   },
 });
 
+const MIXIN_API_URL = process.env.NEXT_PUBLIC_MIXIN_API;
+
+export const apiMixin = axios.create({
+  baseURL: MIXIN_API_URL,
+  headers: {
+    "Content-Type": "application/json",
+    Authorization: process.env.NEXT_PUBLIC_MIXIN_AUTH_KEY,
+  },
+});
+
 const errorInterceptor = async (axiosError: AxiosError) => {
   if (axiosError.response) {
     toast.error("خطای سمت سرور:");

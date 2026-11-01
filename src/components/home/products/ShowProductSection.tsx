@@ -8,13 +8,13 @@ import Link from "next/link";
 import { ButtonBase } from "@/components/ui/primitives";
 import { fetcherMixinApi } from "@/provider/fetchers";
 import { ProductSliderSkeleton } from "./ProductSliderSkeleton";
-export const ShowProductSection = ({
+export const MainProductSection = ({
   title,
   link,
   style,
-  fetchUrl
-}:ShowBannerSectionProps ) => {
-const { data, isLoading , error } = useSWR(fetchUrl, fetcherMixinApi);
+}: MainBannerSectionProps) => {
+  const { data, isLoading } = useSWR("management/v1/products", fetcherMixinApi);
+
   return (
     <section className={cn(`w-full fcc  gap-y-4`, style)} dir="rtl">
       <div className={`fbc  w-full  `}>
@@ -32,11 +32,10 @@ const { data, isLoading , error } = useSWR(fetchUrl, fetcherMixinApi);
           </>
         )}
       </div>
-       <>
-      {!isLoading && !error  &&  data?.result ? (
-        <ProductSlider  data={data?.result} />
-        ) :<ProductSliderSkeleton/> }
-        </>
+      {isLoading && <ProductSliderSkeleton />}
+      {!isLoading && data?.result && (
+        <ProductSlider hasCaption={true} data={data?.result} />
+      )}
     </section>
   );
 };
