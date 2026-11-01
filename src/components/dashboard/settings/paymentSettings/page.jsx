@@ -6,7 +6,7 @@
 // import NiazmandiSettingForm from "./niazmandiSettingForm";
 // import EmployeeSettingForm from "./employeeSettingForm";
 // import PaymentGateway from "./PaymentGateway";
-// const PaymentSettings = () => {
+// export default function PaymentSettings() {
 //   const [tab, setTab] = useState("gatway");
 
 //   return (
@@ -21,7 +21,7 @@
 //             className={`nav-link ${tab === "gatway" ? "active" : ""}`}
 //             onClick={() => setTab("gatway")}
 //           >
-//             درگاه 
+//             درگاه
 //           </button>
 //           <button
 //             className={`nav-link ${tab === "property" ? "active" : ""}`}
@@ -57,6 +57,4 @@
 //       {tab === "gatway" && <PaymentGateway />}
 //     </div>
 //   );
-// };
-
-// export default PaymentSettings;
+// }

@@ -4,7 +4,7 @@
 // import toast from "react-hot-toast";
 // import useSWR, { mutate } from "swr";
 // import LoadingModal from "@/components/MainComponents/LoadingModal";
-// const SmsSettings = () => {
+// export default function SmsSettings() {
 //   const { data, isLoading } = useSWR("/admin/v3/sms/pattern/all/1");
 //   const dataSMS = data?.result || [];
 //   // const initialValues = {
@@ -33,7 +33,6 @@
 //   //   free_add_expire_business: dataSMS?.free_add_expire_business || "",
 //   //   wallet_balance_cell_verification: dataSMS?.wallet_balance_cell_verification||"",
 //   // };
-
 
 //   // const templateLabels = {
 //   //   sms_id: "شناسه پیامک",
@@ -67,12 +66,12 @@
 //       <div className="container">
 //         <div className="row align-items-center mb-5">
 //           <div className="col-6">
-//             <h1 >تنظیمات الگوهای پیامک</h1>
+//             <h1>تنظیمات الگوهای پیامک</h1>
 //           </div>
 //         </div>
 //       </div>
 
-//       <form >
+//       <form>
 //         <div className="row">
 //           {/* {Object.entries(templateLabels).map(([key, label]) => (
 //             <div key={key} className="col-sm-12 col-md-6">
@@ -98,14 +97,11 @@
 //           ))} */}
 //         </div>
 
-//         <div >          <button
-//             type="submit"
-//           >
-//           </button>
+//         <div>
+//           {" "}
+//           <button type="submit"></button>
 //         </div>
 //       </form>
 //     </div>
 //   );
-// };
-
-// export default SmsSettings;
+// }

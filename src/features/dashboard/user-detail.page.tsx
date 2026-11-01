@@ -59,9 +59,9 @@ export default function UserDetail() {
         <CardHeader>
           <div className="flex items-center gap-4">
             <Avatar className="h-16 w-16">
-              <AvatarFallback className="bg-primary/10 text-xl text-primary">
-                {user.first_name?.charAt(0)}
-                {user.last_name?.charAt(0)}
+              <AvatarFallback className="bg-primary/10 text-xl text-primary ">
+                <span>{user.first_name?.charAt(0)}</span>
+                <span>{user.last_name?.charAt(0)}</span>
               </AvatarFallback>
             </Avatar>
 
@@ -72,7 +72,10 @@ export default function UserDetail() {
               <div className="flex flex-wrap gap-2">
                 <Badge variant="secondary">{roleLabels[user.role]}</Badge>
 
-                <Badge variant={user.is_active ? "default" : "destructive"}>
+                <Badge
+                  variant={user.is_active ? "outline" : "destructive"}
+                  className="text-cyan-300"
+                >
                   {user.is_active ? "حساب فعال" : "حساب غیرفعال"}
                 </Badge>
               </div>

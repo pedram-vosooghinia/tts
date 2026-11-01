@@ -1,5 +1,4 @@
 "use client";
-import AddShoppingValues from "@/components/dashboard/preForma/carts/AddShoppingValues";
 import { Card, CardContent } from "@/components/ui/card";
 import ProductImage from "./ProductImage";
 import { ProductItem } from "@/types/product";
@@ -35,7 +34,7 @@ export default function ProductCard(props: ProductCardProps) {
 
           <span className="text-mainWhite mt-2">{product.price} $</span>
 
-          <AddShoppingValues product={product} />
+          {/* <AddShoppingValues product={product} /> */}
         </CardContent>
       </Card>
     </>

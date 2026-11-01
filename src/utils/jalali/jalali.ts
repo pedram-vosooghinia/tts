@@ -1,6 +1,6 @@
 "use client"
 import jalaaliJs from "jalaali-js";
-function getCurrentJalaliDate():JalaliDate {
+function getCurrentJalaliDate() {
   const now = new Date();
   const { jy, jm, jd } = jalaaliJs.toJalaali(
     now.getFullYear(),

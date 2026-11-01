@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { AxiosError } from "axios";
-
+import Cookies from "js-cookie";
 import { getMeServices, loginServices } from "@/features/auth/services";
 import { LoginFormInputs } from "@/features/auth/types";
 import useUserStore from "@/store/userStore";
@@ -19,8 +19,11 @@ export function useLogin() {
 
       const accessToken = res.data.data.access_token;
 
-      localStorage.setItem("access_token", accessToken);
-
+      Cookies.set("access_token", accessToken, {
+        expires: 7,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "lax",
+      });
       const userRes = await getMeServices();
 
       const userData: User = userRes.data.data;

@@ -4,7 +4,8 @@
 // import BinboardForm from "./BinboardForm";
 // import { useState } from "react";
 // import FirstPageForm from "./FirstPageForm";
-// const GeneralSettings = () => {
+
+// export default function GeneralSettings() {
 //   const [tab, setTab] = useState("wallet");
 //   return (
 //     <div>
@@ -40,6 +41,4 @@
 //       {tab === "firstPage" && <FirstPageForm />}
 //     </div>
 //   );
-// };
-
-// export default GeneralSettings;
+// }
