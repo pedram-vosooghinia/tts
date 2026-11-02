@@ -1,7 +1,5 @@
 "use client";
 
-import useUserStore from "@/store/userStore";
-
 import {
   Card,
   CardContent,
@@ -30,9 +28,9 @@ const roleLabels = {
 };
 
 export default function UserDetail() {
-  const { loading } = useAuth();
-  const { user } = useUserStore();
-  if (loading) {
+  const { user, isLoading } = useAuth();
+
+  if (isLoading) {
     return <div>در حال دریافت اطلاعات کاربر...</div>;
   }
 

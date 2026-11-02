@@ -1,41 +1,40 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import useSWR from "swr";
 import Cookies from "js-cookie";
-import { getMeServices } from "@/features/auth/services";
-import useUserStore from "@/store/userStore";
+import { AxiosError } from "axios";
+import { User } from "@/types/user";
 
 export function useAuth() {
-  const { user, addToUser, clearUser } = useUserStore();
-  const [loading, setLoading] = useState(true);
+  const router = useRouter();
+
+  const hasToken =
+    typeof window !== "undefined" && !!Cookies.get("access_token");
+
+  const {
+    data: user,
+    error,
+    isLoading,
+    mutate,
+  } = useSWR<User>(hasToken ? "/auth/me" : null);
+
+  const status = (error as AxiosError)?.response?.status;
 
   useEffect(() => {
-    const checkAuth = async () => {
-      const token = Cookies.get("access_token");
-
-      if (!token) {
-        clearUser();
-        setLoading(false);
-        return;
-      }
-
-      try {
-        const res = await getMeServices();
-        addToUser(res.data.data);
-      } catch {
-        Cookies.remove("access_token");
-        clearUser();
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    checkAuth();
-  }, [addToUser, clearUser]);
+    if (status === 401) {
+      Cookies.remove("access_token", { path: "/" });
+      mutate(undefined, { revalidate: false });
+      router.replace("/login");
+    }
+  }, [status, mutate, router]);
 
   return {
-    user,
-    loading,
+    user: user ?? null,
+    isLoading,
     isAuthenticated: !!user,
+    error,
+    mutate,
   };
 }

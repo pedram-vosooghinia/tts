@@ -4,14 +4,16 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { AxiosError } from "axios";
 import Cookies from "js-cookie";
-import { getMeServices, loginServices } from "@/features/auth/services";
+import { loginServices } from "@/features/auth/services";
 import { LoginFormInputs } from "@/features/auth/types";
-import useUserStore from "@/store/userStore";
+import { useSWRConfig } from "swr";
+import { api } from "@/services/api";
+import { getDashboardPath } from "../utils/getDashboardPath";
 import { User } from "@/types/user";
 
 export function useLogin() {
   const router = useRouter();
-  const { addToUser } = useUserStore();
+  const { mutate } = useSWRConfig();
 
   const login = async (values: LoginFormInputs) => {
     try {
@@ -24,14 +26,19 @@ export function useLogin() {
         secure: process.env.NODE_ENV === "production",
         sameSite: "lax",
       });
-      const userRes = await getMeServices();
 
-      const userData: User = userRes.data.data;
+      const userRes = await api.get("/auth/me");
+      const user: User = userRes.data.data;
 
-      addToUser(userData);
+      await mutate("/auth/me", user, {
+        revalidate: false,
+      });
+
+      const dashboardPath = getDashboardPath(user.role);
+
       toast.success("شما با موفقیت وارد شدید");
 
-      router.push("/dashboard");
+      router.push(dashboardPath);
     } catch (error) {
       const err = error as AxiosError<{ message?: string }>;
 

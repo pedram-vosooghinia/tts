@@ -57,16 +57,16 @@ export default function RootLayout({
           "relative font-yekan antialiased    bg-mainGray flex flex-col items-center    ",
         )}
       >
-        <Header />
-        <ToastProvider>
-          <SwrProvider>
+        <SwrProvider>
+          <ToastProvider>
+            <Header />
             <main className="w-full max-w-[700px] flex flex-col  items-center px-4  pt-8 pb-28  ">
               {children}
             </main>
-          </SwrProvider>
-        </ToastProvider>
-        <Footer />
-        <MenuBar />
+            <Footer />
+            <MenuBar />
+          </ToastProvider>
+        </SwrProvider>
       </body>
     </html>
   );

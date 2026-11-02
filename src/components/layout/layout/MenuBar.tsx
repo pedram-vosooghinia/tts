@@ -6,10 +6,13 @@ import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { IoHome } from "react-icons/io5";
 import { CiSearch } from "react-icons/ci";
-
+import { useAuth } from "@/features/auth/hooks/useAuth";
+import { getDashboardPath } from "@/features/auth/utils/getDashboardPath";
 const MenuBar = () => {
   const pathname = usePathname();
   const router = useRouter();
+  const { user } = useAuth();
+  const accountPath = user ? getDashboardPath(user.role) : "/login";
   const navItems = [
     {
       id: 1,
@@ -33,7 +36,7 @@ const MenuBar = () => {
     {
       id: 3,
       name: "حساب",
-      href: "/dashboard",
+      href: accountPath,
       icon: BsPersonFill,
     },
   ];
