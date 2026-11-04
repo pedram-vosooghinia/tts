@@ -10,15 +10,7 @@ import { User } from "@/types/user";
 export function useAuth() {
   const router = useRouter();
 
-  const hasToken =
-    typeof window !== "undefined" && !!Cookies.get("access_token");
-
-  const {
-    data: user,
-    error,
-    isLoading,
-    mutate,
-  } = useSWR<User>(hasToken ? "/auth/me" : null);
+  const { data: user, error, isLoading, mutate } = useSWR<User>("/auth/me");
 
   const status = (error as AxiosError)?.response?.status;
 

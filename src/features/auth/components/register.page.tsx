@@ -44,7 +44,6 @@ export default function RegisterPage() {
   });
 
   const onSubmit = async (values: RegisterFormData) => {
-      console.log("values",values)
     await signIn(values);
   };
 

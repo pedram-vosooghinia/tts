@@ -4,8 +4,7 @@ import Link from "next/link";
 import dynamic from "next/dynamic";
 import { Button } from "@/components/ui/button";
 import { MenuIcon } from "lucide-react";
-import { ReturnButton } from "./ReturnButton";
-import logo from "@/public/images/home/logo.jpg"
+import logo from "@/public/images/home/logo.jpg";
 const MenuDrawer = dynamic(() => import("./MenuDrawer"), {
   ssr: false,
   loading: () => (
@@ -16,8 +15,6 @@ const MenuDrawer = dynamic(() => import("./MenuDrawer"), {
 });
 
 export default function Header() {
-
-
   return (
     <>
       <div className="bg-thirdGray w-full max-w-[43.75rem] sticky top-0 z-[30]  px-6 pb-2.5 rounded-b-2xl ">
@@ -40,7 +37,9 @@ export default function Header() {
           </Link>
         </div>
         <div className=" mx-auto border-t border-e-grayborder my-2.5"></div>
-        <div className=" text-center  text-mainWhite">تجربه بهترین محصولات با بهترین قیمت</div>
+        <div className=" text-center  text-mainWhite">
+          تجربه بهترین محصولات با بهترین قیمت
+        </div>
       </div>
     </>
   );

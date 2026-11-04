@@ -7,6 +7,7 @@
     direction: rtl;
     writing-mode: horizontal-tb;
     text-orientation: upright;
+    /* scrollbar-gutter: stable; */
   }
   .rtl {
     direction: rtl;
@@ -101,7 +102,6 @@
     align-items: center;
   }
 
-
   .fcc {
     display: flex;
     flex-direction: column;
@@ -165,11 +165,4 @@
     --chart-5: 340 75% 55%;
   }
 }
-/* @layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-} */
+
