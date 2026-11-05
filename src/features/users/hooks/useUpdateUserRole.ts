@@ -6,13 +6,12 @@ import toast from "react-hot-toast";
 import { AxiosError } from "axios";
 import { updateUserRoleService } from "../services/users.services";
 
-type UserRole = "user" | "admin" | "support";
-
+type AssignableRole = "user" | "support";
 export function useUpdateUserRole() {
   const [isUpdatingRole, setIsUpdatingRole] = useState(false);
   const { mutate } = useSWRConfig();
 
-  const updateRole = async (id: number, role: UserRole) => {
+  const updateRole = async (id: number, role: AssignableRole) => {
     try {
       setIsUpdatingRole(true);
 

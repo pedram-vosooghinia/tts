@@ -24,7 +24,7 @@ export const updateUserStatusService = async (
 
 export const updateUserRoleService = async (
   id: number,
-  role: "user" | "admin" | "support",
+  role: "user"  | "support",
 ) => {
   const res = await api.patch(`/users/${id}/role`, {
     role,

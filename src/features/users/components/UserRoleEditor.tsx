@@ -26,16 +26,15 @@ import {
 import type { User } from "../types/user.types";
 import { useUpdateUserRole } from "../hooks/useUpdateUserRole";
 
-type UserRole = User["role"];
+type AssignableRole = "user" | "support";
 
 interface UserRoleEditorProps {
   user: User;
   onSuccess?: () => void;
 }
 
-const roleLabels: Record<UserRole, string> = {
+const roleLabels: Record<AssignableRole, string> = {
   user: "کاربر عادی",
-  admin: "مدیر",
   support: "پشتیبان",
 };
 
@@ -43,10 +42,13 @@ export default function UserRoleEditor({
   user,
   onSuccess,
 }: UserRoleEditorProps) {
-  const [selectedRole, setSelectedRole] = useState<UserRole>(user.role);
+  const [selectedRole, setSelectedRole] = useState<AssignableRole>(
+    user.role === "admin" ? "user" : user.role,
+  );
+
   const [confirmOpen, setConfirmOpen] = useState(false);
 
-  const { updateRole, isUpdatingRole } = useUpdateUserRole();
+  const { updateRole,  isUpdatingRole } = useUpdateUserRole();
 
   const handleRoleChange = async () => {
     if (selectedRole === user.role) return;
@@ -63,56 +65,68 @@ export default function UserRoleEditor({
     <div className="space-y-3 border-t px-6 py-4">
       <label className="text-sm font-medium">تغییر نقش کاربر</label>
 
-      <div className="flex items-center gap-3">
-        <Select
-          value={selectedRole}
-          onValueChange={(value) => setSelectedRole(value as UserRole)}
-        >
-          <SelectTrigger className="flex-1">
-            <SelectValue placeholder="انتخاب نقش" />
-          </SelectTrigger>
-
-          <SelectContent>
-            <SelectItem value="user">کاربر عادی</SelectItem>
-            <SelectItem value="support">پشتیبان</SelectItem>
-            <SelectItem value="admin">مدیر</SelectItem>
-          </SelectContent>
-        </Select>
-
-        <Button
-          disabled={selectedRole === user.role || isUpdatingRole}
-          onClick={() => setConfirmOpen(true)}
-        >
-          ذخیره نقش
-        </Button>
-      </div>
-
-      <AlertDialog open={confirmOpen} onOpenChange={setConfirmOpen}>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>تغییر نقش کاربر</AlertDialogTitle>
-
-            <AlertDialogDescription>
-              آیا از تغییر نقش این کاربر به {roleLabels[selectedRole]} اطمینان
-              داری؟
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-
-          <AlertDialogFooter>
-            <AlertDialogCancel disabled={isUpdatingRole}>انصراف</AlertDialogCancel>
-
-            <AlertDialogAction
-              disabled={isUpdatingRole}
-              onClick={(event) => {
-                event.preventDefault();
-                handleRoleChange();
-              }}
+      {user.role === "admin" ? (
+        <p className="text-sm text-muted-foreground">
+          نقش مدیر از طریق این بخش قابل تغییر نیست.
+        </p>
+      ) : (
+        <>
+          <div className="flex items-center gap-3">
+            <Select
+              value={selectedRole}
+              onValueChange={(value) =>
+                setSelectedRole(value as AssignableRole)
+              }
             >
-              {isUpdatingRole ? "در حال ذخیره..." : "تأیید تغییر نقش"}
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
+              <SelectTrigger className="flex-1">
+                <SelectValue placeholder="انتخاب نقش" />
+              </SelectTrigger>
+
+              <SelectContent>
+                <SelectItem value="user">کاربر عادی</SelectItem>
+
+                <SelectItem value="support">پشتیبان</SelectItem>
+              </SelectContent>
+            </Select>
+
+            <Button
+              disabled={selectedRole === user.role || isUpdatingRole}
+              onClick={() => setConfirmOpen(true)}
+            >
+              ذخیره نقش
+            </Button>
+          </div>
+
+          <AlertDialog open={confirmOpen} onOpenChange={setConfirmOpen}>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>تغییر نقش کاربر</AlertDialogTitle>
+
+                <AlertDialogDescription>
+                  آیا از تغییر نقش این کاربر به {roleLabels[selectedRole]}{" "}
+                  اطمینان داری؟
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+
+              <AlertDialogFooter>
+                <AlertDialogCancel disabled={isUpdatingRole}>
+                  انصراف
+                </AlertDialogCancel>
+
+                <AlertDialogAction
+                  disabled={isUpdatingRole}
+                  onClick={(event) => {
+                    event.preventDefault();
+                    handleRoleChange();
+                  }}
+                >
+                  {isUpdatingRole ? "در حال ذخیره..." : "تأیید تغییر نقش"}
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
+        </>
+      )}
     </div>
   );
 }
