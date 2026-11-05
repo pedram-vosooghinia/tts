@@ -5,5 +5,9 @@ export default function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <RoleGuard allowedRoles={["support"]}>{children}</RoleGuard>;
+  return (
+    <RoleGuard allowedRoles={["support"]}>
+      <div className="w-full space-y-6">{children}</div>
+    </RoleGuard>
+  );
 }

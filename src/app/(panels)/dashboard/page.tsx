@@ -5,9 +5,11 @@ import Link from "next/link";
 export default function page() {
   return (
     <>
-      <Link href="/dashboard/tickets/create">
-        <Button className="text-white">تیکت</Button>
-      </Link>
+      <div className="flex justify-between items-center w-full">
+        <Link href="/dashboard/tickets">
+          <Button className="text-white">تیک ها</Button>
+        </Link>
+      </div>
       <UserDetail />;
       <LogoutButton />
     </>

@@ -1,4 +1,3 @@
-import { ReturnButton } from "./ReturnButton";
 import MenuDrawer from "./MenuDrawer";
 interface IPanelHeaderProps {
   title: string;
@@ -9,7 +8,6 @@ const PanelHeader = ({ title }: IPanelHeaderProps) => {
       <div className="flex items-center justify-between px-4 py-4 drop-shadow-lg">
         <MenuDrawer />
         <h1 className="text-lg font-bold text-gray-800">{title}</h1>
-        <ReturnButton />
       </div>
     </header>
   );

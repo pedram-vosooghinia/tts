@@ -1,8 +1,4 @@
-export type TicketPriority =
-  | "low"
-  | "medium"
-  | "high"
-  | "urgent";
+export type TicketPriority = "low" | "medium" | "high" | "urgent";
 
 export type TicketStatus =
   | "open"
@@ -27,7 +23,6 @@ export interface TicketMessage {
 export interface Ticket {
   id: number;
   title: string;
-  subject: string;
   status: TicketStatus;
   priority: TicketPriority;
   created_at: string;
@@ -35,10 +30,15 @@ export interface Ticket {
   user: TicketUser;
   messages: TicketMessage[];
 }
-
+export interface CreatedTicketMessage {
+  id: number;
+  message: string;
+  ticketId: number;
+  senderId: number;
+  created_at: string;
+}
 export interface CreateTicketDto {
   title: string;
-  subject: string;
   priority?: TicketPriority;
   initialMessage: string;
 }

@@ -5,6 +5,8 @@ import { useUsers } from "@/features/users/hooks/useUsers";
 import UsersTable from "@/features/users/components/UsersTable";
 import UsersFilters from "@/features/users/components/UsersFilters";
 import DataPagination from "@/components/shared/DataPagination";
+import BreadcrumbMain from "@/components/shared/BreadcrumbMain";
+import PageHeader from "@/components/shared/PageHeader";
 
 export default function UsersPage() {
   const [page, setPage] = useState(1);
@@ -34,20 +36,23 @@ export default function UsersPage() {
     setPage(1);
   };
   return (
-    <div className="space-y-6 w-full">
-      <div>
-        <h1 className="text-2xl font-bold">مدیریت کاربران</h1>
-        <p className="mt-2 text-sm text-muted-foreground">
-          مشاهده و مدیریت کاربران سامانه
-        </p>
-      </div>
+    <>
+      <BreadcrumbMain
+        items={[
+          { label: "داشبرد", href: "/admin" },
+          { label: "کاربران", href: "#" },
+        ]}
+      />
+      <PageHeader
+        title="مدیریت کاربران"
+        description="مشاهده و مدیریت کاربران سامانه"
+      />
       <UsersFilters
         search={search}
         isActive={isActive}
         onSearchChange={setSearch}
         onStatusChange={handleFilterChange}
       />
-
       <UsersTable users={users} isLoading={isLoading} />
       {meta && (
         <DataPagination
@@ -60,7 +65,6 @@ export default function UsersPage() {
           onPageChange={setPage}
         />
       )}
-
-    </div>
+    </>
   );
 }

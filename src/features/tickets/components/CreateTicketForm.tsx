@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useRouter } from "next/navigation";
@@ -29,10 +30,16 @@ import {
 import { useCreateTicket } from "../hooks/useCreateTicket";
 
 const createTicketSchema = z.object({
-  title: z.string().min(3, "عنوان باید حداقل ۳ کاراکتر باشد"),
-  subject: z.string().min(3, "موضوع باید حداقل ۳ کاراکتر باشد"),
+  title: z
+    .string()
+    .min(3, "عنوان باید حداقل ۳ کاراکتر باشد")
+    .max(150, "عنوان نمی‌تواند بیشتر از ۱۵۰ کاراکتر باشد"),
+
   priority: z.enum(["low", "medium", "high", "urgent"]),
-  initialMessage: z.string().min(10, "متن پیام باید حداقل ۱۰ کاراکتر باشد"),
+
+  initialMessage: z
+    .string()
+    .min(10, "متن پیام باید حداقل ۱۰ کاراکتر باشد"),
 });
 
 type CreateTicketFormValues = z.infer<typeof createTicketSchema>;
@@ -45,7 +52,6 @@ export default function CreateTicketForm() {
     resolver: zodResolver(createTicketSchema),
     defaultValues: {
       title: "",
-      subject: "",
       priority: "medium",
       initialMessage: "",
     },
@@ -62,6 +68,7 @@ export default function CreateTicketForm() {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+
         <FormField
           control={form.control}
           name="title"
@@ -70,23 +77,9 @@ export default function CreateTicketForm() {
               <FormLabel>عنوان تیکت</FormLabel>
               <FormControl>
                 <Input
-                  placeholder="عنوان درخواست خود را وارد کنید"
+                  placeholder="مثلاً مشکل در ورود به حساب کاربری"
                   {...field}
                 />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="subject"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>موضوع</FormLabel>
-              <FormControl>
-                <Input placeholder="موضوع تیکت را وارد کنید" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -98,13 +91,17 @@ export default function CreateTicketForm() {
           name="priority"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>اولویت</FormLabel>
-              <Select value={field.value} onValueChange={field.onChange}>
+              <FormLabel>اولویت درخواست</FormLabel>
+              <Select
+                value={field.value}
+                onValueChange={field.onChange}
+              >
                 <FormControl>
                   <SelectTrigger>
                     <SelectValue placeholder="انتخاب اولویت" />
                   </SelectTrigger>
                 </FormControl>
+
                 <SelectContent>
                   <SelectItem value="low">کم</SelectItem>
                   <SelectItem value="medium">متوسط</SelectItem>
@@ -125,7 +122,7 @@ export default function CreateTicketForm() {
               <FormLabel>شرح درخواست</FormLabel>
               <FormControl>
                 <Textarea
-                  placeholder="توضیحات درخواست خود را بنویسید..."
+                  placeholder="مشکل یا درخواست خود را با جزئیات توضیح دهید..."
                   rows={6}
                   {...field}
                 />
@@ -146,7 +143,9 @@ export default function CreateTicketForm() {
           </Button>
 
           <Button type="submit" disabled={isCreating}>
-            {isCreating && <Loader2 className="ml-2 h-4 w-4 animate-spin" />}
+            {isCreating && (
+              <Loader2 className="ml-2 h-4 w-4 animate-spin" />
+            )}
             {isCreating ? "در حال ثبت..." : "ثبت تیکت"}
           </Button>
         </div>

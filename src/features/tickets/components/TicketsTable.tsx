@@ -27,11 +27,13 @@ export default function TicketsTable({
   isSupport,
   onView,
 }: TicketsTableProps) {
+
   return (
     <div className="rounded-md border">
       <Table>
         <TableHeader>
           <TableRow>
+            <TableHead className="text-right">شماره تیکت</TableHead>
             <TableHead className="text-right">عنوان</TableHead>
 
             {isSupport && (
@@ -49,7 +51,7 @@ export default function TicketsTable({
           {tickets.length === 0 ? (
             <TableRow>
               <TableCell
-                colSpan={isSupport ? 6 : 5}
+                colSpan={isSupport ? 7 : 5}
                 className="h-24 text-center text-muted-foreground"
               >
                 هیچ تیکتی یافت نشد.
@@ -58,6 +60,7 @@ export default function TicketsTable({
           ) : (
             tickets.map((ticket) => (
               <TableRow key={ticket.id}>
+                <TableCell>#{ticket.id}</TableCell>
                 <TableCell className="font-medium">{ticket.title}</TableCell>
 
                 {isSupport && (

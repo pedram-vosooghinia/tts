@@ -2,40 +2,61 @@
 
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { Plus, Ticket as TicketIcon } from "lucide-react";
+import { Plus } from "lucide-react";
+
 import { useTickets } from "@/features/tickets/hooks/useTickets";
 import TicketsTable from "@/features/tickets/components/TicketsTable";
 import type { Ticket } from "@/features/tickets/types/ticket.types";
 import { useAuth } from "@/features/auth/hooks/useAuth";
 
+import BreadcrumbMain from "@/components/shared/BreadcrumbMain";
+import PageHeader from "@/components/shared/PageHeader";
+
 export default function TicketsPage() {
   const router = useRouter();
 
   const { tickets, isLoading, error } = useTickets();
+  console.log("tickets", tickets);
+  console.log("isLoading", isLoading);
+  console.log("error", error);
   const { user } = useAuth();
 
   const isSupport = user?.role === "support";
-
+  const dashboardPath = isSupport ? "/support" : "/dashboard";
+console.log("dashboardPath",dashboardPath)
   const handleViewTicket = (ticket: Ticket) => {
-    router.push(`/tickets/${ticket.id}`);
+    router.push(`${dashboardPath}/tickets/${ticket.id}`);
   };
 
-  return (
-    <div className="space-y-6 p-6 w-full">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="flex items-center gap-2 text-2xl font-bold">
-            <TicketIcon className="h-6 w-6" />
-            تیکت‌ها
-          </h1>
+  if (!user) {
+    return (
+      <div className="py-12 text-center text-muted-foreground">
+        در حال دریافت اطلاعات کاربر...
+      </div>
+    );
+  }
 
-          <p className="mt-2 text-sm text-muted-foreground">
-            مدیریت و پیگیری درخواست‌های پشتیبانی
-          </p>
-        </div>
+  return (
+    <div className="space-y-6 p-6">
+      <BreadcrumbMain
+        items={[
+          { label: "داشبورد", href: dashboardPath },
+          { label: "تیکت‌ها", href: "#" },
+        ]}
+      />
+
+      <div className="flex items-center justify-between">
+        <PageHeader
+          title={isSupport ? "مدیریت تیکت‌ها" : "تیکت‌های من"}
+          description={
+            isSupport
+              ? "مشاهده و پیگیری درخواست‌های کاربران"
+              : "مشاهده و پیگیری درخواست‌های پشتیبانی شما"
+          }
+        />
 
         {!isSupport && (
-          <Button onClick={() => router.push("/tickets/create")}>
+          <Button onClick={() => router.push("/dashboard/tickets/create")}>
             <Plus className="ml-2 h-4 w-4" />
             ایجاد تیکت
           </Button>
