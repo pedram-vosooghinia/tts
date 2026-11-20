@@ -1,34 +1,20 @@
 "use client";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import notFoundImage from "@/public/images/notFoundImage.svg";
-import Image from "next/image";
-import { IoHome } from "react-icons/io5";
-import { useRouter } from "next/navigation";
+
 export default function NotFound() {
-  const router = useRouter();
   return (
-    <div className=" flex justify-center items-center h-1/2  px-4 py-16 flex-wrap  ">
-      <Image src={notFoundImage} alt="not-found-404" width={300} height={300} />
-      <div className="mx-auto max-w-max">
-        <main className="flex flex-col justify-center items-center gap-y-4">
-          <p className="bg-gradient-to-br from-mainGold to-mainBlack bg-clip-text my-5 font-bold tracking-tight text-transparent text-5xl ">
-            404
-          </p>
-          <h1 className="text-3xl font-bold text-center tracking-tight text-gray-900 ">
-            این صفحه وجود ندارد.
-          </h1>
-          <p className="mt-1 text-base text-center  text-gray-500">
-            لینکی که دنبال آن بودید وجود ندارد. لطفا از دکمه پایین به صفحه اصلی
-            بروید.
-          </p>
-          <Button
-            onClick={() => router.push("/")}
-            className="flex justify-between gap-4 bg-gradient-to-br from-mainGold to-mainblack hover:bg-gradient-to-br hover:from-mainBlack hover:to-mainGold"
-          >
-            <IoHome size={26} className="text-mainWhite" />
-          </Button>
-        </main>
-      </div>
+    <div className="flex min-h-[60vh] flex-col items-center justify-center px-4 py-16 text-center">
+      <p className="text-sm font-medium text-muted-foreground">404</p>
+      <h1 className="mt-2 text-2xl font-semibold tracking-tight">
+        این صفحه پیدا نشد
+      </h1>
+      <p className="mt-3 max-w-md text-sm text-muted-foreground">
+        صفحه‌ای که به دنبال آن بودید وجود ندارد یا منتقل شده است.
+      </p>
+      <Button asChild variant="outline" className="mt-6">
+        <Link href="/">بازگشت به صفحه اصلی</Link>
+      </Button>
     </div>
   );
 }

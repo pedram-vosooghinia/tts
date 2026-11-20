@@ -8,28 +8,24 @@ export default function ScrollToTopButton() {
 
   useEffect(() => {
     const toggleVisibility = () => {
-      if (window.scrollY > 200) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
-      }
+      setIsVisible(window.scrollY > 200);
     };
 
     window.addEventListener("scroll", toggleVisibility);
     return () => window.removeEventListener("scroll", toggleVisibility);
   }, []);
 
+  if (!isVisible) return null;
+
   return (
-    <>
-      {isVisible && (
-        <Button
-          variant="ghost"
-          className="fixed bottom-4 right-4 bg-mainGold rounded-sm shadow-lg"
-          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-        >
-          <ChevronUp className="h-4 w-4" />
-        </Button>
-      )}
-    </>
+    <Button
+      variant="outline"
+      size="icon"
+      className="fixed bottom-20 left-4 z-40 h-9 w-9 rounded-full bg-background"
+      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+      aria-label="بازگشت به بالا"
+    >
+      <ChevronUp className="h-4 w-4" />
+    </Button>
   );
 }

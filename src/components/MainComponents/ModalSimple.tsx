@@ -11,11 +11,13 @@ const ModalSimple = ({ isOpen, onClose, children }: ModalSimpleProp) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed top-0 left-0 w-full h-full bg-black/50 flex justify-center items-center z-1000">
-      <div className="bg-white p-6 rounded-md relative z-1001">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
+      <div className="relative w-full max-w-md rounded-lg border bg-background p-6">
         <button
-          className="absolute top-2 right-2 bg-none border-none text-xl cursor-pointer text-gray-700"
+          type="button"
+          className="absolute left-3 top-3 text-muted-foreground transition-colors hover:text-foreground"
           onClick={onClose}
+          aria-label="بستن"
         >
           &times;
         </button>

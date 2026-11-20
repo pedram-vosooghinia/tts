@@ -13,25 +13,7 @@ const config: Config = {
       fontFamily: {
         yekan: ["var(--font-yekan)"],
       },
-      borderColor: {
-        grayborder: "#E3E3E3",
-        greenborder: "#AACF9A",
-      },
-      textColor: {
-        primary: "#05220E",
-        secondary: "#636363",
-      },
       colors: {
-        toastGreen: "#0D935F",
-        toastRed: "#930D0F",
-        toastYellow: "#DBBF09",
-        mainWhite: "#FAFAFA",
-        mainGray: "#B1B1B1",
-        seconderyGray: "#DDDFDE",
-        thirdGray: "#38373A",
-        mainblack: "#18181A",
-        mainGold: "#D3AD8A",
-        seconderyGold: "#948979",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {
@@ -80,20 +62,12 @@ const config: Config = {
       },
       keyframes: {
         "accordion-down": {
-          from: {
-            height: "0",
-          },
-          to: {
-            height: "var(--radix-accordion-content-height)",
-          },
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
-          from: {
-            height: "var(--radix-accordion-content-height)",
-          },
-          to: {
-            height: "0",
-          },
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
         },
       },
       animation: {

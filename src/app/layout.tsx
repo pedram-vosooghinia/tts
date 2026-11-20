@@ -54,13 +54,13 @@ export default function RootLayout({
       <body
         className={cn(
           yekanBakh.variable,
-          "relative font-yekan antialiased    bg-mainGray flex flex-col items-center    ",
+          "relative min-h-screen bg-background font-yekan antialiased",
         )}
       >
         <SwrProvider>
           <ToastProvider>
             <Header />
-            <main className="w-full max-w-[700px] flex flex-col  items-center px-4  pt-8 pb-28  ">
+            <main className="mx-auto flex w-full max-w-[700px] flex-col px-4 pb-24 pt-6">
               {children}
             </main>
             <Footer />
