@@ -16,9 +16,7 @@ export default function TicketsPage() {
   const router = useRouter();
 
   const { tickets, isLoading, error } = useTickets();
-  console.log("tickets", tickets);
-  console.log("isLoading", isLoading);
-  console.log("error", error);
+
   const { user } = useAuth();
 
   const isSupport = user?.role === "support";

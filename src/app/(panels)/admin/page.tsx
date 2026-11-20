@@ -11,6 +11,9 @@ export default function page() {
         <Link href="/admin/users">
           <Button className="text-white">کاربران</Button>
         </Link>
+        <Link href="/admin/categories">
+          <Button className="text-white">دسته بندی ها</Button>
+        </Link>
       </div>
       <UserDetail />;
       <LogoutButton />
