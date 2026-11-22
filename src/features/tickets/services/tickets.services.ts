@@ -9,18 +9,6 @@ import type {
   UpdateTicketPriorityDto,
 } from "../types/ticket.types";
 
-// دریافت لیست تیکت‌ها
-export const getTicketsService = async (): Promise<Ticket[]> => {
-  const res = await api.get("/tickets");
-  return res.data.data;
-};
-
-// دریافت جزئیات یک تیکت
-export const getTicketService = async (id: number): Promise<Ticket> => {
-  const res = await api.get(`/tickets/${id}`);
-  return res.data.data;
-};
-
 // ایجاد تیکت جدید
 export const createTicketService = async (
   data: CreateTicketDto,

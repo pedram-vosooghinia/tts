@@ -1,15 +1,6 @@
 import { api } from "@/services/api";
-import { GetUsersParams, GetUsersResponse } from "../types/user.types";
 
-export const getUsersServices = async (
-  params: GetUsersParams,
-): Promise<GetUsersResponse> => {
-  const res = await api.get("/users", {
-    params,
-  });
 
-  return res.data.data;
-};
 
 export const updateUserStatusService = async (
   id: number,
