@@ -1,6 +1,6 @@
 "use client";
 import { BsPersonFill } from "react-icons/bs";
-import { FaCartShopping } from "react-icons/fa6";
+import { BiCategory } from "react-icons/bi";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { IoHome } from "react-icons/io5";
@@ -16,7 +16,7 @@ const MenuBar = () => {
   const accountPath = user ? getDashboardPath(user.role) : "/login";
   const navItems = [
     { id: 1, name: "خانه", href: "/", icon: IoHome },
-    { id: 2, name: "سبدخرید", href: "/preForma", icon: FaCartShopping },
+    { id: 2, name: "دسته بندی", href: "/categories", icon: BiCategory },
     { id: 4, name: "جستجو", href: "/search", icon: CiSearch },
     { id: 3, name: "حساب", href: accountPath, icon: BsPersonFill },
   ];
