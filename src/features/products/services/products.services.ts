@@ -12,10 +12,11 @@ import type {
 // Get all products
 export const getProductsService = async (
   page = 1,
-  limit = 10
+  limit = 10,
+  categoryId?: number,
 ): Promise<ProductsResponse> => {
   const res = await api.get<ApiResponse<ProductsResponse>>("/products", {
-    params: { page, limit },
+    params: { page, limit, ...(categoryId ? { categoryId } : {}) },
   });
 
   return res.data.data;

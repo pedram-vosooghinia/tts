@@ -1,18 +1,18 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
-export function proxy(request: NextRequest) {
-  const token = request.cookies.get("access_token")?.value;
+export function proxy() {
+  // const token = request.cookies.get("access_token")?.value;
 
-  if (!token) {
-    const loginUrl = new URL("/login", request.url);
+  // if (!token) {
+  //   const loginUrl = new URL("/login", request.url);
 
-    loginUrl.searchParams.set(
-      "callbackUrl",
-      request.nextUrl.pathname + request.nextUrl.search,
-    );
+  //   loginUrl.searchParams.set(
+  //     "callbackUrl",
+  //     request.nextUrl.pathname + request.nextUrl.search,
+  //   );
 
-    return NextResponse.redirect(loginUrl);
-  }
+  //   return NextResponse.redirect(loginUrl);
+  // }
 
   return NextResponse.next();
 }

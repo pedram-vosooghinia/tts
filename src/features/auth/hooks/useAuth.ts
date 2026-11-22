@@ -18,7 +18,7 @@ export function useAuth() {
     if (status === 401) {
       Cookies.remove("access_token", { path: "/" });
       mutate(undefined, { revalidate: false });
-      router.replace("/login");
+      // router.replace("/login");
     }
   }, [status, mutate, router]);
 

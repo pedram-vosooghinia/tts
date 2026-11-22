@@ -5,11 +5,13 @@ import useSWR from "swr";
 import { getProductsService } from "../services/products.services";
 import type { ProductsResponse } from "../types/products.types";
 
-export function useProducts(page = 1, limit = 10) {
-  const key = `/products?page=${page}&limit=${limit}`;
+export function useProducts(page = 1, limit = 10, categoryId?: number) {
+  const key = categoryId
+    ? `/products?page=${page}&limit=${limit}&categoryId=${categoryId}`
+    : `/products?page=${page}&limit=${limit}`;
 
   const { data, error, isLoading, mutate } = useSWR<ProductsResponse>(key, () =>
-    getProductsService(page, limit),
+    getProductsService(page, limit, categoryId),
   );
 
   return {
