@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/card";
 import { getCategoryService } from "@/features/categories/services/categories.services";
 import { useProducts } from "@/features/products/hooks/use-products";
+import AddToCartButton from "@/features/cart/components/AddToCartButton";
 import type { Category } from "@/features/categories/types/category.types";
 import CategoryLoading from "./loading";
 
@@ -81,6 +82,10 @@ export default function CategoryProductsPage() {
                   <span className="text-muted-foreground">
                     موجودی: {product.stock.toLocaleString("fa-IR")}
                   </span>
+                </div>
+
+                <div className="mt-3">
+                  <AddToCartButton productId={product.id} />
                 </div>
               </CardHeader>
             </Card>

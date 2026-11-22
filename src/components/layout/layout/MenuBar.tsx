@@ -5,7 +5,9 @@ import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { IoHome } from "react-icons/io5";
 import { CiSearch } from "react-icons/ci";
+import { HiMiniShoppingCart } from "react-icons/hi2";
 import { useAuth } from "@/features/auth/hooks/useAuth";
+import { useCart } from "@/features/cart/hooks/useCart";
 import { getDashboardPath } from "@/features/auth/utils/getDashboardPath";
 import { cn } from "@/lib/utils";
 
@@ -13,10 +15,12 @@ const MenuBar = () => {
   const pathname = usePathname();
   const router = useRouter();
   const { user } = useAuth();
+  const { itemCount } = useCart();
   const accountPath = user ? getDashboardPath(user.role) : "/login";
   const navItems = [
     { id: 1, name: "خانه", href: "/", icon: IoHome },
     { id: 2, name: "دسته بندی", href: "/categories", icon: BiCategory },
+    { id: 5, name: "سبد خرید", href: "/cart", icon: HiMiniShoppingCart },
     { id: 4, name: "جستجو", href: "/search", icon: CiSearch },
     { id: 3, name: "حساب", href: accountPath, icon: BsPersonFill },
   ];
@@ -40,7 +44,14 @@ const MenuBar = () => {
                   : "text-muted-foreground hover:text-foreground",
               )}
             >
-              <Icon className="h-5 w-5" />
+              <span className="relative">
+                <Icon className="h-5 w-5" />
+                {item.id === 5 && itemCount > 0 && (
+                  <span className="absolute -right-2 -top-2 flex h-4 min-w-4 items-center justify-center rounded-full bg-primary px-1 text-[10px] text-primary-foreground">
+                    {itemCount.toLocaleString("fa-IR")}
+                  </span>
+                )}
+              </span>
               <span>{item.name}</span>
             </button>
           );

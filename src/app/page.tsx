@@ -15,6 +15,7 @@ import { Container } from "@/components/ui/container";
 
 import { useCategories } from "@/features/categories/hooks/useCategories";
 import { useProducts } from "@/features/products/hooks/use-products";
+import AddToCartButton from "@/features/cart/components/AddToCartButton";
 
 import { HomeCategoryLoading, HomeProductsLoading } from "./loading";
 
@@ -140,6 +141,10 @@ export default function Home() {
                             .join("، ")}
                         </span>
                       )}
+                    </div>
+
+                    <div className="mt-3">
+                      <AddToCartButton productId={product.id} />
                     </div>
                   </CardHeader>
                 </Card>
