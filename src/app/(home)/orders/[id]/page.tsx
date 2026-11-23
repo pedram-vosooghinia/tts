@@ -14,8 +14,6 @@ import OrderStatusBadge from "@/features/orders/components/OrderStatusBadge";
 import OrderStatusEditor from "@/features/orders/components/OrderStatusEditor";
 import { useOrder } from "@/features/orders/hooks/useOrder";
 
-import OrderDetailsLoading from "./loading";
-
 export default function OrderDetailsPage() {
   const params = useParams<{ id: string }>();
   const id = Number(params.id);
@@ -25,7 +23,6 @@ export default function OrderDetailsPage() {
   const { user } = useAuth();
 
   if (!isValidId) notFound();
-  if (isLoading) return <OrderDetailsLoading />;
 
   if (!isAuthenticated) {
     return (
