@@ -1,6 +1,6 @@
 "use client";
 
-import { Loader2, Minus, Plus, Trash2 } from "lucide-react";
+import { Loader2, Minus, Plus, ShoppingBag, Trash2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -18,16 +18,26 @@ export default function CartItemRow({ item }: CartItemRowProps) {
   const { removeCartItem, isRemoving } = useRemoveCartItem(item.id);
 
   const isBusy = isUpdating || isRemoving;
+  const price = item.product.price || 0;
+  const totalPrice = price * item.quantity;
 
   return (
-    <Card>
-      <CardContent className="flex flex-col gap-3 p-4">
-        <div className="flex items-start justify-between gap-3">
-          <div className="min-w-0">
-            <p className="line-clamp-2 font-semibold">{item.product.title}</p>
+    <Card className="gap-0 overflow-hidden">
+      <CardContent className="p-4">
+        <div className="flex items-start gap-3">
+          <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+            <ShoppingBag className="size-5" />
+          </div>
+
+          <div className="min-w-0 flex-1">
+            <p className="line-clamp-2 text-sm font-semibold leading-6">
+              {item.product.title}
+            </p>
 
             <p className="mt-1 text-xs text-muted-foreground">
-              {(item.product.price || 0).toLocaleString("fa-IR")} تومان
+              {price.toLocaleString("fa-IR")} تومان
+              <span className="mx-1.5">·</span>
+              هر عدد
             </p>
           </div>
 
@@ -35,53 +45,62 @@ export default function CartItemRow({ item }: CartItemRowProps) {
             type="button"
             variant="ghost"
             size="icon"
+            className="size-8 shrink-0 text-muted-foreground hover:bg-destructive/10 hover:text-destructive"
             aria-label="حذف از سبد خرید"
             disabled={isBusy}
             onClick={removeCartItem}
           >
             {isRemoving ? (
-              <Loader2 className="animate-spin" />
+              <Loader2 className="size-4 animate-spin" />
             ) : (
-              <Trash2 className="text-destructive" />
+              <Trash2 className="size-4" />
             )}
           </Button>
         </div>
 
+        <div className="my-4 border-t border-border" />
+
         <div className="flex items-center justify-between gap-3">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 rounded-lg border border-border p-1">
             <Button
               type="button"
-              variant="outline"
+              variant="ghost"
               size="icon"
-              className="h-8 w-8"
+              className="size-7"
               aria-label="کاهش تعداد"
               disabled={isBusy || item.quantity <= 1}
               onClick={() => updateCartItem(item.quantity - 1)}
             >
-              <Minus />
+              <Minus className="size-3.5" />
             </Button>
 
-            <span className="min-w-8 text-center text-sm font-medium">
+            <span className="min-w-6 text-center text-sm font-semibold tabular-nums">
               {item.quantity.toLocaleString("fa-IR")}
             </span>
 
             <Button
               type="button"
-              variant="outline"
+              variant="ghost"
               size="icon"
-              className="h-8 w-8"
+              className="size-7"
               aria-label="افزایش تعداد"
               disabled={isBusy}
               onClick={() => updateCartItem(item.quantity + 1)}
             >
-              {isUpdating ? <Loader2 className="animate-spin" /> : <Plus />}
+              {isUpdating ? (
+                <Loader2 className="size-3.5 animate-spin" />
+              ) : (
+                <Plus className="size-3.5" />
+              )}
             </Button>
           </div>
 
-          <span className="text-sm font-semibold">
-            {((item.product.price || 0) * item.quantity).toLocaleString("fa-IR")}{" "}
-            تومان
-          </span>
+          <div className="text-left">
+            <p className="text-[11px] text-muted-foreground">قیمت کل</p>
+            <p className="mt-0.5 text-sm font-bold tabular-nums">
+              {totalPrice.toLocaleString("fa-IR")} تومان
+            </p>
+          </div>
         </div>
       </CardContent>
     </Card>

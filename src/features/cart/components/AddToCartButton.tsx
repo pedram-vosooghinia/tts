@@ -40,15 +40,11 @@ export default function AddToCartButton({
     <Button
       type="button"
       size="sm"
-      className={cn("w-full", className)}
+      className={cn("w-full ", className)}
       disabled={isAdding || disabled}
       onClick={handleClick}
     >
-      {isAdding ? (
-        <Loader2 className="animate-spin" />
-      ) : (
-        <ShoppingCart />
-      )}
+      {isAdding ? <Loader2 className="animate-spin" /> : <ShoppingCart />}
       {isAdding ? "در حال افزودن..." : label}
     </Button>
   );
