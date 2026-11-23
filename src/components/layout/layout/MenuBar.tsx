@@ -10,6 +10,7 @@ import { useAuth } from "@/features/auth/hooks/useAuth";
 import { useCart } from "@/features/cart/hooks/useCart";
 import { getDashboardPath } from "@/features/auth/utils/getDashboardPath";
 import { cn } from "@/lib/utils";
+import { Home, Layout, LayoutDashboard, Search, User } from "lucide-react";
 
 const MenuBar = () => {
   const pathname = usePathname();
@@ -18,12 +19,12 @@ const MenuBar = () => {
   const { itemCount } = useCart();
   const accountPath = user ? getDashboardPath(user.role) : "/login";
   const navItems = [
-    { id: 1, name: "خانه", href: "/", icon: IoHome },
-    { id: 2, name: "دسته بندی", href: "/categories", icon: BiCategory },
+    { id: 1, name: "خانه", href: "/", icon: Home },
+    { id: 2, name: "دسته بندی", href: "/categories", icon: LayoutDashboard },
     // { id: 5, name: "سبد خرید", href: "/cart", icon: HiMiniShoppingCart },
     // { id: 6, name: "سفارشات", href: "/orders", icon: HiOutlineShoppingBag },
-    { id: 4, name: "جستجو", href: "/search", icon: CiSearch },
-    { id: 3, name: "حساب", href: "/profile", icon: BsPersonFill },
+    { id: 4, name: "جستجو", href: "/search", icon: Search },
+    { id: 3, name: "حساب", href: "/profile", icon: User },
   ];
 
   return (
