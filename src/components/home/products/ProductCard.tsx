@@ -13,7 +13,7 @@ export default function ProductCard(props: ProductCardProps) {
     <>
       <Card
         key={product.id}
-        className=" flex-wrap justify-center items-center gap-4 bg-mainblack shadow-lg rounded-2xl overflow-hidden flex flex-col w-full max-w-[18.75rem] "
+        className=" flex-wrap justify-center items-center gap-4 bg-mainblack shadow-lg rounded-2xl overflow-hidden flex flex-col w-full max-w-75 "
       >
         <CardContent className="p-4 flex flex-col justify-between h-full">
           <ProductImage

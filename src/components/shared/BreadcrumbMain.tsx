@@ -22,7 +22,7 @@ interface BreadcrumbMainProps {
 export default function BreadcrumbMain({ items }: BreadcrumbMainProps) {
   return (
     <Breadcrumb className="flex w-full items-center justify-center ">
-      <BreadcrumbList className="m-2 flex rounded bg-gradient-to-tr from-lime-200 to-slate-400">
+      <BreadcrumbList className="m-2 flex rounded bg-linear-to-tr from-lime-200 to-slate-400">
         {items.map((item, index) => {
           const isLast = index === items.length - 1;
 

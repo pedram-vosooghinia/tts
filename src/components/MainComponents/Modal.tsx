@@ -9,7 +9,7 @@ interface ButtonConfig {
   className?: string;
   disabled?: boolean;
   buttonName?: string;
-  color?: "link" | "default" | "destructive" | "outline" | "secondary" | "ghost" | null;
+  color?: "link" | "default" | "destructive" | "outline-solid" | "secondary" | "ghost" | null;
 }
 
 interface ModalProps {

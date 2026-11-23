@@ -41,7 +41,7 @@ const DetailHeader: React.FC<SliderNavbarProps> = ({
           <div className=" flex justify-start">
             <button
               onClick={onReturnClick}
-              className="w-10 h-10 backdrop-blur-md bg-white/70 flex items-center justify-center rounded-full shadow-sm"
+              className="w-10 h-10 backdrop-blur-md bg-white/70 flex items-center justify-center rounded-full shadow-xs"
               aria-label="بازگشت"
               style={{ boxShadow: "rgb(189 189 189 / 95%) 0px 0px 10px -1px" }}
             >
@@ -53,7 +53,7 @@ const DetailHeader: React.FC<SliderNavbarProps> = ({
           {showFavorite && (
             <button
               onClick={onFavoriteClick}
-              className="w-10 h-10 backdrop-blur-md bg-white/70 flex items-center justify-center rounded-full shadow-sm"
+              className="w-10 h-10 backdrop-blur-md bg-white/70 flex items-center justify-center rounded-full shadow-xs"
               style={{ boxShadow: "rgb(189 189 189 / 95%) 0px 0px 10px -1px" }}
               aria-label={
                 isFavorite ? "حذف از علاقه‌مندی" : "افزودن به علاقه‌مندی"
@@ -70,21 +70,21 @@ const DetailHeader: React.FC<SliderNavbarProps> = ({
           {isDashboard && isBusiness !== true && (
             <Link
               href="/dashboard/dashboard-register-business"
-              className="relative animate-shineMove group w-auto h-10 px-4 backdrop-blur-md bg-white/70 flex items-center justify-center rounded-full shadow-sm overflow-hidden"
+              className="relative animate-shineMove group w-auto h-10 px-4 backdrop-blur-md bg-white/70 flex items-center justify-center rounded-full shadow-xs overflow-hidden"
               style={{ boxShadow: "rgb(189 189 189 / 95%) 0px 0px 10px -1px" }}
             >
               <span className="text-[#8D8D8D] text-xs z-10">
                 کسب و کار خودت رو بساز
               </span>
 
-              <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/60 to-transparent translate-x-[-150%] animate-[shineMove_2s_linear_infinite] rounded-full" />
+              <span className="absolute inset-0 bg-linear-to-r from-transparent via-white/60 to-transparent translate-x-[-150%] animate-[shineMove_2s_linear_infinite] rounded-full" />
             </Link>
           )}
 
           {showNotification && (
             <button
               onClick={onNotificationClick}
-              className="w-10 h-10 backdrop-blur-md bg-white/70 flex items-center justify-center rounded-full shadow-sm"
+              className="w-10 h-10 backdrop-blur-md bg-white/70 flex items-center justify-center rounded-full shadow-xs"
               aria-label="اعلان"
               style={{ boxShadow: "rgb(189 189 189 / 95%) 0px 0px 10px -1px" }}
             >
@@ -93,7 +93,7 @@ const DetailHeader: React.FC<SliderNavbarProps> = ({
           )}
           <button
             onClick={onShareClick}
-            className="w-10 h-10 backdrop-blur-md bg-white/70 flex items-center justify-center rounded-full shadow-sm"
+            className="w-10 h-10 backdrop-blur-md bg-white/70 flex items-center justify-center rounded-full shadow-xs"
             aria-label="اشتراک‌گذاری"
             style={{ boxShadow: "rgb(189 189 189 / 95%) 0px 0px 10px -1px" }}
           >

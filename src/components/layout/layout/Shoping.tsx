@@ -11,7 +11,7 @@
 
 //   return (
 //     <div
-//       className="w-10 h-10 backdrop-blur-md bg-white/70 flex items-center justify-center rounded-full shadow-sm"
+//       className="w-10 h-10 backdrop-blur-md bg-white/70 flex items-center justify-center rounded-full shadow-xs"
 //       style={{ boxShadow: "rgb(189 189 189 / 95%) 0px 0px 10px -1px" }}
 //     >
 //       <Link

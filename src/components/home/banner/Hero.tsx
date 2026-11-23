@@ -21,12 +21,12 @@ export default function HomeHero() {
     //       bulletActiveClass:
     //         "swiper-pagination-bullet-active custom-bullet-active",
     //     }}
-    //     className="w-full !pb-10"
+    //     className="w-full pb-10!"
     //   >
     //     {data?.map((slide: SliderDataType, index: number) => (
     //       <SwiperSlide key={slide.id}>
     //         <div className="flex flex-col items-center gap-3">
-    //           <div className="relative w-full overflow-hidden rounded-2xl shadow-sm">
+    //           <div className="relative w-full overflow-hidden rounded-2xl shadow-xs">
     //             <Image
     //               src={slide?.image_url}
     //               alt={slide?.title || "بنر تبلیغاتی"}

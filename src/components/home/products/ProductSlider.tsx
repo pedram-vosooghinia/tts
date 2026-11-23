@@ -30,7 +30,7 @@ export default function ProductSlider({
           bulletActiveClass:
             "swiper-pagination-bullet-active custom-bullet-active",
         }}
-        className="w-full !pb-16"
+        className="w-full pb-16!"
       >
         {data?.map((product: ProductItem) => (
           <SwiperSlide key={product?.id}>
