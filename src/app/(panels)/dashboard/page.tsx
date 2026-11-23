@@ -9,6 +9,9 @@ export default function page() {
         <Link href="/dashboard/tickets">
           <Button className="text-white">تیک ها</Button>
         </Link>
+        <Link href="/address">
+          <Button className="text-white">آدرس ها</Button>
+        </Link>
       </div>
       <UserDetail />;
       <LogoutButton />
