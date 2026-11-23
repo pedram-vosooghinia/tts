@@ -34,11 +34,9 @@ export function useLogin() {
         revalidate: false,
       });
 
-      const dashboardPath = getDashboardPath(user.role);
-
       toast.success("شما با موفقیت وارد شدید");
 
-      router.push(dashboardPath);
+      router.push("/profile");
     } catch (error) {
       const err = error as AxiosError<{ message?: string }>;
 

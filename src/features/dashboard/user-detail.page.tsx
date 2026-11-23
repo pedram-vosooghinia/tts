@@ -1,136 +1,87 @@
 "use client";
 
+import Link from "next/link";
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
-
-import {
+  ChevronLeft,
+  Package,
+  Signpost,
+  Ticket,
+  User,
   UserRound,
-  Phone,
-  ShieldCheck,
-  CircleCheck,
-  CircleX,
 } from "lucide-react";
+
 import { useAuth } from "@/features/auth/hooks/useAuth";
 
-const roleLabels = {
-  user: "کاربر",
-  admin: "مدیر",
-  support: "پشتیبانی",
-};
+const menuItems = [
+  {
+    label: "سفارش‌ها",
+    href: "/account/orders",
+    icon: Package,
+  },
+  {
+    label: "آدرس‌ها",
+    href: "/address",
+    icon: Signpost,
+  },
+
+  {
+    label: "تیکت‌ها",
+    href: "/tickets",
+    icon: Ticket,
+  },
+];
 
 export default function UserDetail() {
   const { user, isLoading } = useAuth();
 
-  if (isLoading) {
-    return <div>در حال دریافت اطلاعات کاربر...</div>;
-  }
-
   if (!user) {
-    return (
-      <div className="flex min-h-[60vh] items-center justify-center">
-        <p className="text-muted-foreground">اطلاعات کاربر در دسترس نیست.</p>
-      </div>
-    );
+    return;
   }
 
-  const fullName = `${user.first_name} ${user.last_name}`.trim() || "کاربر";
+  const fullName =
+    `${user.first_name ?? ""} ${user.last_name ?? ""}`.trim() || "کاربر";
 
   return (
-    <div className="container mx-auto max-w-3xl p-6" dir="rtl">
-      <div className="mb-6">
-        <h1 className="text-2xl font-bold">داشبورد</h1>
-        <p className="mt-2 text-sm text-muted-foreground">
-          خوش آمدید، {fullName}
+    <main dir="rtl" className="flex w-full  flex-col gap-9">
+      <section className="flex w-full flex-col items-center">
+        <div className="bg-neutral-500 rounded-lg flex flex-col items-center">
+          <User className="text-neutral-800" size={80} strokeWidth={1.5} />
+        </div>
+        <h1 className="mt-2 text-sm font-bold text-foreground">{fullName}</h1>
+
+        <p dir="ltr" className="mt-1 text-xs text-muted-foreground">
+          {user.mobile}
         </p>
-      </div>
-
-      <Card>
-        <CardHeader>
-          <div className="flex items-center gap-4">
-            <Avatar className="h-16 w-16">
-              <AvatarFallback className="bg-primary/10 text-xl text-primary ">
-                <span>{user.first_name?.charAt(0)}</span>
-                <span>{user.last_name?.charAt(0)}</span>
-              </AvatarFallback>
-            </Avatar>
-
-            <div className="space-y-2">
-              <CardTitle>{fullName}</CardTitle>
-              <CardDescription>اطلاعات حساب کاربری شما</CardDescription>
-
-              <div className="flex flex-wrap gap-2">
-                <Badge variant="secondary">{roleLabels[user.role]}</Badge>
-
-                <Badge
-                  variant={user.is_active ? "outline" : "destructive"}
-                  className="text-cyan-300"
-                >
-                  {user.is_active ? "حساب فعال" : "حساب غیرفعال"}
-                </Badge>
+      </section>
+      <nav className="mt-2 flex w-full  flex-col">
+        {menuItems.map(({ label, href, icon: Icon }, index) => (
+          <div className="flex flex-col w-full " key={href}>
+            <Link
+              href={href}
+              className="group p-4 flex min-h-[51px] w-full items-center justify-between  transition-colors hover:bg-muted/50"
+            >
+              <div className="flex items-center gap-3">
+                <Icon
+                  className="size-5 shrink-0 text-foreground"
+                  strokeWidth={1.7}
+                />
+                <span className="text-[13px] font-medium text-foreground">
+                  {label}
+                </span>
               </div>
-            </div>
-          </div>
-        </CardHeader>
 
-        <Separator />
+              <ChevronLeft
+                className="size-4 shrink-0 text-muted-foreground/70"
+                strokeWidth={1.8}
+              />
+            </Link>
 
-        <CardContent className="flex flex-wrap justify-around items-center gap-4 pt-6 ">
-          <div className="flex items-center gap-3">
-            <UserRound className="h-5 w-5 text-muted-foreground" />
-
-            <div>
-              <p className="text-sm text-muted-foreground">
-                نام و نام خانوادگی
-              </p>
-              <p className="font-medium">{fullName}</p>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <Phone className="h-5 w-5 text-muted-foreground" />
-
-            <div>
-              <p className="text-sm text-muted-foreground">شماره موبایل</p>
-              <p className="font-medium" dir="ltr">
-                {user.mobile}
-              </p>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <ShieldCheck className="h-5 w-5 text-muted-foreground" />
-
-            <div>
-              <p className="text-sm text-muted-foreground">نقش کاربری</p>
-              <p className="font-medium">{roleLabels[user.role]}</p>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-3">
-            {user.is_active ? (
-              <CircleCheck className="h-5 w-5 text-green-600" />
-            ) : (
-              <CircleX className="h-5 w-5 text-destructive" />
+            {index !== menuItems.length - 1 && (
+              <hr className="border-border border-neutral-100" />
             )}
-
-            <div>
-              <p className="text-sm text-muted-foreground">وضعیت حساب</p>
-              <p className="font-medium">
-                {user.is_active ? "فعال" : "غیرفعال"}
-              </p>
-            </div>
           </div>
-        </CardContent>
-      </Card>
-    </div>
+        ))}
+      </nav>
+    </main>
   );
 }
