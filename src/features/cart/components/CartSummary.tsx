@@ -13,7 +13,8 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Loader2, Trash2 } from "lucide-react";
+import { Loader2, ShoppingBag, Trash2 } from "lucide-react";
+import CreateOrderDialog from "@/features/orders/components/CreateOrderDialog";
 
 import { useClearCart } from "../hooks/useClearCart";
 
@@ -42,6 +43,13 @@ export default function CartSummary({
             {totalPrice.toLocaleString("fa-IR")} تومان
           </span>
         </div>
+
+        <CreateOrderDialog>
+          <Button type="button" className="w-full">
+            <ShoppingBag />
+            ثبت سفارش
+          </Button>
+        </CreateOrderDialog>
 
         <AlertDialog>
           <AlertDialogTrigger asChild>

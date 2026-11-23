@@ -14,6 +14,9 @@ export default function page() {
         <Link href="/admin/categories">
           <Button className="text-white">دسته بندی ها</Button>
         </Link>
+        <Link href="/orders">
+          <Button className="text-white">سفارشات</Button>
+        </Link>
       </div>
       <UserDetail />;
       <LogoutButton />
