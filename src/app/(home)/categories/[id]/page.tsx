@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { notFound, useParams } from "next/navigation";
 import useSWR from "swr";
 import { Container } from "@/components/ui/container";
@@ -19,8 +20,6 @@ export default function CategoryProductsPage() {
   const params = useParams<{ id: string }>();
   const categoryId = Number(params.id);
 
-  if (!Number.isFinite(categoryId)) notFound();
-
   const {
     data: category,
     error: categoryError,
@@ -33,7 +32,7 @@ export default function CategoryProductsPage() {
     products,
     isLoading: productsLoading,
     error: productsError,
-  } = useProducts(1, 20, categoryId);
+  } = useProducts(1, 20);
 
   const isLoading = categoryLoading || productsLoading;
   const error = categoryError || productsError;
@@ -48,7 +47,7 @@ export default function CategoryProductsPage() {
   if (!category || !products) notFound();
 
   return (
-    <Container className="flex flex-col gap-6 pb-28">
+    <div className="flex flex-col mt-16 gap-6 pb-28">
       <div className="flex flex-col gap-1">
         <h1 className="text-xl font-bold text-foreground">{category.name}</h1>
         <p className="text-sm text-muted-foreground">
@@ -66,7 +65,12 @@ export default function CategoryProductsPage() {
             <Card key={product.id} className="h-full">
               <CardHeader className="p-4">
                 <CardTitle className="text-base font-semibold">
-                  {product.title}
+                  <Link
+                    href={`/products/${product.id}`}
+                    className="hover:underline"
+                  >
+                    {product.title}
+                  </Link>
                 </CardTitle>
                 {product.description ? (
                   <CardDescription className="line-clamp-2 min-h-8 text-xs">
@@ -92,6 +96,6 @@ export default function CategoryProductsPage() {
           ))}
         </div>
       )}
-    </Container>
+    </div>
   );
 }

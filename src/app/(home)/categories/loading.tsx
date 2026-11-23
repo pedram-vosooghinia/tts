@@ -3,7 +3,7 @@ import { Container } from "@/components/ui/container";
 
 export default function CategoriesLoading() {
   return (
-    <Container className="flex flex-col gap-6 pb-28">
+    <div className="flex flex-col mt-16 gap-6 pb-28">
       <div className="flex flex-col gap-1">
         <h1 className="text-xl font-bold text-foreground">دسته‌بندی‌ها</h1>
         <p className="text-sm text-muted-foreground">
@@ -16,6 +16,6 @@ export default function CategoriesLoading() {
           <CategoryCardSkeleton key={i} />
         ))}
       </div>
-    </Container>
+    </div>
   );
 }
