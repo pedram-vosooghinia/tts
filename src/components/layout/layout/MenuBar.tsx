@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { IoHome } from "react-icons/io5";
 import { CiSearch } from "react-icons/ci";
-import { HiMiniShoppingCart } from "react-icons/hi2";
+import { HiMiniShoppingCart, HiOutlineShoppingBag } from "react-icons/hi2";
 import { useAuth } from "@/features/auth/hooks/useAuth";
 import { useCart } from "@/features/cart/hooks/useCart";
 import { getDashboardPath } from "@/features/auth/utils/getDashboardPath";
@@ -20,9 +20,10 @@ const MenuBar = () => {
   const navItems = [
     { id: 1, name: "خانه", href: "/", icon: IoHome },
     { id: 2, name: "دسته بندی", href: "/categories", icon: BiCategory },
-    { id: 5, name: "سبد خرید", href: "/cart", icon: HiMiniShoppingCart },
+    // { id: 5, name: "سبد خرید", href: "/cart", icon: HiMiniShoppingCart },
+    // { id: 6, name: "سفارشات", href: "/orders", icon: HiOutlineShoppingBag },
     { id: 4, name: "جستجو", href: "/search", icon: CiSearch },
-    { id: 3, name: "حساب", href: accountPath, icon: BsPersonFill },
+    { id: 3, name: "حساب", href: "/profile", icon: BsPersonFill },
   ];
 
   return (

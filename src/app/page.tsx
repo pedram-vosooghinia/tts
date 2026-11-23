@@ -40,7 +40,7 @@ export default function Home() {
   if (!categoriesLoading && !categories) notFound();
 
   return (
-    <Container className="flex flex-col gap-10 pb-28">
+    <div className="flex flex-col gap-10 pb-28">
       <HomeHero />
 
       {/* Categories */}
@@ -113,7 +113,12 @@ export default function Home() {
                   <CardHeader className="p-4">
                     <div className="flex items-start justify-between gap-3">
                       <CardTitle className="line-clamp-1 text-base font-semibold">
-                        {product.title}
+                        <Link
+                          href={`/products/${product.id}`}
+                          className="hover:underline"
+                        >
+                          {product.title}
+                        </Link>
                       </CardTitle>
 
                       <span className="shrink-0 rounded-md bg-primary/10 px-2 py-1 text-xs font-medium text-primary">
@@ -129,11 +134,11 @@ export default function Home() {
                       <div className="mt-1 h-10" />
                     )}
 
-                    <div className="mt-3 flex min-h-4 items-center justify-between text-xs text-muted-foreground">
+                    {/* <div className="mt-3 flex min-h-4 items-center justify-between text-xs text-muted-foreground">
                       <span>
                         موجودی: {product.stock.toLocaleString("fa-IR")}
-                      </span>
-
+                      </span> */}
+                    {/* 
                       {product.categories?.length > 0 && (
                         <span className="line-clamp-1 max-w-[50%] text-left">
                           {product.categories
@@ -141,7 +146,7 @@ export default function Home() {
                             .join("، ")}
                         </span>
                       )}
-                    </div>
+                    </div> */}
 
                     <div className="mt-3">
                       <AddToCartButton productId={product.id} />
@@ -153,6 +158,6 @@ export default function Home() {
           )
         )}
       </section>
-    </Container>
+    </div>
   );
 }
