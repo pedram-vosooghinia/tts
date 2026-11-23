@@ -7,15 +7,24 @@ export interface Category {
   updated_at: string;
 }
 
+export interface ProductImage {
+  id: number;
+  image: string;
+  image_alt?: string;
+  default?: boolean;
+}
+
 export interface Product {
   id: number;
   title: string;
   description: string;
   price: number;
   stock: number;
+  is_active?: boolean;
   created_at: string;
   updated_at: string;
   categories: Category[];
+  images?: ProductImage[];
 }
 
 export interface CreateProductDto {

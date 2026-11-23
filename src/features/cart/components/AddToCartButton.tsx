@@ -11,14 +11,18 @@ import { useAddToCart } from "../hooks/useAddToCart";
 
 interface AddToCartButtonProps {
   productId: number;
+  quantity?: number;
   className?: string;
   label?: string;
+  disabled?: boolean;
 }
 
 export default function AddToCartButton({
   productId,
+  quantity = 1,
   className,
   label = "افزودن به سبد خرید",
+  disabled = false,
 }: AddToCartButtonProps) {
   const router = useRouter();
   const { addToCart, isAdding } = useAddToCart();
@@ -29,7 +33,7 @@ export default function AddToCartButton({
       return;
     }
 
-    await addToCart({ productId, quantity: 1 });
+    await addToCart({ productId, quantity });
   };
 
   return (
@@ -37,7 +41,7 @@ export default function AddToCartButton({
       type="button"
       size="sm"
       className={cn("w-full", className)}
-      disabled={isAdding}
+      disabled={isAdding || disabled}
       onClick={handleClick}
     >
       {isAdding ? (
