@@ -2,12 +2,11 @@
 
 import Link from "next/link";
 import { notFound, useParams } from "next/navigation";
-import useSWR from "swr";
-import { ArrowLeft, Layers, Package, ShoppingBag } from "lucide-react";
+import { AxiosError } from "axios";
+import { ArrowLeft, Layers, Package, RefreshCw, ShoppingBag } from "lucide-react";
 
-import { getCategoryService } from "@/features/categories/services/categories.services";
-import { useProducts } from "@/features/products/hooks/use-products";
-import type { Category } from "@/features/categories/types/category.types";
+import { Button } from "@/components/ui/button";
+import { useCategory } from "@/features/categories/hooks/useCategory";
 import CategoryLoading from "./loading";
 
 export default function CategoryProductsPage() {
@@ -16,40 +15,45 @@ export default function CategoryProductsPage() {
 
   const isValidId = Number.isSafeInteger(categoryId) && categoryId > 0;
 
-  const {
-    data: category,
-    error: categoryError,
-    isLoading: categoryLoading,
-  } = useSWR<Category>(isValidId ? `/categories/${categoryId}` : null, () =>
-    getCategoryService(categoryId),
-  );
-
-  const {
-    products,
-    isLoading: productsLoading,
-    error: productsError,
-  } = useProducts(1, 20);
+  const { category, error, isLoading, mutate } = useCategory(categoryId);
 
   if (!isValidId) notFound();
 
-  if (categoryLoading || productsLoading) {
+  if (isLoading) {
     return <CategoryLoading />;
   }
 
-  if (categoryError) {
-    const status = (categoryError as { response?: { status?: number } })
-      .response?.status;
+  const status = (error as AxiosError | undefined)?.response?.status;
 
-    if (status === 404) notFound();
-  }
+  if (status === 404) notFound();
 
-  if (categoryError || productsError) {
-    throw new Error(
-      categoryError?.message || productsError || "خطا در دریافت اطلاعات",
+  if (error || !category) {
+    return (
+      <main dir="rtl" className="mx-auto w-full max-w-6xl px-4 py-8 pb-28">
+        <div className="flex flex-col items-center gap-4 rounded-2xl border border-border bg-card px-4 py-16 text-center">
+          <div className="flex size-12 items-center justify-center rounded-full bg-muted text-muted-foreground">
+            <Package className="size-6" />
+          </div>
+
+          <div className="space-y-1">
+            <h1 className="text-base font-semibold text-foreground">
+              دریافت اطلاعات دسته‌بندی ناموفق بود
+            </h1>
+            <p className="text-sm text-muted-foreground">
+              لطفاً دوباره تلاش کنید.
+            </p>
+          </div>
+
+          <Button variant="outline" onClick={() => mutate()}>
+            <RefreshCw />
+            تلاش مجدد
+          </Button>
+        </div>
+      </main>
     );
   }
 
-  if (!category || !products) notFound();
+  const products = category.products ?? [];
 
   return (
     <main
