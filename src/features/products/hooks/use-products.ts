@@ -7,11 +7,11 @@ import type { ProductsResponse } from "../types/products.types";
 
 export function useProducts(page = 1, limit = 10, categoryId?: number) {
   const key = categoryId
-    ? `/products?page=${page}&limit=${limit}&categoryId=${categoryId}`
+    ? `/products/category/${categoryId}?page=${page}&limit=${limit}`
     : `/products?page=${page}&limit=${limit}`;
 
   const { data, error, isLoading, mutate } = useSWR<ProductsResponse>(key, () =>
-    getProductsService(page, limit, categoryId),
+    getProductsService(page, limit),
   );
 
   return {

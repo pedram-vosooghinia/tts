@@ -1,3 +1,14 @@
+export interface CategoryProduct {
+  id: number;
+  title: string;
+  description: string | null;
+  price: number;
+  stock: number;
+  is_active?: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
 export interface Category {
   id: number;
   name: string;
@@ -5,6 +16,7 @@ export interface Category {
   description: string | null;
   created_at: string;
   updated_at: string;
+  products?: CategoryProduct[];
 }
 
 export interface CreateCategoryDto {

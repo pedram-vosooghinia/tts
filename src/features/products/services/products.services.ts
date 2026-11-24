@@ -1,4 +1,3 @@
-
 import { api } from "@/services/api";
 
 import type {
@@ -13,27 +12,38 @@ import type {
 export const getProductsService = async (
   page = 1,
   limit = 10,
-  categoryId?: number,
 ): Promise<ProductsResponse> => {
   const res = await api.get<ApiResponse<ProductsResponse>>("/products", {
-    params: { page, limit, ...(categoryId ? { categoryId } : {}) },
+    params: { page, limit },
   });
 
   return res.data.data;
 };
 
 // Get product by ID
-export const getProductService = async (
-  id: number
-): Promise<Product> => {
+export const getProductService = async (id: number): Promise<Product> => {
   const res = await api.get<ApiResponse<Product>>(`/products/${id}`);
+
+  return res.data.data;
+};
+export const getProductsByCategoryService = async (
+  page = 1,
+  limit = 10,
+  categoryId: number,
+): Promise<ProductsResponse> => {
+  const res = await api.get<ApiResponse<ProductsResponse>>(
+    `/products/category/${categoryId}`,
+    {
+      params: { page, limit },
+    },
+  );
 
   return res.data.data;
 };
 
 // Create product
 export const createProductService = async (
-  data: CreateProductDto
+  data: CreateProductDto,
 ): Promise<Product> => {
   const res = await api.post<ApiResponse<Product>>("/products", data);
 
@@ -43,19 +53,14 @@ export const createProductService = async (
 // Update product
 export const updateProductService = async (
   id: number,
-  data: UpdateProductDto
+  data: UpdateProductDto,
 ): Promise<Product> => {
-  const res = await api.patch<ApiResponse<Product>>(
-    `/products/${id}`,
-    data
-  );
+  const res = await api.patch<ApiResponse<Product>>(`/products/${id}`, data);
 
   return res.data.data;
 };
 
 // Delete product
-export const deleteProductService = async (
-  id: number
-): Promise<void> => {
+export const deleteProductService = async (id: number): Promise<void> => {
   await api.delete(`/products/${id}`);
 };
