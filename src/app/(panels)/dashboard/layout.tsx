@@ -1,13 +1,11 @@
-import RoleGuard from "@/components/guards/RoleGuard";
-
 export default function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <RoleGuard allowedRoles={["user"]}>
-      <div className="w-full space-y-6">{children}</div>
-    </RoleGuard>
+    <main className="mx-auto flex w-full max-w-[700px] flex-col px-4 pb-24 pt-6">
+      {children}
+    </main>
   );
 }

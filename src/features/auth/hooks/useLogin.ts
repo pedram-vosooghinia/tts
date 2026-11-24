@@ -8,7 +8,6 @@ import { loginServices } from "@/features/auth/services";
 import { LoginFormInputs } from "@/features/auth/types";
 import { useSWRConfig } from "swr";
 import { api } from "@/services/api";
-import { getDashboardPath } from "../utils/getDashboardPath";
 import { User } from "@/types/user";
 
 export function useLogin() {
