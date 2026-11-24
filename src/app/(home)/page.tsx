@@ -10,7 +10,7 @@ import { useProducts } from "@/features/products/hooks/use-products";
 import AddToCartButton from "@/features/cart/components/AddToCartButton";
 
 import HomeHero from "@/components/home/banner/Hero";
-import { HomeCategoryLoading, HomeProductsLoading } from "./loading";
+import { HomeCategoryLoading, HomeProductsLoading } from "../loading";
 
 export default function Home() {
   const {

@@ -1,35 +1,24 @@
 "use client";
-import { BsPersonFill } from "react-icons/bs";
-import { BiCategory } from "react-icons/bi";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
-import { IoHome } from "react-icons/io5";
-import { CiSearch } from "react-icons/ci";
-import { HiMiniShoppingCart, HiOutlineShoppingBag } from "react-icons/hi2";
-import { useAuth } from "@/features/auth/hooks/useAuth";
 import { useCart } from "@/features/cart/hooks/useCart";
-import { getDashboardPath } from "@/features/auth/utils/getDashboardPath";
 import { cn } from "@/lib/utils";
 import { Home, Layout, LayoutDashboard, Search, User } from "lucide-react";
 
 const MenuBar = () => {
   const pathname = usePathname();
   const router = useRouter();
-  const { user } = useAuth();
   const { itemCount } = useCart();
-  const accountPath = user ? getDashboardPath(user.role) : "/login";
   const navItems = [
     { id: 1, name: "خانه", href: "/", icon: Home },
     { id: 2, name: "دسته بندی", href: "/categories", icon: LayoutDashboard },
-    // { id: 5, name: "سبد خرید", href: "/cart", icon: HiMiniShoppingCart },
-    // { id: 6, name: "سفارشات", href: "/orders", icon: HiOutlineShoppingBag },
     { id: 4, name: "جستجو", href: "/search", icon: Search },
     { id: 3, name: "حساب", href: "/profile", icon: User },
   ];
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-40 border-t bg-background">
-      <div className="mx-auto flex h-16 w-full max-w-[700px] items-center justify-around px-4">
+      <div className="mx-auto flex h-16 w-full max-w-175 items-center justify-around px-4">
         {navItems.map((item) => {
           const isActive = pathname === item.href;
           const Icon = item.icon;
