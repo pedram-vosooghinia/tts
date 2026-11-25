@@ -39,8 +39,8 @@ export default function UsersPage() {
     <>
       <BreadcrumbMain
         items={[
-          { label: "داشبرد", href: "/admin" },
-          { label: "کاربران", href: "#" },
+          { label: "داشبورد", href: "/dashboard" },
+          { label: "کاربران" },
         ]}
       />
       <PageHeader

@@ -39,7 +39,7 @@ console.log("dashboardPath",dashboardPath)
       <BreadcrumbMain
         items={[
           { label: "داشبورد", href: dashboardPath },
-          { label: "تیکت‌ها", href: "#" },
+          { label: "تیکت‌ها" },
         ]}
       />
 

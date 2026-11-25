@@ -84,7 +84,7 @@ export default function TicketDetailsPage() {
         items={[
           { label: "داشبورد", href: dashboardPath },
           { label: "تیکت‌ها", href: `${dashboardPath}/tickets` },
-          { label: `تیکت شماره ${ticket.id}`, href: "#" },
+          { label: `تیکت شماره ${ticket.id}` },
         ]}
       />
 

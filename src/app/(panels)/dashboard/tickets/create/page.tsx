@@ -7,8 +7,8 @@ export default function CreateTicketPage() {
     <>
       <BreadcrumbMain
         items={[
-          { label: "داشبرد", href: "/dashboard" },
-          { label: "تیکت ها", href: "#" },
+          { label: "داشبورد", href: "/dashboard" },
+          { label: "تیکت‌ها" },
         ]}
       />
       <PageHeader
