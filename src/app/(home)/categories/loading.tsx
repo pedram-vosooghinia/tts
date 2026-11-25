@@ -1,5 +1,4 @@
 import { CategoryCardSkeleton } from "@/components/shared/CardSkeletons";
-import { Container } from "@/components/ui/container";
 
 export default function CategoriesLoading() {
   return (

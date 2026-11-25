@@ -7,7 +7,6 @@ import { ArrowLeft, Layers, Package, ShoppingBag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useCategories } from "@/features/categories/hooks/useCategories";
 import { useProducts } from "@/features/products/hooks/use-products";
-import AddToCartButton from "@/features/cart/components/AddToCartButton";
 
 import HomeHero from "@/components/home/banner/Hero";
 import { HomeCategoryLoading, HomeProductsLoading } from "../loading";
