@@ -51,10 +51,7 @@ export default function DashboardProductsPage() {
   return (
     <div className="space-y-6">
       <BreadcrumbMain
-        items={[
-          { label: "داشبورد", href: "/dashboard" },
-          { label: "محصولات" },
-        ]}
+        items={[{ label: "داشبورد", href: "/dashboard" }, { label: "محصولات" }]}
       />
 
       <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
@@ -71,7 +68,7 @@ export default function DashboardProductsPage() {
 
       <div className="flex flex-wrap items-center justify-between gap-3">
         <Select value={selectedCategory} onValueChange={handleCategoryChange}>
-          <SelectTrigger className="w-[220px] bg-white">
+          <SelectTrigger className="w-55 bg-white">
             <SelectValue placeholder="فیلتر بر اساس دسته‌بندی" />
           </SelectTrigger>
           <SelectContent>

@@ -89,7 +89,7 @@ export default function DashboardOrdersPage() {
         </form>
 
         <Select value={statusFilter} onValueChange={setStatusFilter}>
-          <SelectTrigger className="w-[200px] bg-white">
+          <SelectTrigger className="w-50 bg-white">
             <SelectValue placeholder="وضعیت سفارش" />
           </SelectTrigger>
           <SelectContent>
