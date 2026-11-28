@@ -1,7 +1,7 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 
-const API_BASE_URL = "https://tts-backend-tan.vercel.app";
+import { API_BASE_URL } from "@/lib/api-url";
 
 export const api = axios.create({
   baseURL: API_BASE_URL,

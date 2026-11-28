@@ -1,11 +1,8 @@
 "use client";
-import Image from "next/image";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { Button } from "@/components/ui/button";
 import { MenuIcon, ShoppingCart } from "lucide-react";
-import { HiMiniShoppingCart } from "react-icons/hi2";
-import logo from "@/public/images/home/logo.jpg";
 import { useCart } from "@/features/cart/hooks/useCart";
 
 const MenuDrawer = dynamic(() => import("./MenuDrawer"), {
@@ -44,17 +41,6 @@ export default function Header() {
             </span>
           )}
         </Link>
-
-        {/* <Link href="/" className="flex items-center" aria-label="خانه">
-          <Image
-            src={logo}
-            alt="tts"
-            width={32}
-            height={32}
-            className="rounded-full object-cover"
-            priority
-          />
-        </Link> */}
       </div>
     </header>
   );

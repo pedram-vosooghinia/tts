@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import placeholder from "@/public/placeholder.jpg";
-import { CiImageOff } from "react-icons/ci";
+import { ImageOff } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 
 interface ProductImageProps {
@@ -22,7 +22,7 @@ export default function ProductImage({ src, alt }: ProductImageProps) {
 
       {/* Error icon */}
       {error ? (
-        <CiImageOff size={52} className="text-gray-400" />
+        <ImageOff size={52} className="text-gray-400" />
       ) : (
         <Image
           src={src}

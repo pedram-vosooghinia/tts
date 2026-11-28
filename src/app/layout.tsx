@@ -3,10 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import ToastProvider from "@/provider/ToastProvider";
 import SwrProvider from "@/provider/SwrProvider";
-import Footer from "@/components/layout/footer";
 import { cn } from "@/lib/utils";
-import Header from "@/components/layout/header/Header";
-import MenuBar from "@/components/layout/layout/MenuBar";
 const yekanBakh = localFont({
   src: [
     {

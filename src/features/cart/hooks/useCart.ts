@@ -1,14 +1,15 @@
 "use client";
 
 import useSWR from "swr";
-
-import { useAuth } from "@/features/auth/hooks/useAuth";
+import Cookies from "js-cookie";
 
 import { CART_KEY, getMyCartService } from "../services/cart.services";
 import type { Cart } from "../types/cart.types";
 
 export function useCart() {
-  const { isAuthenticated, isLoading: isAuthLoading } = useAuth();
+  const isAuthenticated = Boolean(
+    typeof window !== "undefined" && Cookies.get("access_token"),
+  );
 
   const { data, error, isLoading, mutate } = useSWR<Cart>(
     isAuthenticated ? CART_KEY : null,
@@ -27,7 +28,7 @@ export function useCart() {
     itemCount,
     totalPrice,
     isAuthenticated,
-    isLoading: isAuthLoading || (isAuthenticated && isLoading),
+    isLoading,
     error,
     mutate,
   };
