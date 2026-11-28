@@ -54,17 +54,11 @@ export default function RootLayout({
       <body
         className={cn(
           yekanBakh.variable,
-          "relative min-h-screen bg-background font-yekan antialiased",
+          "relative min-h-screen bg-background font-yekan antialiased"
         )}
       >
         <SwrProvider>
-          <ToastProvider>
-            {/* <Header /> */}
-            {children}
-
-            {/* <Footer /> */}
-            {/* <MenuBar /> */}
-          </ToastProvider>
+          <ToastProvider>{children}</ToastProvider>
         </SwrProvider>
       </body>
     </html>

@@ -23,7 +23,9 @@ export interface Product {
   is_active?: boolean;
   created_at: string;
   updated_at: string;
-  categories: Category[];
+  categoryId?: number;
+  category?: Category | null;
+  categories?: Category[];
   images?: ProductImage[];
 }
 
@@ -32,7 +34,7 @@ export interface CreateProductDto {
   description: string;
   price: number;
   stock?: number;
-  categoryIds: number[];
+  categoryId: number;
 }
 
 export type UpdateProductDto = Partial<CreateProductDto>;

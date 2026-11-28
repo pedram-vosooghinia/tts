@@ -2,16 +2,22 @@
 
 import useSWR from "swr";
 
-import { getProductsService } from "../services/products.services";
+import {
+  getProductsByCategoryService,
+  getProductsService,
+} from "../services/products.services";
 import type { ProductsResponse } from "../types/products.types";
 
 export function useProducts(page = 1, limit = 10, categoryId?: number) {
-  const key = categoryId
+  const hasCategory = typeof categoryId === "number" && categoryId > 0;
+  const key = hasCategory
     ? `/products/category/${categoryId}?page=${page}&limit=${limit}`
     : `/products?page=${page}&limit=${limit}`;
 
   const { data, error, isLoading, mutate } = useSWR<ProductsResponse>(key, () =>
-    getProductsService(page, limit),
+    hasCategory
+      ? getProductsByCategoryService(page, limit, categoryId)
+      : getProductsService(page, limit),
   );
 
   return {

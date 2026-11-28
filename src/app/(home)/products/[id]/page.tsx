@@ -125,9 +125,9 @@ export default function ProductDetailsPage() {
 
         <section className="flex flex-col gap-5 rounded-xl border border-border bg-card p-4 sm:p-6">
           <div className="space-y-3">
-            {product.categories?.length > 0 && (
+            {(product.categories?.length ?? 0) > 0 && (
               <div className="flex flex-wrap gap-2">
-                {product.categories.map((item) => (
+                {product.categories?.map((item) => (
                   <Badge key={item.id} variant="secondary">
                     {item.name}
                   </Badge>

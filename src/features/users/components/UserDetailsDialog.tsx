@@ -11,6 +11,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { User as UserIcon } from "lucide-react";
 import type { User } from "../types/user.types";
+import { useUser } from "../hooks/useUser";
 import UserInfoList from "./UserInfoList";
 import UserRoleEditor from "./UserRoleEditor";
 import UserStatusAction from "./UserStatusAction";
@@ -25,7 +26,10 @@ export default function UserDetailsDialog({
   open,
   onOpenChange,
 }: UserDetailsDialogProps) {
-  if (!user) return null;
+  const { user: fetchedUser } = useUser(open && user ? user.id : null);
+  const currentUser = fetchedUser ?? user;
+
+  if (!currentUser) return null;
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -37,25 +41,25 @@ export default function UserDetailsDialog({
             </div>
 
             <DialogTitle className="mt-3 text-xl">
-              {user.first_name} {user.last_name}
+              {currentUser.first_name} {currentUser.last_name}
             </DialogTitle>
 
             <DialogDescription>جزئیات حساب کاربری</DialogDescription>
 
             <Badge
-              variant={user.is_active ? "default" : "destructive"}
+              variant={currentUser.is_active ? "default" : "destructive"}
               className="mt-2"
             >
-              {user.is_active ? "حساب فعال" : "حساب غیرفعال"}
+              {currentUser.is_active ? "حساب فعال" : "حساب غیرفعال"}
             </Badge>
           </DialogHeader>
         </div>
 
-        <UserInfoList user={user} />
+        <UserInfoList user={currentUser} />
 
-        <UserRoleEditor user={user} onSuccess={() => onOpenChange(false)} />
+        <UserRoleEditor user={currentUser} onSuccess={() => onOpenChange(false)} />
 
-        <UserStatusAction user={user} onSuccess={() => onOpenChange(false)} />
+        <UserStatusAction user={currentUser} onSuccess={() => onOpenChange(false)} />
           
       </DialogContent>
     </Dialog>

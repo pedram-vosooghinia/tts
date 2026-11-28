@@ -1,18 +1,22 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Plus } from "lucide-react";
 import { useUsers } from "@/features/users/hooks/useUsers";
 import UsersTable from "@/features/users/components/UsersTable";
 import UsersFilters from "@/features/users/components/UsersFilters";
+import CreateUserDialog from "@/features/users/components/CreateUserDialog";
 import DataPagination from "@/components/shared/DataPagination";
 import BreadcrumbMain from "@/components/shared/BreadcrumbMain";
 import PageHeader from "@/components/shared/PageHeader";
+import { Button } from "@/components/ui/button";
 
 export default function UsersPage() {
   const [page, setPage] = useState(1);
   const [isActive, setIsActive] = useState("all");
   const [search, setSearch] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
+  const [createOpen, setCreateOpen] = useState(false);
 
   const limit = 10;
 
@@ -36,17 +40,23 @@ export default function UsersPage() {
     setPage(1);
   };
   return (
-    <>
+    <div className="space-y-6">
       <BreadcrumbMain
         items={[
           { label: "داشبورد", href: "/dashboard" },
           { label: "کاربران" },
         ]}
       />
-      <PageHeader
-        title="مدیریت کاربران"
-        description="مشاهده و مدیریت کاربران سامانه"
-      />
+      <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
+        <PageHeader
+          title="مدیریت کاربران"
+          description="مشاهده و مدیریت کاربران سامانه"
+        />
+        <Button onClick={() => setCreateOpen(true)}>
+          <Plus className="ml-2 h-4 w-4" />
+          افزودن کاربر
+        </Button>
+      </div>
       <UsersFilters
         search={search}
         isActive={isActive}
@@ -65,6 +75,7 @@ export default function UsersPage() {
           onPageChange={setPage}
         />
       )}
-    </>
+      <CreateUserDialog open={createOpen} onOpenChange={setCreateOpen} />
+    </div>
   );
 }
