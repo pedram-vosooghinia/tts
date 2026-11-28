@@ -31,3 +31,10 @@ export interface GetUsersParams {
   isActive?: boolean;
   search?: string;
 }
+
+export interface CreateUserDto {
+  first_name: string;
+  last_name?: string;
+  mobile: string;
+  password?: string;
+}

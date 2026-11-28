@@ -1,76 +1,64 @@
 "use client";
 
-import {
-  Area,
-  AreaChart,
-  CartesianGrid,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from "recharts";
+export interface DashboardChartPoint {
+  label: string;
+  value: number;
+}
 
-const data = [
-  { day: "شنبه", sales: 12 },
-  { day: "یکشنبه", sales: 19 },
-  { day: "دوشنبه", sales: 15 },
-  { day: "سه‌شنبه", sales: 28 },
-  { day: "چهارشنبه", sales: 23 },
-  { day: "پنجشنبه", sales: 36 },
-  { day: "جمعه", sales: 31 },
+interface DashboardChartProps {
+  data?: DashboardChartPoint[];
+  unit?: string;
+}
+
+const defaultData: DashboardChartPoint[] = [
+  { label: "محصولات", value: 0 },
+  { label: "دسته‌بندی‌ها", value: 0 },
+  { label: "سفارش‌ها", value: 0 },
+  { label: "کاربران", value: 0 },
+  { label: "پروژه‌ها", value: 0 },
+  { label: "وظایف", value: 0 },
+  { label: "تیکت‌ها", value: 0 },
 ];
 
-export function DashboardChart() {
+export function DashboardChart({
+  data = defaultData,
+  unit = "مورد",
+}: DashboardChartProps) {
+  const max = Math.max(...data.map((item) => item.value), 1);
+
   return (
-    <div className="h-[280px] w-full" dir="ltr">
-      <ResponsiveContainer width="100%" height="100%">
-        <AreaChart data={data} margin={{ top: 10, right: 5, left: -15, bottom: 0 }}>
-          <defs>
-            <linearGradient id="salesGradient" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#7950D8" stopOpacity={0.22} />
-              <stop offset="100%" stopColor="#7950D8" stopOpacity={0} />
-            </linearGradient>
-          </defs>
+    <div className="flex h-[260px] w-full flex-col justify-between gap-4 pt-2">
+      <div className="flex flex-1 items-end gap-3 sm:gap-5">
+        {data.map((item) => {
+          const heightPercent = Math.max(
+            item.value > 0 ? Math.round((item.value / max) * 100) : 6,
+            6,
+          );
 
-          <CartesianGrid
-            stroke="#F0EDF4"
-            strokeDasharray="4 4"
-            vertical={false}
-          />
+          return (
+            <div
+              key={item.label}
+              className="group flex h-full flex-1 flex-col items-center justify-end gap-2"
+            >
+              <span className="text-[11px] font-semibold tabular-nums text-muted-foreground transition-colors group-hover:text-primary">
+                {item.value.toLocaleString("fa-IR")}
+              </span>
 
-          <XAxis
-            dataKey="day"
-            axisLine={false}
-            tickLine={false}
-            tick={{ fill: "#9995A5", fontSize: 11 }}
-            tickMargin={12}
-          />
+              <div className="relative flex h-full w-full max-w-[44px] items-end rounded-xl bg-[#F5F3F9] p-1">
+                <div
+                  style={{ height: `${heightPercent}%` }}
+                  title={`${item.label}: ${item.value.toLocaleString("fa-IR")} ${unit}`}
+                  className="w-full rounded-lg bg-gradient-to-t from-primary to-primary/70 transition-all duration-500 group-hover:from-primary group-hover:to-primary/90"
+                />
+              </div>
 
-          <YAxis
-            axisLine={false}
-            tickLine={false}
-            tick={{ fill: "#9995A5", fontSize: 11 }}
-          />
-
-          <Tooltip
-            contentStyle={{
-              borderRadius: 12,
-              border: "1px solid #ECE9F2",
-              fontSize: 12,
-            }}
-            formatter={(value) => [`${value} میلیون تومان`, "فروش"]}
-          />
-
-          <Area
-            type="monotone"
-            dataKey="sales"
-            stroke="#7950D8"
-            strokeWidth={2.5}
-            fill="url(#salesGradient)"
-            activeDot={{ r: 5, strokeWidth: 0 }}
-          />
-        </AreaChart>
-      </ResponsiveContainer>
+              <span className="line-clamp-1 text-center text-[11px] text-[#777485]">
+                {item.label}
+              </span>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }

@@ -2,12 +2,16 @@
 
 import Link from "next/link";
 import { notFound, useParams } from "next/navigation";
-import { AxiosError } from "axios";
-import { ArrowLeft, Layers, Package, RefreshCw, ShoppingBag } from "lucide-react";
+import useSWR from "swr";
+import { ArrowLeft, Layers, Package, ShoppingBag } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
-import { useCategory } from "@/features/categories/hooks/useCategory";
+import { getCategoryService } from "@/features/categories/services/categories.services";
+import { useProducts } from "@/features/products/hooks/use-products";
+import type { Category } from "@/features/categories/types/category.types";
 import CategoryLoading from "./loading";
+import { useCategories } from "@/features/categories/hooks/useCategories";
+import { useCategory } from "@/features/categories/hooks/useCategory";
+import { useProductsByCategory } from "@/features/products/hooks/use-products-by-category";
 
 export default function CategoryProductsPage() {
   const params = useParams<{ id: string }>();
@@ -15,46 +19,39 @@ export default function CategoryProductsPage() {
 
   const isValidId = Number.isSafeInteger(categoryId) && categoryId > 0;
 
-  const { category, error, isLoading, mutate } = useCategory(categoryId);
+  const {
+    category,
+    error: categoryError,
+    isLoading: categoryLoading,
+  } = useCategory(categoryId);
+
+  const {
+    products,
+    isLoading: productsLoading,
+    error: productsError,
+  } = useProductsByCategory(1, 20, categoryId);
 
   if (!isValidId) notFound();
 
-  if (isLoading) {
+  if (categoryLoading || productsLoading) {
     return <CategoryLoading />;
   }
 
-  const status = (error as AxiosError | undefined)?.response?.status;
+  if (categoryError) {
+    const status = (categoryError as { response?: { status?: number } })
+      .response?.status;
 
-  if (status === 404) notFound();
+    if (status === 404) notFound();
+  }
 
-  if (error || !category) {
-    return (
-      <main dir="rtl" className="mx-auto w-full max-w-6xl px-4 py-8 pb-28">
-        <div className="flex flex-col items-center gap-4 rounded-2xl border border-border bg-card px-4 py-16 text-center">
-          <div className="flex size-12 items-center justify-center rounded-full bg-muted text-muted-foreground">
-            <Package className="size-6" />
-          </div>
-
-          <div className="space-y-1">
-            <h1 className="text-base font-semibold text-foreground">
-              دریافت اطلاعات دسته‌بندی ناموفق بود
-            </h1>
-            <p className="text-sm text-muted-foreground">
-              لطفاً دوباره تلاش کنید.
-            </p>
-          </div>
-
-          <Button variant="outline" onClick={() => mutate()}>
-            <RefreshCw />
-            تلاش مجدد
-          </Button>
-        </div>
-      </main>
+  if (categoryError || productsError) {
+    throw new Error(
+      categoryError?.message || productsError || "خطا در دریافت اطلاعات",
     );
   }
 
-  const products = category.products ?? [];
-
+  if (!category || !products) notFound();
+  console.log(products);
   return (
     <main
       dir="rtl"

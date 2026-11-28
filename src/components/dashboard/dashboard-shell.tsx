@@ -1,6 +1,6 @@
 "use client";
 
-import { use, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -9,20 +9,19 @@ import {
   Package,
   Tags,
   Users,
-  ChartNoAxesCombined,
   Settings,
-  Bell,
-  Search,
   Menu,
   X,
   ChevronLeft,
   LogOut,
-  Megaphone,
   Wallet,
   Headset,
+  FolderKanban,
+  ListTodo,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { useAuth } from "@/features/auth/hooks/useAuth";
+import useLogout from "@/features/auth/hooks/useLogout";
 
 interface DashboardShellProps {
   children: React.ReactNode;
@@ -45,21 +44,17 @@ const navigation: {
       { label: "سفارش‌ها", href: "/dashboard/orders", icon: ShoppingBag },
       { label: "محصولات", href: "/dashboard/products", icon: Package },
       { label: "دسته‌بندی‌ها", href: "/dashboard/categories", icon: Tags },
-      { label: "مشتریان", href: "/dashboard/users", icon: Users },
+      { label: "پرداخت‌ها", href: "/dashboard/payments", icon: Wallet },
+      { label: "کاربران", href: "/dashboard/users", icon: Users },
     ],
   },
-  // {
-  //   title: "مدیریت و بازاریابی",
-  //   items: [
-  //     { label: "کمپین‌ها", href: "/dashboard/campaigns", icon: Megaphone },
-  //     {
-  //       label: "گزارش‌ها",
-  //       href: "/dashboard/analytics",
-  //       icon: ChartNoAxesCombined,
-  //     },
-  //     { label: "بودجه", href: "/dashboard/budget", icon: Wallet },
-  //   ],
-  // },
+  {
+    title: "پروژه‌ها و وظایف",
+    items: [
+      { label: "پروژه‌ها", href: "/dashboard/projects", icon: FolderKanban },
+      { label: "وظایف", href: "/dashboard/tasks", icon: ListTodo },
+    ],
+  },
   {
     title: "پشتیبانی",
     items: [{ label: "تیکت‌ها", href: "/dashboard/tickets", icon: Headset }],
@@ -69,6 +64,7 @@ const navigation: {
 export function DashboardShell({ children }: DashboardShellProps) {
   const pathname = usePathname();
   const { user } = useAuth();
+  const logout = useLogout();
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const isActive = (href: string) =>
@@ -148,12 +144,17 @@ export function DashboardShell({ children }: DashboardShellProps) {
         <div className="border-t border-[#F0EDF4] p-4">
           <Link
             href="/dashboard/settings"
+            onClick={() => setMobileOpen(false)}
             className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm text-[#777485] hover:bg-[#F8F6FB]"
           >
             <Settings size={19} />
             تنظیمات
           </Link>
-          <button className="flex w-full items-center gap-3 rounded-xl px-3 py-3 text-sm text-red-500 hover:bg-red-50">
+          <button
+            type="button"
+            onClick={logout}
+            className="flex w-full items-center gap-3 rounded-xl px-3 py-3 text-sm text-red-500 hover:bg-red-50"
+          >
             <LogOut size={19} />
             خروج از حساب
           </button>
@@ -170,32 +171,22 @@ export function DashboardShell({ children }: DashboardShellProps) {
             <Menu size={22} />
           </button>
 
-          {/* <div className="relative hidden w-full max-w-[380px] sm:block">
-            <Search
-              size={18}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-[#AAA6B5]"
-            />
-            <input
-              placeholder="جستجو در پنل مدیریت..."
-              className="h-10 w-full rounded-xl border border-[#EEEAF3] bg-[#F9F8FB] pr-10 pl-4 text-sm outline-none transition focus:border-[#7950D8] focus:bg-white"
-            />
-          </div> */}
-
           <div className="mr-auto flex items-center gap-3">
-            {/* <button
-              aria-label="اعلان‌ها"
-              className="relative rounded-xl border border-[#EEEAF3] p-2.5 text-[#777485] hover:bg-[#F8F6FB]"
-            >
-              <Bell size={19} />
-              <span className="absolute right-2 top-2 size-2 rounded-full bg-red-500 ring-2 ring-white" />
-            </button> */}
-
-            <div className="flex items-center gap-3  pr-4">
+            <div className="flex items-center gap-3 pr-4">
               <div className="hidden text-left sm:block">
                 <p className="text-xs font-semibold">
-                  {user?.first_name + " " + user?.last_name}
+                  {user
+                    ? `${user.first_name ?? ""} ${user.last_name ?? ""}`.trim() ||
+                      "کاربر"
+                    : "در حال بارگذاری..."}
                 </p>
-                <p className="mt-1 text-[10px] text-[#9995A5]">مدیر کل</p>
+                <p className="mt-1 text-[10px] text-[#9995A5]">
+                  {user?.role === "support"
+                    ? "پشتیبان"
+                    : user?.role === "admin"
+                      ? "مدیر کل"
+                      : "پنل مدیریت"}
+                </p>
               </div>
               <div className="flex size-10 items-center justify-center rounded-full bg-primary/20 text-primary">
                 <Users size={19} />
