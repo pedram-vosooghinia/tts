@@ -13,8 +13,8 @@ export default function CategoriesPage() {
     <>
       <BreadcrumbMain
         items={[
-          { label: "داشبورد", href: "/admin" },
-          { label: "دسته‌بندی‌ها", href: "#" },
+          { label: "داشبورد", href: "/dashboard" },
+          { label: "دسته‌بندی‌ها" },
         ]}
       />
 
